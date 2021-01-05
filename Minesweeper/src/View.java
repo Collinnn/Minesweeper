@@ -42,5 +42,4 @@ public class View extends Application {
 		}
 		this.button.setText("" + this.counter);
 	}
-
 }

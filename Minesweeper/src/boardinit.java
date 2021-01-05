@@ -26,14 +26,14 @@ public class boardinit {
 	
 	public int getNeighbors(int x, int y) {
 		int neighbor = 0;
-		neighbor = grid[x-1][y-1]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x-1][y]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x-1][y+1]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x][y-1]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x][y+1]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x+1][y-1]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x+1][y]==1 ? neighbor++ : neighbor;
-		neighbor = grid[x+1][y+1]==1 ? neighbor++ : neighbor;
+		neighbor = grid[x-1][y-1]==1 	? neighbor++ : neighbor;
+		neighbor = grid[x-1][y]==1 		? neighbor++ : neighbor;
+		neighbor = grid[x-1][y+1]==1 	? neighbor++ : neighbor;
+		neighbor = grid[x][y-1]==1 		? neighbor++ : neighbor;
+		neighbor = grid[x][y+1]==1		? neighbor++ : neighbor;
+		neighbor = grid[x+1][y-1]==1 	? neighbor++ : neighbor;
+		neighbor = grid[x+1][y]==1 		? neighbor++ : neighbor;
+		neighbor = grid[x+1][y+1]==1 	? neighbor++ : neighbor;
 		return neighbor;
 	}
 	

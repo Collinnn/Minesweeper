@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--****WARNING: DO NOT MODIFY THIS FILE DIRECTLY******-->
+<Gantt Version="2.0">
+  <Display Width="665" Height="605" Split="280" />
+  <File Saved="2021-01-05 12:47:01" Created="2021-01-05 12:38:26" Name="Gant skema mk.1" Physical="D:\DTU\Software1\Gant skema mk.1.gnt">D:\DTU\Software1\Gant skema mk.1.gnt</File>
+  <Globalization RegionInfo="DNK">
+    <Culture LCID="1030" ISO="dan" DN="Dansk (Danmark)" Cal="System.Globalization.GregorianCalendar" Parent="dansk">dansk (Danmark)</Culture>
+    <UICulture LCID="1030" ISO="dan" DN="Dansk (Danmark)" Cal="System.Globalization.GregorianCalendar" Parent="dansk">dansk (Danmark)</UICulture>
+    <Currency LCID="1030" ISO="DKK" DN="Danmark" Currency="Dansk krone" />
+  </Globalization>
+  <FirstDay Date="2020-12-29" />
+  <LastDay Date="2021-01-25" />
+  <Padding Left="5" Top="2" Right="2" Bottom="2" />
+  <Tasks>
+    <!--S=Start D=Duration P=Predecessor H=Height L=Lag VA=Valign R=Remarks F=Flag I=Importance-->
+    <!--B=BarType BC=BarColor BTx=BarText-->
+    <Task ID="1" S="2021-01-04" B="0" BC="-16776961" D="14" H="35" U="100" VA="1">Projekt januar</Task>
+    <Task ID="2" S="2021-01-04" B="0" BC="-16776961" D="4" H="35" U="100" VA="1">Brainstorming minesweeper</Task>
+    <Task ID="3" S="2021-01-07" B="0" BC="-16776961" D="2" H="35" U="100" VA="1">Aflevering af tidsplan</Task>
+    <Task ID="4" S="2021-01-08" B="0" BC="-16776961" D="8" H="35" U="100" VA="1">Kodning af javaFx</Task>
+    <Task ID="5" S="2021-01-15" B="0" BC="-16776961" D="5" H="35" U="100" VA="1">Rapport Skrivning</Task>
+    <Task ID="6" S="1753-01-01" B="0" BC="-16776961" D="1" H="35" U="100" VA="1" />
+  </Tasks>
+  <Remarks />
+  <Remarks1 />
+  <Remarks2 />
+  <Remarks3 />
+  <Remarks4 />
+  <TextStyles Flag="O" Deadline="!">
+    <Font Style="1" Size="10" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="10" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="1" Size="10" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="2" Size="8" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="3" Size="10" Color="-65536">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="8" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="8" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="8" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="8" Color="-16777216">Microsoft Sans Serif</Font>
+    <Font Style="1" Size="12" Color="-65536">Arial Black</Font>
+    <Font Style="0" Size="11" Color="-65536">Wingdings</Font>
+  </TextStyles>
+  <BarStyles Type="0" Color="-16776961" Color2="-16777216" Color3="-16776961" />
+  <Columns>
+    <!--W=Width A=Align DA=DataAlign DNW=DataNoWrap D=DisplayMode-->
+    <Header Type="1" W="30" A="1" D="0" DA="1" DNW="F">#</Header>
+    <Header Type="2" W="100" A="1" D="0" DA="0" DNW="F">Task name</Header>
+    <Header Type="3" W="80" A="1" D="0" DA="1" DNW="F">Start date</Header>
+    <Header Type="5" W="70" A="1" D="0" DA="1" DNW="F">Duration</Header>
+  </Columns>
+  <Calendar WorkDays="0111110" WeekStart="0" />
+  <DateHeader Tiers="3" TierHeight="15" DayWidth="16" DarkGrid="2" LightGrid="3" ColorBackground="-986896" ColorGridlines="-16777216" AltLight="1" Lightness="0.4">
+    <Tier Type="1" Align="1" Tick="T">Y</Tier>
+    <Tier Type="2" Align="1" Tick="T">MMM d</Tier>
+    <Tier Type="3" Align="1" Tick="T">%d</Tier>
+    <Reference Day0="D" Week0="Week 0" Month0="Start" Year0="Year 0">2021-01-05</Reference>
+  </DateHeader>
+  <Holidays>
+    <Holiday Date="2020-01-01">New Year's Day</Holiday>
+  </Holidays>
+  <Headers HeaderLeft="%f" HeaderCenter="" HeaderRight="" HeaderLineSpace="2" />
+  <HeadersFonts>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+  </HeadersFonts>
+  <Footers FooterLeft="" FooterCenter=" -%p of %P- " FooterRight="" FooterLineSpace="2" />
+  <FootersFonts>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+    <Font Style="0" Size="10" StrikeOut="0" Underline="0">Microsoft Sans Serif</Font>
+  </FootersFonts>
+  <Print allRows="1" fromTask="1" toTask="0" numberOfLeftColumnsCompDisp="1" numberOfLeftColumns="0" showTaskNumbers="1" leftColumnsOnPage1Only="1" dateOnRightCompDisp="1" fromDate="2020-12-31" toDate="2021-02-09" fitToPage="1" numberOfPages="1" fitHorizontal="1" NumberSequence="0" />
+  <PrintToImageFile allRows="1" fromTask="1" toTask="0" numberOfLeftColumnsCompDisp="1" numberOfLeftColumns="0" showTaskNumbers="1" dateOnRightCompDisp="1" fromDate="2020-12-31" toDate="2021-01-30" />
+  <Copy allRows="1" fromTask="1" toTask="0" numberOfLeftColumnsCompDisp="1" numberOfLeftColumns="0" showTaskNumbers="1" dateOnRightCompDisp="1" fromDate="2021-01-05" toDate="2021-01-20" />
+  <ChartColor ChartBack="-1" BorderBack="-986896" LeftPanelBack="-1" LeftPanelGrid="-6250336" RightPanelHGrid="-986896" RightPanelVGridDark="-6250336" RightPanelVGridLight="-986896" HolidayShade="-986896" SelectedRowBack="-16746281" SelectedRowFore="-1" />
+</Gantt>

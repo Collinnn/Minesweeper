@@ -1,21 +1,21 @@
 
 public class boardinit {
-	private int collum, row,num_mines;
+	private int column, row,num_mines;
 	private int [][] grid; 
 	
-	public boardinit(int collum, int row,int num_mines) {
-		this.collum=collum;
+	public boardinit(int column, int row,int num_mines) {
+		this.column=column;
 		this.row=row;
 		this.num_mines=num_mines;
-		this.grid= new int[collum][row];
+		this.grid= new int[column][row];
 	}
 	
 	public static void pupulateboard() {
 		
 	}
 	
-	public int getCollum() {
-		return collum;
+	public int getColumn() {
+		return column;
 	}
 	public int getrow() {
 		return row;

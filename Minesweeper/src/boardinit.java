@@ -23,6 +23,10 @@ public class boardinit {
 	public int getmines() {
 		return num_mines;
 	}
+	public int setmineamount(int mine) {
+		num_mines=mine; 
+		return num_mines; 
+	}
 	
 	public int getNeighbors(int x, int y) {
 		int neighbor = 0;
@@ -36,8 +40,5 @@ public class boardinit {
 		neighbor = grid[x+1][y+1]==1 	? neighbor++ : neighbor;
 		return neighbor;
 	}
-	
-	
-	
 }
 

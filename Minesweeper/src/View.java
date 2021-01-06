@@ -16,7 +16,8 @@ public class View extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Hello World!");
+		primaryStage.setTitle("Minesweeper");
+		primaryStage.setResizable(false);
 		this.button.setText("Im a counter! Click ME!!!");
 		this.button.setOnAction(this::handleClick);
 		StackPane root = new StackPane();

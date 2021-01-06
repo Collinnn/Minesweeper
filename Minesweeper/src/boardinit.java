@@ -1,5 +1,5 @@
 
-public class boardinit {
+public class boardinit {//Kommentar
 	private int collum, row,num_mines;
 	private int [][] grid; 
 	

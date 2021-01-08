@@ -1,9 +1,12 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.input.*;
 public class View extends Application {
 
@@ -44,3 +47,24 @@ public class View extends Application {
 		this.button.setText("" + this.counter);
 	}
 }
+/*
+
+if (timeline != null) {
+			timeline.stop();
+		}
+		else {
+			timeline = new Timeline();
+			timeline.getKeyFrames().add(new KeyFrame(Duration.INDEFINITE));
+			timeline.play();
+			System.out.println("count");
+		}
+		
+	}
+	import javafx.scene.control.Label;
+	import javafx.util.Duration;
+	import javafx.animation.Animation;
+	import javafx.animation.KeyFrame;
+	import javafx.animation.Timeline;
+	private Timeline timeline;
+	private Label timerLabel = new Label();
+*/

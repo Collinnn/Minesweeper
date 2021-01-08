@@ -5,18 +5,22 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 import java.util.Random;
 import java.util.ArrayList;
 
-
 public class Main extends Application implements EventHandler<ActionEvent> {
 	Button button;
-	static int HEIGHT = 10;
-	static int WIDTH = 10;
+	static int size = 40; 
+	static int width = 800; 
+	static int height = 600; 
+	static int xtile = width/size;
+	static int ytile = height/size;
 	static int NoOfBombs = 20;
-	static Button[][] tiles = new Button[WIDTH][WIDTH];
+	static Button[][] tiles = new Button[xtile][ytile];
 	static ArrayList<Button> bombTiles = new ArrayList<Button>();
 	
 	Image img = new Image("bombe.png");
@@ -33,8 +37,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		stage.setTitle("Minesweeper");
 		stage.setScene(new Scene(grid));
 		
-	    for (int row = 0; row < HEIGHT; row++) {
-	        for (int col = 0; col < WIDTH; col++) {
+	    for (int row = 0; row < xtile; row++) {
+	        for (int col = 0; col < ytile; col++) {
 	            Button button = new Button();
 	            button.setPrefSize(40, 40);
 	            grid.add(button, col, row);
@@ -45,8 +49,8 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	    Random rand = new Random();
 	    int bombs = 0;
 	    while (bombs < NoOfBombs) {
-	    	int randRow = rand.nextInt(HEIGHT);
-	    	int randCol = rand.nextInt(WIDTH);
+	    	int randRow = rand.nextInt(xtile);
+	    	int randCol = rand.nextInt(ytile);
 	    	Button tile = tiles[randRow][randCol];
 	    	if (!bombTiles.contains(tile)) {
 	    		bombTiles.add(tile);
@@ -54,14 +58,14 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	    		ImageView view = new ImageView(img);
 	            view.setFitWidth(20);
 	        	view.setPreserveRatio(true);
-	            tiles[randRow][randCol].setOnAction(e -> tiles[randRow][randCol].setGraphic(view));
+	            tiles[randRow][randCol].setOnAction(e ->tiles[randRow][randCol].setGraphic(view));
 	           
 	    		bombs++;
 	    	}
 	    }
 	    	    
-	    for (int row = 0; row < HEIGHT; row++) {
-	    	for (int col = 0; col < WIDTH; col++) {
+	    for (int row = 0; row < xtile; row++) {
+	    	for (int col = 0; col < ytile; col++) {
 	    		int neighborBombs = 0;
 	    		for (Button tile : get_neighbors(row, col)) {
 		    		if (bombTiles.contains(tile)) {
@@ -78,8 +82,6 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 	    		}
 	    	}
 	    }
-	    
-	    
 	    stage.show();
 	}
 	
@@ -99,11 +101,15 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		return neighbors;
 	}
 	
-	@Override
-	public void handle(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
-	}
+		
+	
+	
+	@Override
+	public void handle(ActionEvent tiles) {
+		
 
 	
+}
 }

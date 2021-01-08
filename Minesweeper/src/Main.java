@@ -69,10 +69,12 @@ public class Main extends Application implements EventHandler<ActionEvent> {
 		    		}
 		    	}
 	    		if (!bombTiles.contains(tiles[row][col])) {
-	    			int finalRow = row;
-	    			int finalCol = col;
-	    			int finalNeighborBombs = neighborBombs;
-	    			tiles[row][col].setOnAction(e -> tiles[finalRow][finalCol].setText(Integer.toString(finalNeighborBombs)));
+	    			if (neighborBombs != 0) {
+	    				int finalRow = row;
+		    			int finalCol = col;
+		    			int finalNeighborBombs = neighborBombs;
+		    			tiles[row][col].setOnAction(e -> tiles[finalRow][finalCol].setText(Integer.toString(finalNeighborBombs)));
+	    			}
 	    		}
 	    	}
 	    }

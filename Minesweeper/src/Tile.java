@@ -1,17 +1,17 @@
 import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
-public class Tile extends StackPane {
+public class Tile extends GridPane {
 	//Declare int variabler
 	private int x,y,bomb,flag;
-	private boolean open;
+	private boolean clicked;
 	
 	//For nu! static int variabler
 	static int size = 40;
@@ -35,7 +35,8 @@ public class Tile extends StackPane {
 		this.y = y;
 		this.bomb = bomb;
 		this.flag = flag; 
-		//Farver for firkant, uden noget kendt
+		
+			//Farver for firkant, uden noget kendt
 		felt.setFill(Color.GRAY);
 		felt.setFill(Color.BLACK);
 		
@@ -55,6 +56,38 @@ public class Tile extends StackPane {
 		
 		//Image
 		tileimage.setVisible(false);
+		
+		getChildren().addAll(felt,text,tileimage);
+		
+		setOnMouseClicked(e -> {
+			if(e.getButton() == MouseButton.PRIMARY) {
+				if(flag==0) {
+					
+				}
+				
+			}
+			else if (e.getButton() == MouseButton.SECONDARY) {
+				if(flag==0) {
+					// flag++;   Virker ikke på denne måde. 
+					tileimage.setVisible(true);
+				}
+			}
+			
+		});
+	}
+	
+	//Handles Leftclick only
+	public void onclick() {
+		if(clicked) {
+			return; 
+		}
+		
+		if (bomb>0) {
+			tileimage.setVisible(true);
+			return; 
+		}
+		clicked = true;
+		felt.setFill(Color.LIGHTGRAY);
 		
 	}
 	

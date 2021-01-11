@@ -1,9 +1,18 @@
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import java.util.Random;
 
 public class Main extends Application {
 	public static final int WIDTH = 20;
@@ -43,8 +52,37 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setTitle("Minesweeper");	
-		stage.setScene(new Scene(root));
+		stage.setTitle("Minesweeper");
+		HBox topItems = new HBox();
+		
+		topItems.setSpacing(50);
+		
+		Label label1 = new Label("Bomb Counter");
+		Button reset = new Button("reset");
+		Label label2 = new Label("Timer");
+		
+		topItems.setAlignment(Pos.CENTER);
+		
+		topItems.getChildren().addAll(label1,reset,label2);
+		
+		
+		
+		Menu fileMenu = new Menu("File");
+		fileMenu.getItems().add(new MenuItem("Settings"));
+		MenuBar menuBar = new MenuBar();
+		menuBar.getMenus().addAll(fileMenu);
+		
+		
+		BorderPane topLevel = new BorderPane();
+		BorderPane midLevel = new BorderPane();
+		
+		midLevel.setTop(topItems);
+		midLevel.setCenter(root);
+		
+		topLevel.setTop(menuBar);
+		topLevel.setCenter(midLevel);
+		
+		stage.setScene(new Scene(topLevel));
 		root.setPadding(new Insets(2));		
 		
 		stage.show();

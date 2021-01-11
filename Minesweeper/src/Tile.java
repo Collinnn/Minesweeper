@@ -8,39 +8,44 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
 public class Tile implements EventHandler<MouseEvent> {
+	// Array for all tiles and tiles with bombs
+	public static Tile[][] tiles = new Tile[Main.HEIGHT][Main.WIDTH];
+	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
-	//For nu! static int variables
-	private static final int SIZE = 40;
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
-	static int xtile = WIDTH/SIZE;
-	static int ytile = HEIGHT/SIZE;
-	
-	//Declare int variables
-	private int x,y,bomb;
-	private boolean clicked, flagged = false;
-	
-	//Felter for billeder, firkanter og Text
-	private Rectangle shape;
-	private Text text;
-	private StackPane stack;
-	
-	//Billeder
+	//Images
 	private static final Image bombImg = new Image("bomb1.png");
 	private static final ImagePattern bombPattern = new ImagePattern(bombImg, 0, 0, bombImg.getWidth(), bombImg.getHeight(), false);
 	
 	private static final Image flagImg = new Image("Flag.png");
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
-	// Array for all tiles and tiles with bombs
-	public static Tile[][] tiles = new Tile[HEIGHT][WIDTH];
-	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
+	//Int & bool variables
+	private static final int SIZE = 40;
+	private int x,y,bomb;
+	private boolean clicked, flagged = false;
 	
-	//Tile konstruktøren
+	//shape, text and stackpane
+	private Rectangle shape;
+	private Text text;
+	private StackPane stack;
+	
+	private Color[] textFill = new Color[] {
+			Color.BLUE, 
+			Color.GREEN, 
+			Color.RED, 
+			Color.DARKBLUE, 
+			Color.DARKGREEN, 
+			Color.DARKRED,
+			Color.CRIMSON,
+			Color.BLACK
+			};
+	
+	//Tile constructor
 	public Tile(int x, int y) {
 		
 		this.x = x; 
@@ -48,19 +53,20 @@ public class Tile implements EventHandler<MouseEvent> {
 		//this.bomb = bomb;
 		//this.flag = flag; 
 		
+		tiles[y][x] = this;
+		
 		this.stack = new StackPane();
 		
 		//Farver for firkant, uden noget kendt
-		this.shape = new Rectangle(SIZE-2, SIZE-2);
+		this.shape = new Rectangle(SIZE, SIZE);
 		this.shape.setFill(Color.LIGHTGRAY);
 		this.shape.setStroke(Color.GRAY);		
+		this.shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
 		//Text
 		this.text = new Text("");
-		this.text.setFont(Font.font(18));
+		this.text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
-		//Image
-		//tileimage.setVisible(false);
 		
 		this.stack.getChildren().addAll(this.shape, this.text);//, tileimage);
 		Main.root.add(this.stack, x, y);
@@ -96,19 +102,37 @@ public class Tile implements EventHandler<MouseEvent> {
 	}
 	
 	public void reveal_tile() {
-		if (this.flagged) {
-			
-		}
-		else if (bombTiles.contains(this)) {
+		this.clicked = true;
+		
+		if (bombTiles.contains(this)) {
+			for (Tile[] tileRows : tiles) {
+				for (Tile tile : tileRows) {
+					tile.clicked = true;
+				}
+				
+			}
 			for (Tile tile : bombTiles) {
-				tile.shape.setFill(bombPattern);	
+				if (tile.flagged) {
+					
+				}
+				else {
+					tile.shape.setFill(bombPattern);	
+				}
 			}
 		}
 		else {
 			this.shape.setFill(Color.WHITE);
 			int val = this.get_value();
-			if (val != 0) {
+			if (val == 0) {
+				for (Tile tile : this.get_neighbors()) {
+					if (!tile.clicked) {
+						tile.reveal_tile();
+					}
+				}
+			}
+			else {
 				this.text.setText(Integer.toString(val));
+				this.text.setFill(textFill[val]);
 			}
 		}
 	}
@@ -118,7 +142,6 @@ public class Tile implements EventHandler<MouseEvent> {
 		if (!this.clicked) {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!this.flagged) {
-					this.clicked = true;
 					this.reveal_tile();
 				}
 			}
@@ -131,13 +154,6 @@ public class Tile implements EventHandler<MouseEvent> {
 				}
 				this.flagged = !this.flagged;
 			}
-			
-			/*
-			if(flag==0) {
-				flag++;   Virker ikke på denne måde. 
-				tileimage.setVisible(true);
-			}
-			*/
 		}
 	}	
 }

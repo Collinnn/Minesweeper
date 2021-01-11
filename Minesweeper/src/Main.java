@@ -53,17 +53,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
-		HBox topItems = new HBox();
+		BorderPane topItems = new BorderPane();
 		
-		topItems.setSpacing(50);
 		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
 		Label label2 = new Label("Timer");
 		
-		topItems.setAlignment(Pos.CENTER);
+		topItems.setLeft(label1);
+		topItems.setCenter(reset);
+		topItems.setRight(label2);
 		
-		topItems.getChildren().addAll(label1,reset,label2);
 		
 		
 		

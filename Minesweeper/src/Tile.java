@@ -25,7 +25,7 @@ public class Tile implements EventHandler<MouseEvent> {
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
-	private static final int SIZE = 40;
+	private static final int SIZE = 30;
 	private int row, col, bomb;
 	private boolean flagged = false;
 	public boolean clicked = false;

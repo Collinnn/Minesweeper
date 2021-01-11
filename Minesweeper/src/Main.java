@@ -2,7 +2,6 @@ import java.util.Random;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +11,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -56,14 +56,23 @@ public class Main extends Application {
 		BorderPane topItems = new BorderPane();
 		
 		
+		HBox rightBox = new HBox();
+		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
 		Label label2 = new Label("Timer");
+		Region rightPadderRegion = new Region();
+		rightBox.getChildren().addAll(rightPadderRegion,label2);
+
+
 		
 		topItems.setLeft(label1);
 		topItems.setCenter(reset);
-		topItems.setRight(label2);
+		//topItems.setRight(tempBox);
 		
+		
+		
+		topItems.setRight(rightBox);
 		
 		
 		
@@ -86,5 +95,6 @@ public class Main extends Application {
 		root.setPadding(new Insets(2));		
 		
 		stage.show();
+		rightPadderRegion.setPrefWidth(label1.getWidth()-label2.getWidth());
 	}
 }

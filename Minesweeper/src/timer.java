@@ -5,9 +5,9 @@ import javafx.util.Duration;
 public class timer {
 	public Timeline timeline;
 
-	
-	
 	private int time;
+	
+	
 	public timer() {		
 		timeline = new Timeline();
 		timeline.setCycleCount(999);
@@ -15,8 +15,6 @@ public class timer {
 		timeline.play();
 	}
 	private void increment () {
-		
-		//System.out.println("timer "+ time);
 		time++;
 		Main.label2.setText(String.valueOf(time));
 	}

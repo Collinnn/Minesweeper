@@ -20,6 +20,7 @@ public class Main extends Application {
 
 	static int NoOfBombs = 20;
 	timer time; 
+	public static Label label2 = new Label();
 	
 	public static GridPane root = new GridPane();
 
@@ -64,7 +65,8 @@ public class Main extends Application {
 		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
-		Label label2 = new Label("Timer: ");
+		
+		label2.setText("0");
 		Region rightPadderRegion = new Region();
 		rightBox.getChildren().addAll(rightPadderRegion,label2);
 

@@ -27,23 +27,10 @@ public class Tile implements EventHandler<MouseEvent> {
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-	private static final int SIZE = 40;
-	private int x,y,bomb;
-	private boolean clicked, flagged = false;
-=======
 	public static final int SIZE = 30;
 	private int row, col;
 	private boolean flagged = false;
 	public boolean clicked = false;
->>>>>>> Stashed changes
-=======
-	private static final int SIZE = 30;
-	private int row, col, bomb;
-	private boolean flagged = false;
-	public boolean clicked = false;
->>>>>>> 446cc43af28cc1a0eb8cc98b9c8927c0c1fe623f
 	
 	//shape, text and stackpane
 	private Rectangle shape;
@@ -67,8 +54,7 @@ public class Tile implements EventHandler<MouseEvent> {
 	public Tile(int row, int column) {
 		
 		this.row = row; 
-		this.col = column;
-		
+		this.col = column; 
 		
 		tiles[row][column] = this;
 		
@@ -92,19 +78,10 @@ public class Tile implements EventHandler<MouseEvent> {
 		stack.getChildren().addAll(shape, text);//, tileimage);
 		Main.root.add(stack, column, row);
 		
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-		this.shape.setOnMouseClicked(this);
-=======
-		shape.setOnMouseClicked(this);
->>>>>>> 446cc43af28cc1a0eb8cc98b9c8927c0c1fe623f
-		
-=======
 		shape.setOnMouseClicked(this);
 		shape.setOnMouseEntered(this);
 		shape.setOnMouseExited(this);
 
->>>>>>> Stashed changes
 	}
 	
 	public ArrayList<Tile> get_neighbors() {
@@ -134,17 +111,8 @@ public class Tile implements EventHandler<MouseEvent> {
 	}
 	
 	public void reveal_tile() {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-		this.clicked = true;
-=======
-		clicked = true;
->>>>>>> 446cc43af28cc1a0eb8cc98b9c8927c0c1fe623f
-		
-=======
 		clicked = true;
 		shape.setEffect(null);
->>>>>>> Stashed changes
 		if (bombTiles.contains(this)) {
 			for (Tile[] tileRows : tiles) {
 				for (Tile tile : tileRows) {
@@ -165,7 +133,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : get_neighbors()) {
+				for (Tile tile : this.get_neighbors()) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}
@@ -180,10 +148,6 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	@Override
 	public void handle(MouseEvent event) {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-		if (!this.clicked) {
-=======
 		if (!clicked) {
 			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
 				shape.setEffect(bloomEffect);
@@ -192,10 +156,6 @@ public class Tile implements EventHandler<MouseEvent> {
 				shape.setEffect(null);
 			}
 			
->>>>>>> Stashed changes
-=======
-		if (!clicked) {
->>>>>>> 446cc43af28cc1a0eb8cc98b9c8927c0c1fe623f
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!flagged) {
 					reveal_tile();

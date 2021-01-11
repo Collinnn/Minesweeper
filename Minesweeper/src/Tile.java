@@ -48,7 +48,6 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	//Tile constructor
 	public Tile(int row, int column) {
-		
 		this.row = row; 
 		this.col = column;
 		//this.bomb = bomb;
@@ -81,7 +80,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			for (int j = -1; j <= 1; j++) {
 				if (!(i == 0 && j == 0)) {
 					try {
-						neighbors.add(tiles[this.row+i][this.col+j]);
+						neighbors.add(tiles[row+i][col+j]);
 					}
 					catch(Exception e) {
 					}
@@ -93,7 +92,7 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	public Integer get_value() {
 		int neighborBombs = 0;
-		for (Tile neighbor : this.get_neighbors()) {
+		for (Tile neighbor : get_neighbors()) {
     		if (Tile.bombTiles.contains(neighbor)) {
     			neighborBombs++;
     		}
@@ -102,7 +101,7 @@ public class Tile implements EventHandler<MouseEvent> {
 	}
 	
 	public void reveal_tile() {
-		this.clicked = true;
+		clicked = true;
 		
 		if (bombTiles.contains(this)) {
 			for (Tile[] tileRows : tiles) {
@@ -121,38 +120,38 @@ public class Tile implements EventHandler<MouseEvent> {
 			}
 		}
 		else {
-			this.shape.setFill(Color.WHITE);
-			int val = this.get_value();
+			shape.setFill(Color.WHITE);
+			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : this.get_neighbors()) {
+				for (Tile tile : get_neighbors()) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}
 				}
 			}
 			else {
-				this.text.setText(Integer.toString(val));
-				this.text.setFill(textFill[val]);
+				text.setText(Integer.toString(val));
+				text.setFill(textFill[val]);
 			}
 		}
 	}
 	
 	@Override
 	public void handle(MouseEvent event) {
-		if (!this.clicked) {
+		if (!clicked) {
 			if (event.getButton() == MouseButton.PRIMARY) {
-				if (!this.flagged) {
-					this.reveal_tile();
+				if (!flagged) {
+					reveal_tile();
 				}
 			}
 			else if (event.getButton() == MouseButton.SECONDARY) {
-				if (this.flagged) {
-					this.shape.setFill(Color.LIGHTGRAY);
+				if (flagged) {
+					shape.setFill(Color.LIGHTGRAY);
 				}
 				else {
-					this.shape.setFill(flagPattern);
+					shape.setFill(flagPattern);
 				}
-				this.flagged = !this.flagged;
+				flagged = !flagged;
 			}
 		}
 	}	

@@ -51,12 +51,11 @@ public class Tile implements EventHandler<MouseEvent> {
 		
 		this.row = row; 
 		this.col = column;
-		//this.bomb = bomb;
-		//this.flag = flag; 
+		
 		
 		tiles[row][column] = this;
 		
-		this.stack = new StackPane();
+		stack = new StackPane();
 		
 		//Farver for firkant, uden noget kendt
 		shape = new Rectangle(SIZE, SIZE);
@@ -68,8 +67,8 @@ public class Tile implements EventHandler<MouseEvent> {
 		text = new Text("");
 		text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
-		this.stack.getChildren().addAll(this.shape, this.text);//, tileimage);
-		Main.root.add(this.stack, column, row);
+		stack.getChildren().addAll(shape, text);//, tileimage);
+		Main.root.add(stack, column, row);
 		
 		shape.setOnMouseClicked(this);
 		
@@ -124,7 +123,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : this.get_neighbors()) {
+				for (Tile tile : get_neighbors()) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}

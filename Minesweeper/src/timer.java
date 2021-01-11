@@ -7,8 +7,6 @@ public class timer {
 	public Timeline timeline;
 	
 	public timer() {
-		
-		
 		timeline = new Timeline();
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1)));	

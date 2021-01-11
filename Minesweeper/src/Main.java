@@ -19,8 +19,9 @@ public class Main extends Application {
 	public static final int HEIGHT = 15;
 
 	static int NoOfBombs = 20;
-	timer time; 
+	public static timer time; 
 	public static Label label2 = new Label();
+	public static boolean firstclicked = false;
 	
 	public static GridPane root = new GridPane();
 

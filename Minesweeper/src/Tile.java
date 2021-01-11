@@ -32,7 +32,6 @@ public class Tile implements EventHandler<MouseEvent> {
 	private int row, col;
 	private boolean flagged = false;
 	public boolean clicked = false;
-	private boolean firstClicked = false;
 	
 	//shape, text and stackpane
 	private Rectangle shape;
@@ -161,9 +160,9 @@ public class Tile implements EventHandler<MouseEvent> {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!flagged) {
 					reveal_tile();
-					if(!firstClicked) {
-						timer time = new timer();
-						firstClicked = true;
+					if(!Main.firstclicked) {
+						Main.time = new timer();
+						Main.firstclicked = true;
 					}
 				}
 			}

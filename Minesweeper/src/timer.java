@@ -16,10 +16,9 @@ public class timer {
 	}
 	private void increment () {
 		
-		System.out.println("timer "+ time);
+		//System.out.println("timer "+ time);
 		time++;
-		String timeText = String.valueOf(time);
-		Main.label2.setText(timeText);
+		Main.label2.setText(String.valueOf(time));
 	}
 	
 	public void pausecounter(boolean stop) {

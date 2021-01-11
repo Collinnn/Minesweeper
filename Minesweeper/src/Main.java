@@ -56,7 +56,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
 		
-		time = new timer();
+		//time = new timer();
 		
 		BorderPane topItems = new BorderPane();
 		

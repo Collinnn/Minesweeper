@@ -1,14 +1,15 @@
 import java.util.ArrayList;
+
+import javafx.event.EventHandler;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -31,6 +32,7 @@ public class Tile implements EventHandler<MouseEvent> {
 	private int row, col;
 	private boolean flagged = false;
 	public boolean clicked = false;
+	private boolean firstClicked = false;
 	
 	//shape, text and stackpane
 	private Rectangle shape;
@@ -159,6 +161,10 @@ public class Tile implements EventHandler<MouseEvent> {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!flagged) {
 					reveal_tile();
+					if(!firstClicked) {
+						timer time = new timer();
+						firstClicked = true;
+					}
 				}
 			}
 			else if (event.getButton() == MouseButton.SECONDARY) {

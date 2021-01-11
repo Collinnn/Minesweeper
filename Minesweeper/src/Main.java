@@ -22,7 +22,7 @@ public class Main extends Application {
 	public static void initTiles() {
 		for (int row = 0; row < HEIGHT; row++) {
 	        for (int col = 0; col < WIDTH; col++) {
-	            new Tile(col, row);
+	            new Tile(row, col);
 	        }
 	    }
 	}
@@ -34,7 +34,7 @@ public class Main extends Application {
 		    int randRow = rand.nextInt(HEIGHT);
 		    int randCol = rand.nextInt(WIDTH);
 		    Tile tile = Tile.tiles[randRow][randCol];
-		    if (!Tile.bombTiles.contains(tile)) {
+		    if (!Tile.bombTiles.contains(tile) && !tile.clicked) {
 		    	Tile.bombTiles.add(tile);	           
 		    	bombs++;
 		    }

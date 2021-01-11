@@ -26,8 +26,9 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	//Int & bool variables
 	private static final int SIZE = 40;
-	private int x,y,bomb;
-	private boolean clicked, flagged = false;
+	private int row, col, bomb;
+	private boolean flagged = false;
+	public boolean clicked = false;
 	
 	//shape, text and stackpane
 	private Rectangle shape;
@@ -46,14 +47,14 @@ public class Tile implements EventHandler<MouseEvent> {
 			};
 	
 	//Tile constructor
-	public Tile(int x, int y) {
+	public Tile(int row, int column) {
 		
-		this.x = x; 
-		this.y = y;
+		this.row = row; 
+		this.col = column;
 		//this.bomb = bomb;
 		//this.flag = flag; 
 		
-		tiles[y][x] = this;
+		tiles[row][column] = this;
 		
 		this.stack = new StackPane();
 		
@@ -67,9 +68,8 @@ public class Tile implements EventHandler<MouseEvent> {
 		this.text = new Text("");
 		this.text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
-		
 		this.stack.getChildren().addAll(this.shape, this.text);//, tileimage);
-		Main.root.add(this.stack, x, y);
+		Main.root.add(this.stack, column, row);
 		
 		this.shape.setOnMouseClicked(this);
 		
@@ -81,7 +81,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			for (int j = -1; j <= 1; j++) {
 				if (!(i == 0 && j == 0)) {
 					try {
-						neighbors.add(tiles[this.x+i][this.y+j]);
+						neighbors.add(tiles[this.row+i][this.col+j]);
 					}
 					catch(Exception e) {
 					}

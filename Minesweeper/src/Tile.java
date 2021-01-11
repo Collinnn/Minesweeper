@@ -1,15 +1,14 @@
 import java.util.ArrayList;
-
-import javafx.event.EventHandler;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
+import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -67,6 +66,7 @@ public class Tile implements EventHandler<MouseEvent> {
 		shape.setStroke(Color.GRAY);		
 		shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
+		//Highlights
 		innerShadowEffect.setRadius(4);
 		innerShadowEffect.setColor(Color.DARKBLUE);
 		innerShadowEffect.setChoke(0.5);
@@ -79,11 +79,13 @@ public class Tile implements EventHandler<MouseEvent> {
 		stack.getChildren().addAll(shape, text);//, tileimage);
 		Main.root.add(stack, column, row);
 		
+		//Setting up interactions
 		shape.setOnMouseClicked(this);
 		shape.setOnMouseEntered(this);
 		shape.setOnMouseExited(this);
 
 	}
+	
 	
 	public ArrayList<Tile> get_neighbors() {
 		ArrayList<Tile> neighbors = new ArrayList<Tile>();
@@ -134,7 +136,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : this.get_neighbors()) {
+				for (Tile tile : get_neighbors()) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}

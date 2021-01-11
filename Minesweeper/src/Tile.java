@@ -7,6 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -25,12 +27,21 @@ public class Tile implements EventHandler<MouseEvent> {
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
+<<<<<<< Updated upstream
 	private static final int SIZE = 40;
 	private int x,y,bomb;
 	private boolean clicked, flagged = false;
+=======
+	public static final int SIZE = 30;
+	private int row, col;
+	private boolean flagged = false;
+	public boolean clicked = false;
+>>>>>>> Stashed changes
 	
 	//shape, text and stackpane
 	private Rectangle shape;
+	private static final Bloom bloomEffect = new Bloom();
+	private static final InnerShadow innerShadowEffect = new InnerShadow(3, Color.BLUE);
 	private Text text;
 	private StackPane stack;
 	
@@ -63,6 +74,11 @@ public class Tile implements EventHandler<MouseEvent> {
 		this.shape.setStroke(Color.GRAY);		
 		this.shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
+		innerShadowEffect.setRadius(4);
+		innerShadowEffect.setColor(Color.DARKBLUE);
+		innerShadowEffect.setChoke(0.5);
+		bloomEffect.setInput(innerShadowEffect);
+		
 		//Text
 		this.text = new Text("");
 		this.text.setFont(Font.font(null, FontWeight.BOLD, 18));
@@ -71,8 +87,15 @@ public class Tile implements EventHandler<MouseEvent> {
 		this.stack.getChildren().addAll(this.shape, this.text);//, tileimage);
 		Main.root.add(this.stack, x, y);
 		
+<<<<<<< Updated upstream
 		this.shape.setOnMouseClicked(this);
 		
+=======
+		shape.setOnMouseClicked(this);
+		shape.setOnMouseEntered(this);
+		shape.setOnMouseExited(this);
+
+>>>>>>> Stashed changes
 	}
 	
 	public ArrayList<Tile> get_neighbors() {
@@ -102,8 +125,13 @@ public class Tile implements EventHandler<MouseEvent> {
 	}
 	
 	public void reveal_tile() {
+<<<<<<< Updated upstream
 		this.clicked = true;
 		
+=======
+		clicked = true;
+		shape.setEffect(null);
+>>>>>>> Stashed changes
 		if (bombTiles.contains(this)) {
 			for (Tile[] tileRows : tiles) {
 				for (Tile tile : tileRows) {
@@ -139,7 +167,18 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	@Override
 	public void handle(MouseEvent event) {
+<<<<<<< Updated upstream
 		if (!this.clicked) {
+=======
+		if (!clicked) {
+			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
+				shape.setEffect(bloomEffect);
+			}
+			else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
+				shape.setEffect(null);
+			}
+			
+>>>>>>> Stashed changes
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!this.flagged) {
 					this.reveal_tile();

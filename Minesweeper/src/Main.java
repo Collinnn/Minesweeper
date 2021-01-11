@@ -19,6 +19,7 @@ public class Main extends Application {
 	public static final int HEIGHT = 15;
 
 	static int NoOfBombs = 20;
+	timer time; 
 	
 	public static GridPane root = new GridPane();
 
@@ -53,6 +54,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
+		
+		time = new timer();
+		
 		BorderPane topItems = new BorderPane();
 		
 		
@@ -60,7 +64,7 @@ public class Main extends Application {
 		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
-		Label label2 = new Label("Timer");
+		Label label2 = new Label("Timer: ");
 		Region rightPadderRegion = new Region();
 		rightBox.getChildren().addAll(rightPadderRegion,label2);
 

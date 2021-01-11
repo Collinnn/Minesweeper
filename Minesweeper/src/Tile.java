@@ -1,99 +1,159 @@
+import java.util.ArrayList;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.GridPane;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
-public class Tile extends GridPane {
-	//Declare int variabler
-	private int x,y,bomb,flag;
-	private boolean clicked;
+public class Tile implements EventHandler<MouseEvent> {
+	// Array for all tiles and tiles with bombs
+	public static Tile[][] tiles = new Tile[Main.HEIGHT][Main.WIDTH];
+	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
-	//For nu! static int variabler
-	static int size = 40;
-	static int width = 800;
-	static int height = 600;
-	static int xtile = width/size;
-	static int ytile = height/size;
+	//Images
+	private static final Image bombImg = new Image("bomb1.png");
+	private static final ImagePattern bombPattern = new ImagePattern(bombImg, 0, 0, bombImg.getWidth(), bombImg.getHeight(), false);
 	
-	//Felter for billeder, firkanter og Text
-	private final Rectangle felt = new Rectangle(xtile-2,ytile);
-	private final ImageView tileimage = new ImageView();
-	private final Text text = new Text();
+	private static final Image flagImg = new Image("Flag.png");
+	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
-	//Billeder
-	Image img = new Image("bombe.png");
+	//Int & bool variables
+	private static final int SIZE = 40;
+	private int x,y,bomb;
+	private boolean clicked, flagged = false;
 	
-	//Tile konstruktøren
-	public Tile(int x, int y, int bomb, int flag) {
+	//shape, text and stackpane
+	private Rectangle shape;
+	private Text text;
+	private StackPane stack;
+	
+	private Color[] textFill = new Color[] {
+			Color.BLUE, 
+			Color.GREEN, 
+			Color.RED, 
+			Color.DARKBLUE, 
+			Color.DARKGREEN, 
+			Color.DARKRED,
+			Color.CRIMSON,
+			Color.BLACK
+			};
+	
+	//Tile constructor
+	public Tile(int x, int y) {
 		
 		this.x = x; 
 		this.y = y;
-		this.bomb = bomb;
-		this.flag = flag; 
+		//this.bomb = bomb;
+		//this.flag = flag; 
 		
-			//Farver for firkant, uden noget kendt
-		felt.setFill(Color.GRAY);
-		felt.setFill(Color.BLACK);
+		tiles[y][x] = this;
 		
-		//If bomb 
-		if (bomb>0) {
-			tileimage.setImage(img);
-		}
+		this.stack = new StackPane();
 		
-		if (flag>0) {
-			//tileimage.setImage(flag); MANGLER BILLEDE
-			//Something something disable left click
-		}
+		//Farver for firkant, uden noget kendt
+		this.shape = new Rectangle(SIZE, SIZE);
+		this.shape.setFill(Color.LIGHTGRAY);
+		this.shape.setStroke(Color.GRAY);		
+		this.shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
 		//Text
-		text.setFont(Font.font(18));
-		text.setVisible(false);
+		this.text = new Text("");
+		this.text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
-		//Image
-		tileimage.setVisible(false);
 		
-		getChildren().addAll(felt,text,tileimage);
+		this.stack.getChildren().addAll(this.shape, this.text);//, tileimage);
+		Main.root.add(this.stack, x, y);
 		
-		setOnMouseClicked(e -> {
-			if(e.getButton() == MouseButton.PRIMARY) {
-				if(flag==0) {
-					
+		this.shape.setOnMouseClicked(this);
+		
+	}
+	
+	public ArrayList<Tile> get_neighbors() {
+		ArrayList<Tile> neighbors = new ArrayList<Tile>();
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (!(i == 0 && j == 0)) {
+					try {
+						neighbors.add(tiles[this.x+i][this.y+j]);
+					}
+					catch(Exception e) {
+					}
+				}
+			}
+		}
+		return neighbors;
+	}
+	
+	public Integer get_value() {
+		int neighborBombs = 0;
+		for (Tile neighbor : this.get_neighbors()) {
+    		if (Tile.bombTiles.contains(neighbor)) {
+    			neighborBombs++;
+    		}
+    	}
+		return neighborBombs;
+	}
+	
+	public void reveal_tile() {
+		this.clicked = true;
+		
+		if (bombTiles.contains(this)) {
+			for (Tile[] tileRows : tiles) {
+				for (Tile tile : tileRows) {
+					tile.clicked = true;
 				}
 				
 			}
-			else if (e.getButton() == MouseButton.SECONDARY) {
-				if(flag==0) {
-					// flag++;   Virker ikke på denne måde. 
-					tileimage.setVisible(true);
+			for (Tile tile : bombTiles) {
+				if (tile.flagged) {
+					
+				}
+				else {
+					tile.shape.setFill(bombPattern);	
 				}
 			}
-			
-		});
+		}
+		else {
+			this.shape.setFill(Color.WHITE);
+			int val = this.get_value();
+			if (val == 0) {
+				for (Tile tile : this.get_neighbors()) {
+					if (!tile.clicked) {
+						tile.reveal_tile();
+					}
+				}
+			}
+			else {
+				this.text.setText(Integer.toString(val));
+				this.text.setFill(textFill[val]);
+			}
+		}
 	}
 	
-	//Handles Leftclick only
-	public void onclick() {
-		if(clicked) {
-			return; 
+	@Override
+	public void handle(MouseEvent event) {
+		if (!this.clicked) {
+			if (event.getButton() == MouseButton.PRIMARY) {
+				if (!this.flagged) {
+					this.reveal_tile();
+				}
+			}
+			else if (event.getButton() == MouseButton.SECONDARY) {
+				if (this.flagged) {
+					this.shape.setFill(Color.LIGHTGRAY);
+				}
+				else {
+					this.shape.setFill(flagPattern);
+				}
+				this.flagged = !this.flagged;
+			}
 		}
-		
-		if (bomb>0) {
-			tileimage.setVisible(true);
-			return; 
-		}
-		clicked = true;
-		felt.setFill(Color.LIGHTGRAY);
-		
-	}
-	
-	
-	
-	
-	
-	
+	}	
 }

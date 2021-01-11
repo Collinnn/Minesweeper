@@ -48,7 +48,6 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	//Tile constructor
 	public Tile(int row, int column) {
-		
 		this.row = row; 
 		this.col = column;
 		//this.bomb = bomb;
@@ -124,7 +123,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : this.get_neighbors()) {
+				for (Tile tile : get_neighbors()) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}

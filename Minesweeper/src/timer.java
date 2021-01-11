@@ -5,10 +5,9 @@ import javafx.util.Duration;
 
 public class timer {
 	public Timeline timeline;
+
 	private int time;
-	public timer() {
-		
-		
+	public timer() {		
 		timeline = new Timeline();
 		timeline.setCycleCount(999);
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),e->increment()));
@@ -20,6 +19,7 @@ public class timer {
 	}
 	
 	public void pausecounter(boolean stop) {
+
 		if(stop) {
 			timeline.pause();
 		}
@@ -33,6 +33,4 @@ public class timer {
 	public int getTime() { 
 		return time;
 	}
-	
-	
 }

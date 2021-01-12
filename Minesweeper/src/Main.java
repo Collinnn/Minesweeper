@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -27,7 +28,9 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		initTiles();
-		initBombs();		
+		initBombs();
+		time = new timer();
+		time.timeline.pause();
 		launch(args);
 	}
 	
@@ -66,6 +69,13 @@ public class Main extends Application {
 		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
+		reset.setOnAction(e -> {
+			time.timeline.pause();
+			Tile.reset();
+			initTiles();
+			initBombs();
+			time.restartcounter();
+		});
 		
 		label2.setText("0");
 		Region rightPadderRegion = new Region();

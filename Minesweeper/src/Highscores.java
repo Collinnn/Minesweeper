@@ -23,8 +23,8 @@ public class Highscores {
 		for(int i = 0; i < size; i++) {
 			if (score > highscores[i]) {
 				highscores[i] = score;
+				break;
 			}
-			break;
 		} //checks if highscore beaten
 		for (int i = 0; i < size; i++) {
 			output.print(highscores[i] + " ");

@@ -20,7 +20,7 @@ public class Main extends Application {
 	public static final int HEIGHT = 15;
 
 	static int NoOfBombs = 20;
-	public static timer time; 
+	public static timer time = new timer(); 
 	public static Label label2 = new Label();
 	public static boolean firstclicked = false;
 	
@@ -29,7 +29,6 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		initTiles();
 		initBombs();
-		time = new timer();
 		time.timeline.pause();
 		launch(args);
 	}
@@ -70,11 +69,12 @@ public class Main extends Application {
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
 		reset.setOnAction(e -> {
-			time.timeline.pause();
 			Tile.reset();
 			initTiles();
 			initBombs();
 			time.restartcounter();
+			firstclicked = false;
+			label2.setText("0");
 		});
 		
 		label2.setText("0");

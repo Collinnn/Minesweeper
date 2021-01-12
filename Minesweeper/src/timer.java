@@ -30,6 +30,8 @@ public class timer {
 	}
 	public void restartcounter() {
 		timeline.playFromStart();
+		timeline.pause();
+		time = 0;
 	}
 	public int getTime() { 
 		return time;

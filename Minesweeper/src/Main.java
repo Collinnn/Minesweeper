@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -19,7 +20,7 @@ public class Main extends Application {
 	public static final int HEIGHT = 15;
 
 	static int NoOfBombs = 20;
-	public static timer time; 
+	public static timer time = new timer(); 
 	public static Label label2 = new Label();
 	public static boolean firstclicked = false;
 	
@@ -27,7 +28,8 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		initTiles();
-		initBombs();		
+		initBombs();
+		time.timeline.pause();
 		launch(args);
 	}
 	
@@ -66,6 +68,14 @@ public class Main extends Application {
 		
 		Label label1 = new Label("Bomb Counter");
 		Button reset = new Button("reset");
+		reset.setOnAction(e -> {
+			Tile.reset();
+			initTiles();
+			initBombs();
+			time.restartcounter();
+			firstclicked = false;
+			label2.setText("0");
+		});
 		
 		label2.setText("0");
 		Region rightPadderRegion = new Region();

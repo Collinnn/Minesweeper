@@ -149,6 +149,15 @@ public class Tile implements EventHandler<MouseEvent> {
 		}
 	}
 	
+	public static void reset() {
+		for(int i =0; i< Main.HEIGHT; i++) {
+			for(int j = 0; j<Main.WIDTH; j++) {
+				tiles[i][j].shape.setFill(Color.LIGHTGRAY);
+			}
+		}
+	}
+	
+	
 	@Override
 	public void handle(MouseEvent event) {
 		if (!clicked) {
@@ -163,7 +172,7 @@ public class Tile implements EventHandler<MouseEvent> {
 				if (!flagged) {
 					reveal_tile();
 					if(!Main.firstclicked) {
-						Main.time = new timer();
+						Main.time.timeline.play();
 						Main.firstclicked = true;
 					}
 				}

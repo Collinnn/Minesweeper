@@ -12,7 +12,6 @@ public class Highscores {
 	
 	public void read(File f) throws FileNotFoundException {
 		Scanner input = new Scanner(f);
-		int count = 0;
 		for (int i = 0; i < size; i++) {
 			highscores[i] = input.nextInt();
 		}

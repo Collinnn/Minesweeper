@@ -67,10 +67,13 @@ public class Main extends Application {
 		
 		BorderPane topItems = new BorderPane();
 		
-		
+		HBox leftBox = new HBox();
 		HBox rightBox = new HBox();
 		
 		label1 = new Label(String.valueOf(bombsNotFound));
+		label1.setPadding(new Insets(10,0,10,20));
+		
+		
 		Button reset = new Button("reset");
 		reset.setOnAction(e -> {
 			Tile.reset();
@@ -84,17 +87,21 @@ public class Main extends Application {
 		});
 		
 		label2.setText("0");
+		label2.setPadding(new Insets(10,20,10,0));
+		
+		Region leftPadderRegion = new Region();
 		Region rightPadderRegion = new Region();
+		
+		leftBox.getChildren().addAll(label1,leftPadderRegion);
 		rightBox.getChildren().addAll(rightPadderRegion,label2);
-
-
 		
-		topItems.setLeft(label1);
+		
+		
+		rightPadderRegion.prefWidthProperty().bind(label1.widthProperty().subtract(label2.widthProperty()));
+		leftPadderRegion.prefWidthProperty().bind(label2.widthProperty().subtract(label1.widthProperty()));
+		
+		topItems.setLeft(leftBox);
 		topItems.setCenter(reset);
-		//topItems.setRight(tempBox);
-		
-		
-		
 		topItems.setRight(rightBox);
 		
 		
@@ -118,6 +125,5 @@ public class Main extends Application {
 		root.setPadding(new Insets(2));		
 		
 		stage.show();
-		rightPadderRegion.setPrefWidth(label1.getWidth()-label2.getWidth());
 	}
 }

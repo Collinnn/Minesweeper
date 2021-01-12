@@ -180,9 +180,13 @@ public class Tile implements EventHandler<MouseEvent> {
 			else if (event.getButton() == MouseButton.SECONDARY) {
 				if (flagged) {
 					shape.setFill(Color.LIGHTGRAY);
+					Main.bombsNotFound ++;
+					Main.label1.setText(String.valueOf(Main.bombsNotFound));
 				}
 				else {
 					shape.setFill(flagPattern);
+					Main.bombsNotFound --;
+					Main.label1.setText(String.valueOf(Main.bombsNotFound));
 				}
 				flagged = !flagged;
 			}

@@ -21,12 +21,16 @@ public class Main extends Application {
 
 	static int NoOfBombs = 20;
 	public static timer time = new timer(); 
+	
+	public static Label label1 = new Label();
 	public static Label label2 = new Label();
 	public static boolean firstclicked = false;
+	public static int bombsNotFound;
 	
 	public static GridPane root = new GridPane();
 
 	public static void main(String[] args) {
+		bombsNotFound = NoOfBombs;
 		initTiles();
 		initBombs();
 		time.timeline.pause();
@@ -66,7 +70,7 @@ public class Main extends Application {
 		
 		HBox rightBox = new HBox();
 		
-		Label label1 = new Label("Bomb Counter");
+		label1 = new Label(String.valueOf(bombsNotFound));
 		Button reset = new Button("reset");
 		reset.setOnAction(e -> {
 			Tile.reset();
@@ -75,6 +79,8 @@ public class Main extends Application {
 			time.restartcounter();
 			firstclicked = false;
 			label2.setText("0");
+			bombsNotFound = NoOfBombs;
+			label1.setText(String.valueOf(bombsNotFound));
 		});
 		
 		label2.setText("0");

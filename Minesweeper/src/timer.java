@@ -16,7 +16,7 @@ public class timer {
 	}
 	private void increment () {
 		time++;
-		Main.label2.setText(String.valueOf(time));
+		Main.label2.setText("Time(s) " + String.valueOf(time));
 	}
 	
 	public void pausecounter(boolean stop) {

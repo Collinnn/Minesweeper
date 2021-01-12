@@ -74,10 +74,10 @@ public class Main extends Application {
 			initBombs();
 			time.restartcounter();
 			firstclicked = false;
-			label2.setText("0");
+			label2.setText("Time(s) 0");
 		});
 		
-		label2.setText("0");
+		label2.setText("Time(s) 0");
 		Region rightPadderRegion = new Region();
 		rightBox.getChildren().addAll(rightPadderRegion,label2);
 

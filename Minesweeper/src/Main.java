@@ -1,8 +1,8 @@
-import java.awt.Color;
 import java.util.Random;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,7 +12,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -63,14 +65,23 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
 		
-		//time = new timer();
 		
 		BorderPane topItems = new BorderPane();
 		
+		HBox middleBox = new HBox();
+		middleBox.setAlignment(Pos.CENTER);
 		
-		HBox rightBox = new HBox();
+		StackPane leftPane = new StackPane();
+		StackPane rightPane = new StackPane();
+		Rectangle left = new Rectangle(90,40);
+		Rectangle right = new Rectangle(90,40);
+		left.setFill(Color.BLACK);
+		right.setFill(Color.BLACK);
+		
 		
 		label1 = new Label(String.valueOf(bombsNotFound));
+		label1.setTextFill(Color.WHITE);
+		
 		Button reset = new Button("reset");
 		reset.setOnAction(e -> {
 			Tile.reset();
@@ -84,18 +95,21 @@ public class Main extends Application {
 		});
 		
 		label2.setText("0");
-		Region rightPadderRegion = new Region();
-		rightBox.getChildren().addAll(rightPadderRegion,label2);
+		label2.setTextFill(Color.WHITE);
+		
+		
+		leftPane.getChildren().addAll(left,label1);
+		rightPane.getChildren().addAll(right,label2);
+		
+		middleBox.getChildren().add(reset);
+		
+		leftPane.setPadding(new Insets(10,0,10,20));
+		rightPane.setPadding(new Insets(10,20,10,0));
 
-
 		
-		topItems.setLeft(label1);
-		topItems.setCenter(reset);
-		//topItems.setRight(tempBox);
-		
-		
-		
-		topItems.setRight(rightBox);
+		topItems.setLeft(leftPane);
+		topItems.setRight(rightPane);
+		topItems.setCenter(middleBox);
 		
 		
 		
@@ -118,6 +132,5 @@ public class Main extends Application {
 		root.setPadding(new Insets(2));		
 		
 		stage.show();
-		rightPadderRegion.setPrefWidth(label1.getWidth()-label2.getWidth());
 	}
 }

@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Highscores {
 	
-	private int size = 10;
-	private int[] highscores = new int[size]; //initial size
+	private static final int size = 10;
+	private int[] highscores = new int[size];
 
 	public Highscores(File f) throws FileNotFoundException {//use on start up
 		this.read(f);
@@ -30,5 +30,10 @@ public class Highscores {
 			output.print(highscores[i] + " ");
 		} //saves changes
 	}
+	
+	public int[] getHighscores() {
+		int[] copy = highscores.clone();
+		return copy;
+	}//placeholder
 	
 }

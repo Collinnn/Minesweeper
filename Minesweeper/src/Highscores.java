@@ -31,6 +31,16 @@ public class Highscores {
 		} //saves changes
 	}
 	
+	public void reset(File f) throws FileNotFoundException {//for debugging purposes
+		PrintStream output = new PrintStream(f);
+		for (int i = 0; i < size; i++) {
+			highscores[i] = 0;
+		}
+		for (int i = 0; i < size; i++) {
+			output.print(highscores[i] + " ");
+		}
+	}
+	
 	public int[] getHighscores() {
 		int[] copy = highscores.clone();
 		return copy;

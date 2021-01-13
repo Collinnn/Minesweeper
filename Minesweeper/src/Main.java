@@ -113,11 +113,13 @@ public class Main extends Application {
 		
 		
 		
-		Menu fileMenu = new Menu("File");
+		Menu fileMenu = new Menu("_File");
 		
 		MenuItem settings = new MenuItem("Settings");
 		settings.setOnAction(e -> SettingsWindow.display());
-		fileMenu.getItems().add(settings);
+		MenuItem leaderboards = new MenuItem("Leaderboards");
+		MenuItem exit = new MenuItem("Exit");
+		fileMenu.getItems().addAll(settings, leaderboards, exit);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fileMenu);
 		

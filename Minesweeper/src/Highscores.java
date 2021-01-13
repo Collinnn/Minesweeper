@@ -15,6 +15,7 @@ public class Highscores {
 		this.read(f);
 	}
 	
+	//reads from data file. Use on start-up.
 	public void read(File f) throws FileNotFoundException {
 		input = new Scanner(f);
 		for(int i = 0; i < highscores.length; i++) {
@@ -22,6 +23,7 @@ public class Highscores {
 		}
 	}
 	
+	//writes to data file. Use upon losing or winning. 
 	public void write(String name, int score, File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {
@@ -35,10 +37,11 @@ public class Highscores {
 		}
 	}
 	
+	//resets data file to basic format.
 	public void reset(File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {
-			output.println("name:0");
+			output.println("name:-1");
 		}
 	}
 	

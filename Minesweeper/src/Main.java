@@ -114,7 +114,10 @@ public class Main extends Application {
 		
 		
 		Menu fileMenu = new Menu("File");
-		fileMenu.getItems().add(new MenuItem("Settings"));
+		
+		MenuItem settings = new MenuItem("Settings");
+		settings.setOnAction(e -> SettingsWindow.display());
+		fileMenu.getItems().add(settings);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fileMenu);
 		

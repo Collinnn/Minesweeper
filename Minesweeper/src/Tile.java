@@ -153,22 +153,22 @@ public class Tile implements EventHandler<MouseEvent> {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!flagged) {
 					reveal_tile();
-					if(!Board.firstclicked) {
-						Board.firstClick(this);
+					if(!Main.firstclicked) {
+						Main.time.timeline.play();
+						Main.firstclicked = true;
 					}
 				}
 			}
 			else if (event.getButton() == MouseButton.SECONDARY) {
 				if (flagged) {
 					shape.setFill(Color.LIGHTGRAY);
-						Board.bombsNotFound++;
-						TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
+						Main.bombsNotFound ++;
+						TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
-				
 				else {
 					shape.setFill(flagPattern);
-						Board.bombsNotFound--;
-						TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
+						Main.bombsNotFound --;
+						TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
 				flagged = !flagged;
 			}

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,7 +8,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -18,14 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-<<<<<<< HEAD
-=======
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 15;
-
-	static int NoOfBombs = 20;
-	public static Timer time = new Timer(); 
->>>>>>> 405ff34660797503ac5e7add179b040635ce0588
 	
 	public static Timer time = new Timer(); 
 	
@@ -89,11 +78,13 @@ public class Main extends Application {
 		
 		
 		
-		Menu fileMenu = new Menu("File");
+		Menu fileMenu = new Menu("_File");
 		
 		MenuItem settings = new MenuItem("Settings");
 		settings.setOnAction(e -> SettingsWindow.display());
-		fileMenu.getItems().add(settings);
+		MenuItem leaderboards = new MenuItem("Leaderboards");
+		MenuItem exit = new MenuItem("Exit");
+		fileMenu.getItems().addAll(settings, leaderboards, exit);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fileMenu);
 		

@@ -62,7 +62,7 @@ public class Board {
 		return neighbors;
 	}
 	
-	public static void reset() {
+	public void reset() {
 		for(int i =0; i < HEIGHT; i++) {
 			for(int j = 0; j < WIDTH; j++) {
 				tiles[i][j].shape.setFill(Color.LIGHTGRAY);

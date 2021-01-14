@@ -18,7 +18,7 @@ public class Hints {
 		return bitmap; 
 	}
 	
-	public void getHint () {
+	public static void getHint () {
 		for (Tile[] tilerow: Board.tiles) {
 			for (Tile tile: tilerow) {
 				if(tile.clicked && tile.get_value()==Board.get_neighbors(tile).size()) {   
@@ -31,7 +31,7 @@ public class Hints {
 		}
 	}
 
-	private ArrayList<Tile> findNeighbors(Tile tile) {
+	private static ArrayList<Tile> findNeighbors(Tile tile) {
 		ArrayList<Tile> notClick = new ArrayList<Tile>();
 		for(Tile neighbor: Board.get_neighbors(tile)) {
 			if(!neighbor.clicked) {

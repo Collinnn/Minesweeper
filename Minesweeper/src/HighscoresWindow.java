@@ -3,6 +3,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,9 +42,10 @@ public class HighscoresWindow {
 		buttonLayout.getChildren().addAll(beginnerButton,mediumButton,expertButton);
 			
 		HBox headerLayout = new HBox();
-		Label playerLabel = new Label("Player");
-		Label highscoreLabel = new Label("Highscore");
-		headerLayout.getChildren().addAll(playerLabel,highscoreLabel);
+		Label playerLabel = new Label("Player\tHighscore");
+		playerLabel.setPadding(new Insets(0,0,0,8));
+		headerLayout.getChildren().addAll(playerLabel);
+		
 			
 		VBox primaryLayout = new VBox();
 		primaryLayout.getChildren().addAll(headerLayout,beginnerListView,buttonLayout);
@@ -57,8 +59,12 @@ public class HighscoresWindow {
 		public static void listViewAdd(ListView<String> listview, File f) throws FileNotFoundException {
 			Highscores h = new Highscores(f);
 			for(int i = 0; i < h.getHighscores().length; i++) {
-				listview.getItems().add(h.getHighscores()[i].split(":")[0] + "\t" + 
-			h.getHighscores()[i].split(":")[1]);
+				if(h.getHighscores()[i].equals("name:-1")) {
+					listview.getItems().add("-\t\t-");
+				} else {
+					listview.getItems().add(h.getHighscores()[i].split(":")[0] + "\t\t" + 
+				h.getHighscores()[i].split(":")[1]);
+				}
 			}
 		}
 

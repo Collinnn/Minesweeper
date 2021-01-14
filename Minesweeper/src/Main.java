@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -83,7 +85,14 @@ public class Main extends Application {
 		MenuItem settings = new MenuItem("Settings");
 		settings.setOnAction(e -> SettingsWindow.display());
 		MenuItem leaderboards = new MenuItem("Leaderboards");
-		leaderboards.setOnAction(e -> HighscoresWindow.display());
+		leaderboards.setOnAction(e -> {
+			//autogenereret
+			try {
+				HighscoresWindow.display();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		});
 		MenuItem exit = new MenuItem("Exit");
 		fileMenu.getItems().addAll(settings, leaderboards, exit);
 		MenuBar menuBar = new MenuBar();

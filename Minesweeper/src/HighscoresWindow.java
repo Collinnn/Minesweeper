@@ -1,5 +1,7 @@
 
-import javafx.application.Application;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,12 +13,15 @@ import javafx.stage.Stage;
 
 public class HighscoresWindow {
 
-	public static void display() {
+	//Just for testing purposes
+	
+	public static void display() throws FileNotFoundException {
 			
 		Stage window = new Stage();
 		window.setTitle("Leaderboards");
 			
 		ListView<String> beginnerListView = new ListView<>();
+		listViewAdd(beginnerListView);
 		ListView<String> mediumListView = new ListView<>();
 		ListView<String> expertListView; new ListView<>();
 			
@@ -39,6 +44,15 @@ public class HighscoresWindow {
 		window.setScene(scene);
 		window.showAndWait();	
 		
+		}
+	
+		public static void listViewAdd(ListView<String> listview) throws FileNotFoundException {
+			//temporary for testing
+			File f = new File("Highscores.txt");
+			Highscores beginnerHighscore = new Highscores(f);
+			for(int i = 0; i < beginnerHighscore.getHighscores().length; i++) {
+				listview.getItems().add(beginnerHighscore.getHighscores()[i]);
+			}
 		}
 
 }

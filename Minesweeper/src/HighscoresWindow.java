@@ -37,7 +37,6 @@ public class HighscoresWindow {
 			
 		Scene scene = new Scene(primaryLayout, 400,300);
 		window.setScene(scene);
-		window.show();
 		window.showAndWait();	
 		
 		}

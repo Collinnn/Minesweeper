@@ -16,7 +16,15 @@ public class Board {
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 15;
 
-	static int NoOfBombs = 20;
+	// Random row and column index in tile grid
+	private static Random rand = new Random();
+	private static int randRow = rand.nextInt(HEIGHT);
+	private static int randCol = rand.nextInt(WIDTH);
+	
+	public static int NoOfBombs = 20;
+	public static int bombsNotFound = NoOfBombs;
+	
+	public static boolean firstclicked = false;
 	
 	public Board() {
 		grid.setPadding(new Insets(2));
@@ -34,11 +42,8 @@ public class Board {
 	}
 	
 	private static void initBombs() {
-		Random rand = new Random();
 		int bombs = 0;
 		while (bombs < NoOfBombs) {
-		    int randRow = rand.nextInt(HEIGHT);
-		    int randCol = rand.nextInt(WIDTH);
 		    Tile tile = tiles[randRow][randCol];
 		    if (!bombTiles.contains(tile) && !tile.clicked) {
 		    	bombTiles.add(tile);	           
@@ -87,6 +92,16 @@ public class Board {
 		return group;
 	}
 	
+	public static void firstClick(Tile tile) {
+		firstclicked = true;
+		Main.time.timeline.play();
+		for (Tile groupMember : generateGroup(tile)) {
+			if (bombTiles.contains(groupMember)) {
+				
+			}
+		}
+	}
+	
 	public void reset() {
 		for(int i =0; i < HEIGHT; i++) {
 			for(int j = 0; j < WIDTH; j++) {
@@ -97,10 +112,10 @@ public class Board {
 		initBombs();
 		
 		Main.time.restartcounter();
-		Main.firstclicked = false;
+		Board.firstclicked = false;
 		TopBarLayout.labelTimer.setText("0");
-		Main.bombsNotFound = NoOfBombs;
-		TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
+		Board.bombsNotFound = NoOfBombs;
+		TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 	}
 	
 }

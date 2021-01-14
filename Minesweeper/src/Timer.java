@@ -16,6 +16,7 @@ public class Timer {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),e->increment()));
 		timeline.play();
 	}
+	
 	private void increment () {
 		time++;
 		//Counts upto 59 sekunds
@@ -29,7 +30,6 @@ public class Timer {
 			
 			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
 		}
-		
 	}
 	
 	//Pause and stop with control by the boolean. 

@@ -83,6 +83,7 @@ public class Main extends Application {
 		MenuItem settings = new MenuItem("Settings");
 		settings.setOnAction(e -> SettingsWindow.display());
 		MenuItem leaderboards = new MenuItem("Leaderboards");
+		leaderboards.setOnAction(e -> HighscoresWindow.display());
 		MenuItem exit = new MenuItem("Exit");
 		fileMenu.getItems().addAll(settings, leaderboards, exit);
 		MenuBar menuBar = new MenuBar();

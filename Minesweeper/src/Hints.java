@@ -1,6 +1,6 @@
 import javafx.scene.paint.Color;
 import java.util.ArrayList; 
-public class hints {
+public class Hints {
 	
 	public ArrayList<Tile> GenerateBitmap() {
 		ArrayList<Tile> bitmap = new ArrayList<Tile>();
@@ -18,7 +18,7 @@ public class hints {
 		return bitmap; 
 	}
 	
-	public void gethint () {
+	public void getHint () {
 		for (Tile[] tilerow: Board.tiles) {
 			for (Tile tile: tilerow) {
 				if(tile.clicked && tile.get_value()==Board.get_neighbors(tile).size()) {   
@@ -32,14 +32,14 @@ public class hints {
 	}
 
 	private ArrayList<Tile> findNeighbors(Tile tile) {
-		ArrayList<Tile> notclick = new ArrayList<Tile>();
+		ArrayList<Tile> notClick = new ArrayList<Tile>();
 		for(Tile neighbor: Board.get_neighbors(tile)) {
 			if(!neighbor.clicked) {
-				notclick.add(neighbor); 
+				notClick.add(neighbor); 
 			}
 		}
 		
-		return notclick; 
+		return notClick; 
 	}
 	
 	

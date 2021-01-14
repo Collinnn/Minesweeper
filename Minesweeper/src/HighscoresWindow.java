@@ -1,4 +1,5 @@
 
+//might not be needed
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class HighscoresWindow {
@@ -18,10 +20,16 @@ public class HighscoresWindow {
 	public static void display() throws FileNotFoundException {
 			
 		Stage window = new Stage();
+		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Leaderboards");
+		
+		//This should be moved to model
+		File beginnerFile = new File("Highscores.txt");
+		File mediumFile = new File("Highscores.txt");
+		File expertFile = new File("Highscores.txt");
 			
 		ListView<String> beginnerListView = new ListView<>();
-		listViewAdd(beginnerListView);
+		listViewAdd(beginnerListView, beginnerFile);
 		ListView<String> mediumListView = new ListView<>();
 		ListView<String> expertListView; new ListView<>();
 			
@@ -40,18 +48,17 @@ public class HighscoresWindow {
 		VBox primaryLayout = new VBox();
 		primaryLayout.getChildren().addAll(headerLayout,beginnerListView,buttonLayout);
 			
-		Scene scene = new Scene(primaryLayout, 400,300);
+		Scene scene = new Scene(primaryLayout);
 		window.setScene(scene);
 		window.showAndWait();	
 		
 		}
 	
-		public static void listViewAdd(ListView<String> listview) throws FileNotFoundException {
-			//temporary for testing
-			File f = new File("Highscores.txt");
-			Highscores beginnerHighscore = new Highscores(f);
-			for(int i = 0; i < beginnerHighscore.getHighscores().length; i++) {
-				listview.getItems().add(beginnerHighscore.getHighscores()[i]);
+		public static void listViewAdd(ListView<String> listview, File f) throws FileNotFoundException {
+			Highscores h = new Highscores(f);
+			for(int i = 0; i < h.getHighscores().length; i++) {
+				listview.getItems().add(h.getHighscores()[i].split(":")[0] + "\t" + 
+			h.getHighscores()[i].split(":")[1]);
 			}
 		}
 

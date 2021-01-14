@@ -86,7 +86,6 @@ public class Main extends Application {
 		settings.setOnAction(e -> SettingsWindow.display());
 		MenuItem leaderboards = new MenuItem("Leaderboards");
 		leaderboards.setOnAction(e -> {
-			//autogenereret
 			try {
 				HighscoresWindow.display();
 			} catch (FileNotFoundException e1) {

@@ -26,7 +26,7 @@ public class SettingsWindow {
 	private static final int EBOMBS = 20;
 	private static int CBOMBS = 20;
 
-	public static void display() {
+	public static void display() {	
 		Stage window = new Stage();
 		
 		window.setTitle("Settings");
@@ -69,19 +69,19 @@ public class SettingsWindow {
 		Text bHeight = new Text(String.valueOf(BHEIGHT));
 		Text mHeight = new Text(String.valueOf(MHEIGHT));
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
-		TextField cHeight = new TextField("20");
+		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
 		cHeight.setPrefWidth(60);
 		
 		Text bWidth = new Text(String.valueOf(BWIDTH));
 		Text mWidth = new Text(String.valueOf(MWIDTH));
 		Text eWidth = new Text(String.valueOf(EWIDTH));
-		TextField cWidth = new TextField("20");
+		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		cWidth.setPrefWidth(60);
 		
 		Text bBombs = new Text(String.valueOf(BBOMBS));
 		Text mBombs = new Text(String.valueOf(MBOMBS));
 		Text eBombs = new Text(String.valueOf(EBOMBS));
-		TextField cBombs = new TextField("20");
+		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		cBombs.setPrefWidth(60);
 		
 		cHeight.disableProperty().bind(custom.selectedProperty().not());

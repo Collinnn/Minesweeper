@@ -9,6 +9,7 @@ public class Timer {
 	private int time;
 	private int min; 
 	
+	//Sets the timer to work, with a duration of 1 second. 
 	public Timer() {		
 		timeline = new Timeline();
 		timeline.setCycleCount(Animation.INDEFINITE);
@@ -17,22 +18,22 @@ public class Timer {
 	}
 	private void increment () {
 		time++;
+		//Counts upto 59 sekunds
 		if(time<60) {
-			Main.label2.setText(String.valueOf(time));
-			
+			Main.labelTimer.setText(String.valueOf(time));
 		}
+		//After 59 it counts min and sekunds
 		else {
-			if(time%60==0) {
+			if(time%60==0)
 				min++;
-			}
-			Main.label2.setText(String.valueOf(min + ":" + (time-(60*min))));
 			
+			Main.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
 		}
 		
 	}
 	
+	//Pause and stop with control by the boolean. 
 	public void pausecounter(boolean stop) {
-
 		if(stop) {
 			timeline.pause();
 		}
@@ -40,11 +41,13 @@ public class Timer {
 			timeline.play();
 		}
 	}
+	//Restarts and stops the counter.
 	public void restartcounter() {
 		timeline.playFromStart();
 		timeline.pause();
 		time = 0;
 	}
+	
 	public int getTime() { 
 		return time;
 	}

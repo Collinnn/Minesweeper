@@ -32,11 +32,11 @@ public class TopBarLayout {
 		labelBombCounter = new Label(String.valueOf(Main.bombsNotFound));
 		labelBombCounter.setTextFill(Color.WHITE);
 		
-		Button reset = new Button("reset");
-		reset.setOnAction(e -> {
-			Main.board.reset();
-			
-		});
+		Button hint = new Button("Hints");
+		hint.setOnAction(e-> Hints.getHint());
+		
+		Button reset = new Button("Reset");
+		reset.setOnAction(e -> Main.board.reset());
 		
 		labelTimer.setText("0");
 		labelTimer.setTextFill(Color.WHITE);

@@ -31,9 +31,10 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	//shape, effects, text and stackpane
 	public Rectangle shape;
-	private static final Bloom bloomEffect = new Bloom();
-	private static final InnerShadow innerShadowEffect = new InnerShadow(3, Color.BLUE);
-	private static Effect highlight;
+	
+	private Bloom bloom = new Bloom();
+	private final InnerShadow innerShadow = new InnerShadow(3, Color.DARKBLUE);
+	private Effect highlight = bloom;
 	
 	private Text text;
 	private StackPane stack;
@@ -65,12 +66,10 @@ public class Tile implements EventHandler<MouseEvent> {
 		shape.setStroke(Color.GRAY);		
 		shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
-		//Highlights
-		innerShadowEffect.setRadius(4);
-		innerShadowEffect.setColor(Color.DARKBLUE);
-		innerShadowEffect.setChoke(0.5);
-		bloomEffect.setInput(innerShadowEffect);
-		highlight = bloomEffect;
+		// Highlight
+		innerShadow.setRadius(4);
+		innerShadow.setChoke(0.5);
+		bloom.setInput(innerShadow);
 		
 		//Text
 		text = new Text("");
@@ -131,14 +130,24 @@ public class Tile implements EventHandler<MouseEvent> {
 		return neighborBombs;
 	}
 	
+	public void set_highlight(Color color) {
+		if (color == null) {
+			shape.setEffect(null);
+		}
+		else {
+			innerShadow.setColor(color);
+			shape.setEffect(highlight);
+		}
+	}
+	
 	@Override
 	public void handle(MouseEvent event) {
 		if (!clicked) {
 			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
-				shape.setEffect(highlight);
+				set_highlight(Color.DARKBLUE);
 			}
 			else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
-				shape.setEffect(null);
+				set_highlight(null);
 			}
 			
 			if (event.getButton() == MouseButton.PRIMARY) {

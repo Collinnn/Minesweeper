@@ -18,14 +18,14 @@ public class Timer {
 	private void increment () {
 		time++;
 		if(time<60) {
-			Main.label2.setText(String.valueOf(time));
+			Main.labelTimer.setText(String.valueOf(time));
 			
 		}
 		else {
 			if(time%60==0) {
 				min++;
 			}
-			Main.label2.setText(String.valueOf(min + ":" + (time-(60*min))));
+			Main.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
 			
 		}
 		

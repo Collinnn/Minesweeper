@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Simpleminesweeper extends Application implements EventHandler<ActionEvent> {
+public class SimpleMinesweeper extends Application implements EventHandler<ActionEvent> {
 	Button button;
 	static int size = 40;
 	static int width = 800;

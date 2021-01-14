@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.event.EventHandler;
@@ -8,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Effect;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -15,9 +15,6 @@ import javafx.scene.text.Text;
 
 
 public class Tile implements EventHandler<MouseEvent> {
-	// Array for all tiles and tiles with bombs
-	public static Tile[][] tiles = new Tile[Main.HEIGHT][Main.WIDTH];
-	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
 	//Images
 	private static final Image bombImg = new Image("bomb1.png");
@@ -27,15 +24,17 @@ public class Tile implements EventHandler<MouseEvent> {
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
-	public static final int SIZE = 30;
-	private int row, col;
-	private boolean flagged = false;
+	private static final int SIZE = 30;
+	public int row, col;
+	public boolean flagged = false;
 	public boolean clicked = false;
 	
-	//shape, text and stackpane
-	private Rectangle shape;
+	//shape, effects, text and stackpane
+	public Rectangle shape;
 	private static final Bloom bloomEffect = new Bloom();
 	private static final InnerShadow innerShadowEffect = new InnerShadow(3, Color.BLUE);
+	private static Effect highlight;
+	
 	private Text text;
 	private StackPane stack;
 	
@@ -56,7 +55,7 @@ public class Tile implements EventHandler<MouseEvent> {
 		this.row = row; 
 		this.col = column; 
 		
-		tiles[row][column] = this;
+		Board.tiles[row][column] = this;
 		
 		stack = new StackPane();
 		
@@ -71,13 +70,14 @@ public class Tile implements EventHandler<MouseEvent> {
 		innerShadowEffect.setColor(Color.DARKBLUE);
 		innerShadowEffect.setChoke(0.5);
 		bloomEffect.setInput(innerShadowEffect);
+		highlight = bloomEffect;
 		
 		//Text
 		text = new Text("");
 		text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
 		stack.getChildren().addAll(shape, text);//, tileimage);
-		Main.root.add(stack, column, row);
+		Board.grid.add(stack, column, row);
 		
 		//Setting up interactions
 		shape.setOnMouseClicked(this);
@@ -86,44 +86,16 @@ public class Tile implements EventHandler<MouseEvent> {
 
 	}
 	
-	
-	public ArrayList<Tile> get_neighbors() {
-		ArrayList<Tile> neighbors = new ArrayList<Tile>();
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				if (!(i == 0 && j == 0)) {
-					try {
-						neighbors.add(tiles[row+i][col+j]);
-					}
-					catch(Exception e) {
-					}
-				}
-			}
-		}
-		return neighbors;
-	}
-	
-	public Integer get_value() {
-		int neighborBombs = 0;
-		for (Tile neighbor : get_neighbors()) {
-    		if (Tile.bombTiles.contains(neighbor)) {
-    			neighborBombs++;
-    		}
-    	}
-		return neighborBombs;
-	}
-	
-	public void reveal_tile() {
+	private void reveal_tile() {
 		clicked = true;
 		shape.setEffect(null);
-		if (bombTiles.contains(this)) {
-			for (Tile[] tileRows : tiles) {
+		if (Board.bombTiles.contains(this)) {
+			for (Tile[] tileRows : Board.tiles) {
 				for (Tile tile : tileRows) {
 					tile.clicked = true;
 				}
-				
 			}
-			for (Tile tile : bombTiles) {
+			for (Tile tile : Board.bombTiles) {
 				if (tile.flagged) {
 					
 				}
@@ -136,7 +108,7 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : get_neighbors()) {
+				for (Tile tile : Board.get_neighbors(this)) {
 					if (!tile.clicked) {
 						tile.reveal_tile();
 					}
@@ -149,20 +121,21 @@ public class Tile implements EventHandler<MouseEvent> {
 		}
 	}
 	
-	public static void reset() {
-		for(int i =0; i< Main.HEIGHT; i++) {
-			for(int j = 0; j<Main.WIDTH; j++) {
-				tiles[i][j].shape.setFill(Color.LIGHTGRAY);
-			}
-		}
+	private Integer get_value() {
+		int neighborBombs = 0;
+		for (Tile neighbor : Board.get_neighbors(this)) {
+    		if (Board.bombTiles.contains(neighbor)) {
+    			neighborBombs++;
+    		}
+    	}
+		return neighborBombs;
 	}
-	
 	
 	@Override
 	public void handle(MouseEvent event) {
 		if (!clicked) {
 			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
-				shape.setEffect(bloomEffect);
+				shape.setEffect(highlight);
 			}
 			else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
 				shape.setEffect(null);
@@ -181,12 +154,12 @@ public class Tile implements EventHandler<MouseEvent> {
 				if (flagged) {
 					shape.setFill(Color.LIGHTGRAY);
 						Main.bombsNotFound ++;
-						Main.label1.setText(String.valueOf(Main.bombsNotFound));
+						Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
 				else {
 					shape.setFill(flagPattern);
 						Main.bombsNotFound --;
-						Main.label1.setText(String.valueOf(Main.bombsNotFound));
+						Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
 				flagged = !flagged;
 			}

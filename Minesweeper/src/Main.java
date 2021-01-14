@@ -18,53 +18,27 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 15;
-
-	static int NoOfBombs = 20;
-	public static timer time = new timer(); 
 	
-	public static Label label1 = new Label();
-	public static Label label2 = new Label();
+	public static Timer time = new Timer(); 
+	
+	public static Label labelBombCounter = new Label();
+	public static Label labelTimer = new Label();
 	public static boolean firstclicked = false;
 	public static int bombsNotFound;
 	
-	public static GridPane root = new GridPane();
 
 	public static void main(String[] args) {
-		bombsNotFound = NoOfBombs;
-		initTiles();
-		initBombs();
+		bombsNotFound = Board.NoOfBombs;
 		time.timeline.pause();
 		launch(args);
 	}
 	
-	public static void initTiles() {
-		for (int row = 0; row < HEIGHT; row++) {
-	        for (int col = 0; col < WIDTH; col++) {
-	            new Tile(row, col);
-	        }
-	    }
-	}
-	
-	public static void initBombs() {
-		Random rand = new Random();
-		int bombs = 0;
-		while (bombs < NoOfBombs) {
-		    int randRow = rand.nextInt(HEIGHT);
-		    int randCol = rand.nextInt(WIDTH);
-		    Tile tile = Tile.tiles[randRow][randCol];
-		    if (!Tile.bombTiles.contains(tile) && !tile.clicked) {
-		    	Tile.bombTiles.add(tile);	           
-		    	bombs++;
-		    }
-		}
-	}
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
-		
+		Board board = new Board();
+
 		
 		BorderPane topItems = new BorderPane();
 		
@@ -79,27 +53,21 @@ public class Main extends Application {
 		right.setFill(Color.BLACK);
 		
 		
-		label1 = new Label(String.valueOf(bombsNotFound));
-		label1.setTextFill(Color.WHITE);
+		labelBombCounter = new Label(String.valueOf(bombsNotFound));
+		labelBombCounter.setTextFill(Color.WHITE);
 		
 		Button reset = new Button("reset");
 		reset.setOnAction(e -> {
-			Tile.reset();
-			initTiles();
-			initBombs();
-			time.restartcounter();
-			firstclicked = false;
-			label2.setText("0");
-			bombsNotFound = NoOfBombs;
-			label1.setText(String.valueOf(bombsNotFound));
+			board.reset();
+			
 		});
 		
-		label2.setText("0");
-		label2.setTextFill(Color.WHITE);
+		labelTimer.setText("0");
+		labelTimer.setTextFill(Color.WHITE);
 		
 		
-		leftPane.getChildren().addAll(left,label1);
-		rightPane.getChildren().addAll(right,label2);
+		leftPane.getChildren().addAll(left, labelBombCounter);
+		rightPane.getChildren().addAll(right, labelTimer);
 		
 		middleBox.getChildren().add(reset);
 		
@@ -128,13 +96,12 @@ public class Main extends Application {
 		BorderPane midLevel = new BorderPane();
 		
 		midLevel.setTop(topItems);
-		midLevel.setCenter(root);
+		midLevel.setCenter(Board.grid);
 		
 		topLevel.setTop(menuBar);
 		topLevel.setCenter(midLevel);
 		
 		stage.setScene(new Scene(topLevel));
-		root.setPadding(new Insets(2));		
 		
 		stage.show();
 	}

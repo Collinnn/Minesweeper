@@ -5,10 +5,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	
 	public static Timer time = new Timer();
-
+	public static Board board = new Board();
 	
 	public static void main(String[] args) {
-		new Board();
 		time.timeline.pause();
 		launch(args);
 	}

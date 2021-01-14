@@ -33,7 +33,7 @@ public class TopBarLayout {
 		right.setFill(Color.BLACK);
 		
 		
-		labelBombCounter = new Label(String.valueOf(Main.bombsNotFound));
+		labelBombCounter = new Label(String.valueOf(Board.bombsNotFound));
 		labelBombCounter.setTextFill(Color.WHITE);
 		
 		Button hint = new Button("Hints");

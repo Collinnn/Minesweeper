@@ -18,6 +18,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+<<<<<<< HEAD
+=======
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 15;
+
+	static int NoOfBombs = 20;
+	public static Timer time = new Timer(); 
+>>>>>>> 405ff34660797503ac5e7add179b040635ce0588
 	
 	public static Timer time = new Timer(); 
 	
@@ -81,13 +89,11 @@ public class Main extends Application {
 		
 		
 		
-		Menu fileMenu = new Menu("_File");
+		Menu fileMenu = new Menu("File");
 		
 		MenuItem settings = new MenuItem("Settings");
 		settings.setOnAction(e -> SettingsWindow.display());
-		MenuItem leaderboards = new MenuItem("Leaderboards");
-		MenuItem exit = new MenuItem("Exit");
-		fileMenu.getItems().addAll(settings, leaderboards, exit);
+		fileMenu.getItems().add(settings);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fileMenu);
 		

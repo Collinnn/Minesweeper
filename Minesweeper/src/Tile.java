@@ -24,10 +24,18 @@ public class Tile implements EventHandler<MouseEvent> {
 	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
+<<<<<<< HEAD
 	private static final int SIZE = 30;
 	public int row, col;
 	public boolean flagged = false;
 	public boolean clicked = false;
+=======
+	public static final int SIZE = 30;
+	private static int row;
+	private static int col;
+	private boolean flagged = false;
+	public static boolean clicked = false;
+>>>>>>> 405ff34660797503ac5e7add179b040635ce0588
 	
 	//shape, effects, text and stackpane
 	public Rectangle shape;
@@ -59,7 +67,7 @@ public class Tile implements EventHandler<MouseEvent> {
 		
 		stack = new StackPane();
 		
-		//Farver for firkant, uden noget kendt
+		//Farver for firkant og dimensioner, ikke klikket
 		shape = new Rectangle(SIZE, SIZE);
 		shape.setFill(Color.LIGHTGRAY);
 		shape.setStroke(Color.GRAY);		
@@ -83,10 +91,40 @@ public class Tile implements EventHandler<MouseEvent> {
 		shape.setOnMouseClicked(this);
 		shape.setOnMouseEntered(this);
 		shape.setOnMouseExited(this);
-
 	}
 	
+<<<<<<< HEAD
 	private void reveal_tile() {
+=======
+	
+	public static ArrayList<Tile> get_neighbors() {
+		ArrayList<Tile> neighbors = new ArrayList<Tile>();
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (!(i == 0 && j == 0)) {
+					try {
+						neighbors.add(tiles[row+i][col+j]);
+					}
+					catch(Exception e) {
+					}
+				}
+			}
+		}
+		return neighbors;
+	}
+	
+	public static Integer get_value() {
+		int neighborBombs = 0;
+		for (Tile neighbor : get_neighbors()) {
+    		if (Tile.bombTiles.contains(neighbor)) {
+    			neighborBombs++;
+    		}
+    	}
+		return neighborBombs;
+	}
+	
+	public void reveal_tile() {
+>>>>>>> 405ff34660797503ac5e7add179b040635ce0588
 		clicked = true;
 		shape.setEffect(null);
 		if (Board.bombTiles.contains(this)) {
@@ -159,7 +197,13 @@ public class Tile implements EventHandler<MouseEvent> {
 				else {
 					shape.setFill(flagPattern);
 						Main.bombsNotFound --;
+<<<<<<< HEAD
 						Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
+=======
+						if(Main.bombsNotFound> -1) {
+							Main.label1.setText(String.valueOf(Main.bombsNotFound));
+						}
+>>>>>>> 405ff34660797503ac5e7add179b040635ce0588
 				}
 				flagged = !flagged;
 			}

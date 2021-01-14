@@ -1,3 +1,4 @@
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -6,17 +7,27 @@ public class Timer {
 	public Timeline timeline;
 
 	private int time;
-	
+	private int min; 
 	
 	public Timer() {		
 		timeline = new Timeline();
-		timeline.setCycleCount(999);
+		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),e->increment()));
 		timeline.play();
 	}
 	private void increment () {
 		time++;
-		Main.label2.setText(String.valueOf("Time (s) " + time));
+		if(time<60) {
+			Main.label2.setText(String.valueOf(time));
+			
+		}
+		else {
+			if(time%60==0) {
+				min++;
+			}
+			Main.label2.setText(String.valueOf(min + ":" + (time-(60*min))));
+			
+		}
 		
 	}
 	

@@ -26,7 +26,7 @@ public class SettingsWindow {
 	private static final int EBOMBS = 20;
 	private static int CBOMBS = 20;
 
-	public static void display() {	
+	public static void display() {
 		Stage window = new Stage();
 		
 		window.setTitle("Settings");

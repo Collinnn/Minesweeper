@@ -73,9 +73,9 @@ public class Board {
 		
 		Main.time.restartcounter();
 		Main.firstclicked = false;
-		Main.labelTimer.setText("0");
+		TopBarLayout.labelTimer.setText("0");
 		Main.bombsNotFound = NoOfBombs;
-		Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
+		TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 	}
 	
 }

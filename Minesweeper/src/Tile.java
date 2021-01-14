@@ -163,12 +163,12 @@ public class Tile implements EventHandler<MouseEvent> {
 				if (flagged) {
 					shape.setFill(Color.LIGHTGRAY);
 						Main.bombsNotFound ++;
-						Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
+						TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
 				else {
 					shape.setFill(flagPattern);
 						Main.bombsNotFound --;
-						Main.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
+						TopBarLayout.labelBombCounter.setText(String.valueOf(Main.bombsNotFound));
 				}
 				flagged = !flagged;
 			}

@@ -1,19 +1,6 @@
-import java.io.FileNotFoundException;
-
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -24,6 +11,7 @@ public class Main extends Application {
 	public static Label labelTimer = new Label();
 	public static boolean firstclicked = false;
 	public static int bombsNotFound;
+	public static Board board = new Board();
 	
 
 	public static void main(String[] args) {
@@ -36,6 +24,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
+<<<<<<< Updated upstream
 		Board board = new Board();
 
 		
@@ -109,6 +98,9 @@ public class Main extends Application {
 		
 		stage.setScene(new Scene(topLevel));
 		
+=======
+		stage.setScene(new Scene(MinesweeperStageSetup.setStage()));
+>>>>>>> Stashed changes
 		stage.show();
 	}
 }

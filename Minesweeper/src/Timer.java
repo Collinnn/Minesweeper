@@ -20,14 +20,14 @@ public class Timer {
 		time++;
 		//Counts upto 59 sekunds
 		if(time<60) {
-			Main.labelTimer.setText(String.valueOf(time));
+			TopBarLayout.labelTimer.setText(String.valueOf(time));
 		}
 		//After 59 it counts min and sekunds
 		else {
 			if(time%60==0)
 				min++;
 			
-			Main.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
+			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
 		}
 		
 	}

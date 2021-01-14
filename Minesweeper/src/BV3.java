@@ -9,7 +9,7 @@ public class BV3 {
 			for (int col = 0; col < Board.WIDTH; col++) {
 				Tile tile = Board.tiles[row][col];
 				if (!Board.bombTiles.contains(tile)) {
-					HashSet<Tile> tileGroup = generateGroup(tile);
+					HashSet<Tile> tileGroup = Board.generateGroup(tile);
 					groups.add(tileGroup);
 				}
 			}

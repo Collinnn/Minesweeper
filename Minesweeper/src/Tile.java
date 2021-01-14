@@ -186,9 +186,7 @@ public class Tile implements EventHandler<MouseEvent> {
 				else {
 					shape.setFill(flagPattern);
 						Main.bombsNotFound --;
-						if(Main.bombsNotFound> -1) {
-							Main.label1.setText(String.valueOf(Main.bombsNotFound));
-						}
+						Main.label1.setText(String.valueOf(Main.bombsNotFound));
 				}
 				flagged = !flagged;
 			}

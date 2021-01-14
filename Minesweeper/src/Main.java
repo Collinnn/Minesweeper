@@ -22,7 +22,7 @@ public class Main extends Application {
 	public static final int HEIGHT = 15;
 
 	static int NoOfBombs = 20;
-	public static timer time = new timer(); 
+	public static Timer time = new Timer(); 
 	
 	public static Label label1 = new Label();
 	public static Label label2 = new Label();

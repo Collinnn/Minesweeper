@@ -2,13 +2,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
-public class timer {
+public class Timer {
 	public Timeline timeline;
 
 	private int time;
 	
 	
-	public timer() {		
+	public Timer() {		
 		timeline = new Timeline();
 		timeline.setCycleCount(999);
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),e->increment()));

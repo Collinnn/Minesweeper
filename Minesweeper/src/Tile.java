@@ -28,9 +28,10 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	//Int & bool variables
 	public static final int SIZE = 30;
-	private int row, col;
+	private static int row;
+	private static int col;
 	private boolean flagged = false;
-	public boolean clicked = false;
+	public static boolean clicked = false;
 	
 	//shape, text and stackpane
 	private Rectangle shape;
@@ -60,7 +61,7 @@ public class Tile implements EventHandler<MouseEvent> {
 		
 		stack = new StackPane();
 		
-		//Farver for firkant, uden noget kendt
+		//Farver for firkant og dimensioner, ikke klikket
 		shape = new Rectangle(SIZE, SIZE);
 		shape.setFill(Color.LIGHTGRAY);
 		shape.setStroke(Color.GRAY);		
@@ -83,11 +84,10 @@ public class Tile implements EventHandler<MouseEvent> {
 		shape.setOnMouseClicked(this);
 		shape.setOnMouseEntered(this);
 		shape.setOnMouseExited(this);
-
 	}
 	
 	
-	public ArrayList<Tile> get_neighbors() {
+	public static ArrayList<Tile> get_neighbors() {
 		ArrayList<Tile> neighbors = new ArrayList<Tile>();
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
@@ -103,7 +103,7 @@ public class Tile implements EventHandler<MouseEvent> {
 		return neighbors;
 	}
 	
-	public Integer get_value() {
+	public static Integer get_value() {
 		int neighborBombs = 0;
 		for (Tile neighbor : get_neighbors()) {
     		if (Tile.bombTiles.contains(neighbor)) {

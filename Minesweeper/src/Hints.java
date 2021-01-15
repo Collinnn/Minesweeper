@@ -21,11 +21,10 @@ public class Hints {
 	public static void getHint () {
 		for (Tile[] tilerow: Board.tiles) {
 			for (Tile tile: tilerow) {
-				if(tile.clicked && tile.get_value()==Board.get_neighbors(tile).size()) {   
+				if(tile.clicked && tile.get_value()==findNeighbors(tile).size()) {   
 					for(Tile neighbor: findNeighbors(tile)) {
 						neighbor.set_highlight(Color.GOLD);
 					}
-					
 				}
 			}
 		}

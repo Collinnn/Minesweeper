@@ -1,4 +1,3 @@
-import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 
 public class MinesweeperStageSetup {

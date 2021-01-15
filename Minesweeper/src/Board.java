@@ -9,12 +9,13 @@ import javafx.scene.paint.Color;
 public class Board {
 	public static GridPane grid = new GridPane();
 
+	public static int WIDTH = 62;
+	public static int HEIGHT = 30;
+	
 	// Array for all tiles and tiles with bombs
 	public static Tile[][] tiles = new Tile[Board.HEIGHT][Board.WIDTH];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 15;
 
 	// Random row and column index in tile grid
 	private static Random rand = new Random();

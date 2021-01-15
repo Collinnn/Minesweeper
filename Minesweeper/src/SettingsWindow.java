@@ -15,11 +15,13 @@ public class SettingsWindow {
 	private static final int MHEIGHT = 15;
 	private static final int EHEIGHT = 15;
 	private static int CHEIGHT = 15;
+	private static int CHMAX = 30;
 	
 	private static final int BWIDTH = 20;
 	private static final int MWIDTH = 20;
 	private static final int EWIDTH = 20;
 	private static int CWIDTH = 20;
+	private static int CWMAX = 62;
 	
 	private static final int BBOMBS = 20;
 	private static final int MBOMBS = 20;
@@ -84,9 +86,59 @@ public class SettingsWindow {
 		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		cBombs.setPrefWidth(60);
 		
+		
+		newGame.setOnAction(e ->{
+			if(beginner.isSelected()) {
+				Board.HEIGHT = BHEIGHT;
+				Board.WIDTH = BWIDTH;
+				Board.noOfBombs = BBOMBS;
+				Main.board.reset();
+			}else if(medium.isSelected()) {
+				Board.HEIGHT = MHEIGHT;
+				Board.WIDTH = MWIDTH;
+				Board.noOfBombs = MBOMBS;
+				Main.board.reset();
+			}else if(expert.isSelected()) {
+				Board.HEIGHT = EHEIGHT;
+				Board.WIDTH = EWIDTH;
+				Board.noOfBombs = EBOMBS;
+				Main.board.reset();
+			}else if(custom.isSelected()) {
+				try {
+					int h = Integer.valueOf(cHeight.getText());
+					int w = Integer.valueOf(cHeight.getText());
+					int b = Integer.valueOf(cHeight.getText());
+					h = h<0 ||h>30?CHEIGHT: h;
+					w = w<0 ||w>62?CWIDTH: w;
+					if(b<0) {
+						b= CBOMBS;
+					}else if(b>h*w) {
+						b= (h*w)-9;
+					}
+					Board.HEIGHT = Integer.valueOf(cHeight.getText());
+					Board.WIDTH = Integer.valueOf(cHeight.getText());
+					Board.noOfBombs = Integer.valueOf(cHeight.getText());
+					Main.board.reset();
+				}catch(Exception IllegalArgumentException){
+					Board.HEIGHT = CHEIGHT;
+					Board.WIDTH = CWIDTH;
+					Board.noOfBombs = CBOMBS;
+					Main.board.reset();
+				}
+			}
+			Main.root.sizeToScene();
+			Main.root.centerOnScreen();
+		});
+		
+		
+		
+		
 		cHeight.disableProperty().bind(custom.selectedProperty().not());
 		cWidth.disableProperty().bind(custom.selectedProperty().not());
 		cBombs.disableProperty().bind(custom.selectedProperty().not());
+		
+		
+		
 		
 		heightInset.getChildren().addAll(bHeight,mHeight,eHeight);
 		heightInset.setPadding(new Insets(0,0,0,10));
@@ -103,6 +155,9 @@ public class SettingsWindow {
 		bombs.setPadding(new Insets(0,10,10,10));
 		
 		
+		
+		
+		
 		newGameButton.getChildren().add(newGame);
 		newGameButton.setPadding(new Insets(10,0,0,0));
 		
@@ -110,6 +165,8 @@ public class SettingsWindow {
 		radioMenu.setPadding(new Insets(20,0,10,20));
 		
 		settingsMenu.getChildren().addAll(radioMenu,height,width,bombs);
+		
+		
 		
 		Scene scene = new Scene(settingsMenu);
 		window.setScene(scene);

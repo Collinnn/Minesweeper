@@ -7,6 +7,7 @@ public class Main extends Application {
 	
 	public static Timer time = new Timer();
 	public static Board board = new Board();
+	public static Stage root = new Stage();
 	
 	public static void main(String[] args) {
 		time.timeline.pause();
@@ -15,10 +16,11 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setTitle("Minesweeper");
-		stage.getIcons().add(new Image("bomb1.png"));
-		stage.setScene(new Scene(MinesweeperStageSetup.setStage()));
-		stage.setResizable(false);
-		stage.show();
+		root = stage;
+		root.setTitle("Minesweeper");
+		root.getIcons().add(new Image("bomb1.png"));
+		root.setScene(new Scene(MinesweeperStageSetup.setStage()));
+		root.setResizable(false);
+		root.show();
 	}
 }

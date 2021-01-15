@@ -13,15 +13,15 @@ public class Board {
 	public static Tile[][] tiles = new Tile[Board.HEIGHT][Board.WIDTH];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
-	public static final int WIDTH = 9;
-	public static final int HEIGHT = 9;
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 15;
 
 	// Random row and column index in tile grid
 	private static Random rand = new Random();
 	private static int randRow;
 	private static int randCol; 
 	
-	public static int noOfBombs = 72;
+	public static int noOfBombs = 80;
 	public static int bombsNotFound = noOfBombs;
 	
 	public static boolean firstclicked = false;
@@ -54,9 +54,9 @@ public class Board {
 		}
 	}
 	
-	private static void initBombs(int noOfBombs, HashSet<Tile> group) {
+	private static void initBombs(int noOfBombs, ArrayList<Tile> group) {
 		if (group == null) {
-			group = new HashSet<Tile>();
+			group = new ArrayList<Tile>();
 		}
 		int bombs = 0;
 		while (bombs < noOfBombs) {
@@ -115,22 +115,18 @@ public class Board {
 		Main.time.timeline.play();
 		
 		int badBombs = 0;
-		HashSet<Tile> group = get_group(tile);
-		if (group.size() == 1) {
-			for (Tile neighbor : get_neighbors(tile)) {
-				if (bombTiles.contains(neighbor)) {
-					bombTiles.remove(neighbor);
-					badBombs++;
-				}
-				group.add(neighbor);
+		ArrayList<Tile> group = get_neighbors(tile);
+		group.add(tile);
+		System.out.println("Groupsize :" + group.size());
+
+		for (Tile groupMember : group) {
+			if (bombTiles.contains(groupMember)) {
+				bombTiles.remove(groupMember);
+				badBombs++;
 			}
-			initBombs(badBombs, group);
-			badBombs = 0;		}
-		
-		if (bombTiles.contains(tile)) {
-			bombTiles.remove(tile);
-			initBombs(1, group);
 		}
+		initBombs(badBombs, group);
+		
 		tile.reveal_tile();
 	}
 	

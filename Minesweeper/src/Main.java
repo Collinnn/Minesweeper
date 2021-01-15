@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,7 +16,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Minesweeper");
+		stage.getIcons().add(new Image("bomb1.png"));
 		stage.setScene(new Scene(MinesweeperStageSetup.setStage()));
+		stage.setResizable(false);
 		stage.show();
 	}
 }

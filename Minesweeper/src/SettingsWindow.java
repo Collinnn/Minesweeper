@@ -120,11 +120,15 @@ public class SettingsWindow {
 					if(h<1 || h>CHMAX) {
 						h = CHEIGHT;
 						cHError.setVisible(true);
+					}else {
+						cHError.setVisible(false);
 					}
 					
 					if(w<1 || w > CWMAX) {
 						w = CWIDTH;
 						cWError.setVisible(true);
+					}else {
+						cWError.setVisible(false);
 					}
 					
 					if(b<1) {
@@ -135,6 +139,8 @@ public class SettingsWindow {
 						b= (h*w)-9;
 						cBError.setText("Set to Max " + String.valueOf((h*w)-9));
 						cBError.setVisible(true);
+					}else {
+						cBError.setVisible(false);
 					}
 					Board.HEIGHT = h;
 					Board.WIDTH = w;

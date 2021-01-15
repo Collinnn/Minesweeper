@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -20,6 +21,9 @@ public class TopBarLayout {
 		
 		HBox middleBox = new HBox();
 		middleBox.setAlignment(Pos.CENTER);
+		Region buffer = new Region();
+		buffer.setPadding(new Insets(0,60,0,60));
+		
 		
 		StackPane leftPane = new StackPane();
 		StackPane rightPane = new StackPane();
@@ -45,7 +49,7 @@ public class TopBarLayout {
 		leftPane.getChildren().addAll(left, labelBombCounter);
 		rightPane.getChildren().addAll(right, labelTimer);
 		
-		middleBox.getChildren().add(reset);
+		middleBox.getChildren().addAll(hint,buffer,reset);
 		
 		leftPane.setPadding(new Insets(10,0,10,20));
 		rightPane.setPadding(new Insets(10,20,10,0));

@@ -78,7 +78,7 @@ public class Board {
 					try {
 						neighbors.add(tiles[tile.row+i][tile.col+j]);
 					}
-					catch(Exception e) {
+					catch(ArrayIndexOutOfBoundsException e) {
 					}
 				}
 			}

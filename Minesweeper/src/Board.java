@@ -56,7 +56,7 @@ public class Board {
 	
 	private static void initBombs(int noOfBombs, HashSet<Tile> group) {
 		if (group == null) {
-			group = new HashSet();
+			group = new HashSet<Tile>();
 		}
 		int bombs = 0;
 		while (bombs < noOfBombs) {

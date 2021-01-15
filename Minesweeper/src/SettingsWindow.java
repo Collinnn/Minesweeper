@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -73,19 +74,27 @@ public class SettingsWindow {
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
 		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
 		cHeight.setPrefWidth(60);
+		Text cHError = new Text("Max is 30 min is 1");
+		cHError.setFill(Color.RED);
+		cHError.setVisible(false);
 		
 		Text bWidth = new Text(String.valueOf(BWIDTH));
 		Text mWidth = new Text(String.valueOf(MWIDTH));
 		Text eWidth = new Text(String.valueOf(EWIDTH));
 		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		cWidth.setPrefWidth(60);
+		Text cWError = new Text("Max is 62 min is 1");
+		cWError.setFill(Color.RED);
+		cWError.setVisible(false);
 		
 		Text bBombs = new Text(String.valueOf(BBOMBS));
 		Text mBombs = new Text(String.valueOf(MBOMBS));
 		Text eBombs = new Text(String.valueOf(EBOMBS));
 		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		cBombs.setPrefWidth(60);
-		
+		Text cBError = new Text("Set to Max 2000");
+		cBError.setFill(Color.RED);
+		cBError.setVisible(false);
 		
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {
@@ -106,18 +115,30 @@ public class SettingsWindow {
 			}else if(custom.isSelected()) {
 				try {
 					int h = Integer.valueOf(cHeight.getText());
-					int w = Integer.valueOf(cHeight.getText());
-					int b = Integer.valueOf(cHeight.getText());
-					h = h<0 ||h>30?CHEIGHT: h;
-					w = w<0 ||w>62?CWIDTH: w;
-					if(b<0) {
-						b= CBOMBS;
-					}else if(b>h*w) {
-						b= (h*w)-9;
+					int w = Integer.valueOf(cWidth.getText());
+					int b = Integer.valueOf(cBombs.getText());
+					if(h<1 || h>CHMAX) {
+						h = CHEIGHT;
+						cHError.setVisible(true);
 					}
-					Board.HEIGHT = Integer.valueOf(cHeight.getText());
-					Board.WIDTH = Integer.valueOf(cHeight.getText());
-					Board.noOfBombs = Integer.valueOf(cHeight.getText());
+					
+					if(w<1 || w > CWMAX) {
+						w = CWIDTH;
+						cWError.setVisible(true);
+					}
+					
+					if(b<1) {
+						b= CBOMBS;
+						cBError.setText("Min is 1");
+						cBError.setVisible(true);
+					}else if(b >= (h*w)-9) {
+						b= (h*w)-9;
+						cBError.setText("Set to Max " + String.valueOf((h*w)-9));
+						cBError.setVisible(true);
+					}
+					Board.HEIGHT = h;
+					Board.WIDTH = w;
+					Board.noOfBombs = b;
 					Main.board.reset();
 				}catch(Exception IllegalArgumentException){
 					Board.HEIGHT = CHEIGHT;
@@ -141,17 +162,17 @@ public class SettingsWindow {
 		
 		
 		heightInset.getChildren().addAll(bHeight,mHeight,eHeight);
-		heightInset.setPadding(new Insets(0,0,0,10));
+		heightInset.setPadding(new Insets(0,0,0,8));
 		widthInset.getChildren().addAll(bWidth,mWidth,eWidth);
-		widthInset.setPadding(new Insets(0,0,0,10));
+		widthInset.setPadding(new Insets(0,0,0,8));
 		bombsInset.getChildren().addAll(bBombs,mBombs,eBombs);
-		bombsInset.setPadding(new Insets(0,0,0,10));
+		bombsInset.setPadding(new Insets(0,0,0,8));
 		
-		height.getChildren().addAll(heightText,heightInset,cHeight);
+		height.getChildren().addAll(heightText,heightInset,cHeight,cHError);
 		height.setPadding(new Insets(0,10,10,10));
-		width.getChildren().addAll(widthText,widthInset,cWidth);
+		width.getChildren().addAll(widthText,widthInset,cWidth,cWError);
 		width.setPadding(new Insets(0,10,10,10));
-		bombs.getChildren().addAll(bombText,bombsInset,cBombs);
+		bombs.getChildren().addAll(bombText,bombsInset,cBombs,cBError);
 		bombs.setPadding(new Insets(0,10,10,10));
 		
 		

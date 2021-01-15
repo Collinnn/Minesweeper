@@ -13,16 +13,16 @@ public class Board {
 	public static Tile[][] tiles = new Tile[Board.HEIGHT][Board.WIDTH];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 15;
+	public static final int WIDTH = 9;
+	public static final int HEIGHT = 9;
 
 	// Random row and column index in tile grid
 	private static Random rand = new Random();
-	private static int randRow = rand.nextInt(HEIGHT);
-	private static int randCol = rand.nextInt(WIDTH);
+	private static int randRow;
+	private static int randCol; 
 	
-	public static int NoOfBombs = 20;
-	public static int bombsNotFound = NoOfBombs;
+	public static int noOfBombs = 72;
+	public static int bombsNotFound = noOfBombs;
 	
 	public static boolean firstclicked = false;
 	
@@ -43,9 +43,27 @@ public class Board {
 	
 	private static void initBombs() {
 		int bombs = 0;
-		while (bombs < NoOfBombs) {
+		while (bombs < noOfBombs) {
+			randRow = rand.nextInt(HEIGHT);
+			randCol = rand.nextInt(WIDTH);
 		    Tile tile = tiles[randRow][randCol];
-		    if (!bombTiles.contains(tile) && !tile.clicked) {
+		    if (!bombTiles.contains(tile)) {
+		    	bombTiles.add(tile);	           
+		    	bombs++;
+		    }
+		}
+	}
+	
+	private static void initBombs(int noOfBombs, HashSet<Tile> group) {
+		if (group == null) {
+			group = new HashSet();
+		}
+		int bombs = 0;
+		while (bombs < noOfBombs) {
+			randRow = rand.nextInt(HEIGHT);
+			randCol = rand.nextInt(WIDTH);
+		    Tile tile = tiles[randRow][randCol];
+		    if (!bombTiles.contains(tile) && !group.contains(tile)) {
 		    	bombTiles.add(tile);	           
 		    	bombs++;
 		    }
@@ -68,7 +86,7 @@ public class Board {
 		return neighbors;
 	}
 	
-	public static HashSet<Tile> generateGroup(Tile tile) {
+	public static HashSet<Tile> get_group(Tile tile) {
 		HashSet<Tile> group = new HashSet<Tile>();
 		group.add(tile);
 		if (tile.get_value() == 0 && !Board.bombTiles.contains(tile)) {
@@ -76,14 +94,14 @@ public class Board {
 			for (Tile neighbor : Board.get_neighbors(tile)) {
 				if (!group.contains(neighbor) && !neighbor.clicked) {
 					neighbor.clicked = true;
-					group.addAll(generateGroup(neighbor));
+					group.addAll(get_group(neighbor));
 				}
 			}
 		}
 		else {
 			for (Tile neighbor : Board.get_neighbors(tile)) {
 				if (!tile.clicked && neighbor.get_value() == 0 && !Board.bombTiles.contains(neighbor)) {
-					group.addAll(generateGroup(neighbor));
+					group.addAll(get_group(neighbor));
 				}
 			}
 		}
@@ -95,11 +113,25 @@ public class Board {
 	public static void firstClick(Tile tile) {
 		firstclicked = true;
 		Main.time.timeline.play();
-		for (Tile groupMember : generateGroup(tile)) {
-			if (bombTiles.contains(groupMember)) {
-				
+		
+		int badBombs = 0;
+		HashSet<Tile> group = get_group(tile);
+		if (group.size() == 1) {
+			for (Tile neighbor : get_neighbors(tile)) {
+				if (bombTiles.contains(neighbor)) {
+					bombTiles.remove(neighbor);
+					badBombs++;
+				}
+				group.add(neighbor);
 			}
+			initBombs(badBombs, group);
+			badBombs = 0;		}
+		
+		if (bombTiles.contains(tile)) {
+			bombTiles.remove(tile);
+			initBombs(1, group);
 		}
+		tile.reveal_tile();
 	}
 	
 	public void reset() {
@@ -108,14 +140,14 @@ public class Board {
 				tiles[i][j].shape.setFill(Color.LIGHTGRAY);
 			}
 		}
+		grid.getChildren().clear();
 		initTiles();
 		initBombs();
 		
 		Main.time.restartcounter();
 		Board.firstclicked = false;
 		TopBarLayout.labelTimer.setText("0");
-		Board.bombsNotFound = NoOfBombs;
+		Board.bombsNotFound = noOfBombs;
 		TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 	}
-	
 }

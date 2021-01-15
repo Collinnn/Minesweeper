@@ -85,7 +85,7 @@ public class Tile implements EventHandler<MouseEvent> {
 
 	}
 	
-	private void reveal_tile() {
+	public void reveal_tile() {
 		clicked = true;
 		shape.setEffect(null);
 		if (Board.bombTiles.contains(this)) {
@@ -107,9 +107,13 @@ public class Tile implements EventHandler<MouseEvent> {
 			shape.setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
-				for (Tile tile : Board.get_neighbors(this)) {
-					if (!tile.clicked) {
-						tile.reveal_tile();
+				for (Tile neighbor : Board.get_neighbors(this)) {
+					if (!neighbor.clicked) {
+						if (neighbor.flagged) {
+							Board.bombsNotFound++;
+							TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
+						}
+						neighbor.reveal_tile();
 					}
 				}
 			}
@@ -152,9 +156,11 @@ public class Tile implements EventHandler<MouseEvent> {
 			
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!flagged) {
-					reveal_tile();
 					if(!Board.firstclicked) {
 						Board.firstClick(this);
+					}
+					else {
+						reveal_tile();
 					}
 				}
 			}

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -10,17 +9,18 @@ import javafx.scene.paint.Color;
 public class Board {
 	public static GridPane grid = new GridPane();
 
-	public static int WIDTH = 15;
-	public static int HEIGHT = 12;
+	public static int WIDTH = 62;
+	public static int HEIGHT = 30;
 	
 	// Array for all tiles and tiles with bombs
 	public static Tile[][] tiles = new Tile[Board.HEIGHT][Board.WIDTH];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
 
-	// Random integer
-	private static Random randInt = new Random();
-
+	// Random row and column index in tile grid
+	private static Random rand = new Random();
+	private static int randRow;
+	private static int randCol; 
 	
 	public static int noOfBombs = 80;
 	public static int bombsNotFound = noOfBombs;
@@ -33,6 +33,7 @@ public class Board {
 		initBombs();
 	}
 	
+	
 	private static void initTiles() {
 		for (int row = 0; row < HEIGHT; row++) {
 	        for (int col = 0; col < WIDTH; col++) {
@@ -43,36 +44,30 @@ public class Board {
 	
 	private static void initBombs() {
 		int bombs = 0;
-		ArrayList<Tile> availableTiles = new ArrayList<Tile>();
-		for (Tile[] tilerow : tiles) {
-			availableTiles.addAll(Arrays.asList(tilerow));
-		}
-		availableTiles.removeAll(bombTiles);
-		
 		while (bombs < noOfBombs) {
-			int listSize = availableTiles.size();
-			Tile tile = availableTiles.get(randInt.nextInt(listSize));
-		    availableTiles.remove(tile);
-		    bombTiles.add(tile);         
-		    bombs++;
+			randRow = rand.nextInt(HEIGHT);
+			randCol = rand.nextInt(WIDTH);
+		    Tile tile = tiles[randRow][randCol];
+		    if (!bombTiles.contains(tile)) {
+		    	bombTiles.add(tile);	           
+		    	bombs++;
+		    }
 		}
 	}
 	
 	private static void initBombs(int noOfBombs, ArrayList<Tile> group) {
-		int bombs = 0;
-		ArrayList<Tile> availableTiles = new ArrayList<Tile>();
-		for (Tile[] tilerow : tiles) {
-			availableTiles.addAll(Arrays.asList(tilerow));
+		if (group == null) {
+			group = new ArrayList<Tile>();
 		}
-		availableTiles.removeAll(group);
-		availableTiles.removeAll(bombTiles);
-		
+		int bombs = 0;
 		while (bombs < noOfBombs) {
-			int listSize = availableTiles.size();
-		    Tile tile = availableTiles.get(randInt.nextInt(listSize));
-		    availableTiles.remove(tile);
-		    bombTiles.add(tile);         
-		    bombs++;
+			randRow = rand.nextInt(HEIGHT);
+			randCol = rand.nextInt(WIDTH);
+		    Tile tile = tiles[randRow][randCol];
+		    if (!bombTiles.contains(tile) && !group.contains(tile)) {
+		    	bombTiles.add(tile);	           
+		    	bombs++;
+		    }
 		}
 	}
 	
@@ -123,6 +118,7 @@ public class Board {
 		int badBombs = 0;
 		ArrayList<Tile> group = get_neighbors(tile);
 		group.add(tile);
+		System.out.println("Groupsize :" + group.size());
 
 		for (Tile groupMember : group) {
 			if (bombTiles.contains(groupMember)) {

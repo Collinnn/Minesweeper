@@ -20,17 +20,18 @@ public class Timer {
 	private void increment () {
 		time++;
 		//Counts upto 59 sekunds
-		if(time<60) {
-			TopBarLayout.labelTimer.setText(String.valueOf(time));
-		}
-		//After 59 it counts min and sekunds
-		else {
-			if(time%60==0)
-				min++;
+		if(time ==60) {
+			min++;
+			time = 0;
+		}	
+		
+		if(min == 0) {
+			TopBarLayout.labelTimer.setText(String.valueOf(time));	
+		}else {
+			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + time));
+		}	
 			
-			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + (time-(60*min))));
 		}
-	}
 	
 	//Pause and stop with control by the boolean. 
 	public void pausecounter(boolean stop) {

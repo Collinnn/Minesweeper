@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 public class Highscores {
 	
+	public static File beginnerFile = new File("beginnerHighscores.txt");
+	public static File mediumFile = new File("mediumHighscores.txt");
+	public static File expertFile = new File("expertHighscores.txt");
 	private static final int size = 10;
 	private String[] highscores = new String[size];
 	private Scanner input;
 	private PrintStream output;
-	
 	
 	public Highscores(File f) throws FileNotFoundException {
 		this.read(f);
@@ -38,7 +40,7 @@ public class Highscores {
 	public void reset(File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {
-			output.println("name:-1");
+			output.println("***:-1");
 		}
 	}
 	

@@ -118,7 +118,6 @@ public class Board {
 		int badBombs = 0;
 		ArrayList<Tile> group = get_neighbors(tile);
 		group.add(tile);
-		System.out.println("Groupsize :" + group.size());
 
 		for (Tile groupMember : group) {
 			if (bombTiles.contains(groupMember)) {

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 public class Board {
 	public static GridPane grid = new GridPane();
@@ -13,7 +12,7 @@ public class Board {
 	public static int HEIGHT = 30;
 	
 	// Array for all tiles and tiles with bombs
-	public static Tile[][] tiles = new Tile[Board.HEIGHT][Board.WIDTH];
+	public static Tile[][] tiles = new Tile[HEIGHT][WIDTH];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
 
@@ -90,9 +89,9 @@ public class Board {
 	public static HashSet<Tile> get_group(Tile tile) {
 		HashSet<Tile> group = new HashSet<Tile>();
 		group.add(tile);
-		if (tile.get_value() == 0 && !Board.bombTiles.contains(tile)) {
+		if (tile.get_value() == 0 && !bombTiles.contains(tile)) {
 			tile.clicked = true;
-			for (Tile neighbor : Board.get_neighbors(tile)) {
+			for (Tile neighbor : get_neighbors(tile)) {
 				if (!group.contains(neighbor) && !neighbor.clicked) {
 					neighbor.clicked = true;
 					group.addAll(get_group(neighbor));
@@ -100,8 +99,8 @@ public class Board {
 			}
 		}
 		else {
-			for (Tile neighbor : Board.get_neighbors(tile)) {
-				if (!tile.clicked && neighbor.get_value() == 0 && !Board.bombTiles.contains(neighbor)) {
+			for (Tile neighbor : get_neighbors(tile)) {
+				if (!tile.clicked && neighbor.get_value() == 0 && !bombTiles.contains(neighbor)) {
 					group.addAll(get_group(neighbor));
 				}
 			}
@@ -131,19 +130,15 @@ public class Board {
 	}
 	
 	public void reset() {
-		for(int i =0; i < HEIGHT; i++) {
-			for(int j = 0; j < WIDTH; j++) {
-				tiles[i][j].shape.setFill(Color.LIGHTGRAY);
-			}
-		}
+		tiles = new Tile[HEIGHT][WIDTH];
 		grid.getChildren().clear();
 		initTiles();
 		initBombs();
 		
 		Main.time.restartcounter();
-		Board.firstclicked = false;
+		firstclicked = false;
 		TopBarLayout.labelTimer.setText("0");
-		Board.bombsNotFound = noOfBombs;
-		TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
+		bombsNotFound = noOfBombs;
+		TopBarLayout.labelBombCounter.setText(String.valueOf(bombsNotFound));
 	}
 }

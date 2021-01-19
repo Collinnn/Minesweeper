@@ -68,9 +68,10 @@ public class HighscoresWindow {
 		buttonLayout.getChildren().addAll(beginnerButton,mediumButton,expertButton);
 			
 		VBox primaryLayout = new VBox();
+		primaryLayout.setPrefSize(173,291);
 		primaryLayout.getChildren().addAll(headerLayout,listView,buttonLayout);
 		
-		Scene scene = new Scene(primaryLayout,173,291);
+		Scene scene = new Scene(primaryLayout);
 		window.setScene(scene);
 		window.showAndWait();
 		}

@@ -1,5 +1,4 @@
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseButton;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -14,14 +13,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
-public class Tile implements EventHandler<MouseEvent> {
+public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 	
 	//Images
 	private static final Image bombImg = new Image("bomb1.png");
 	private static final ImagePattern bombPattern = new ImagePattern(bombImg, 0, 0, bombImg.getWidth(), bombImg.getHeight(), false);
-	
-	private static final Image flagImg = new Image("Flag.png");
-	private static final ImagePattern flagPattern = new ImagePattern(flagImg, 0, 0, flagImg.getWidth(), flagImg.getHeight(), false);
 	
 	//Int & bool variables
 	private static final int SIZE = 30;
@@ -30,11 +26,11 @@ public class Tile implements EventHandler<MouseEvent> {
 	public boolean clicked = false;
 	
 	//shape, effects, text and stackpane
-	public Rectangle shape;
+	//public Rectangle shape;
 	
 	private Bloom bloom = new Bloom();
 	private final InnerShadow innerShadow = new InnerShadow(3, Color.DARKBLUE);
-	private Effect highlight = bloom;
+	private Effect highlight;
 	
 	private Text text;
 	private StackPane stack;
@@ -58,36 +54,38 @@ public class Tile implements EventHandler<MouseEvent> {
 		
 		Board.tiles[row][column] = this;
 		
-		stack = new StackPane();
 		
-		//Farver for firkant, uden noget kendt
-		shape = new Rectangle(SIZE, SIZE);
-		shape.setFill(Color.LIGHTGRAY);
-		shape.setStroke(Color.GRAY);		
-		shape.setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
+		// Shape customization with methods from JavaFX Rectangle class
+		setWidth(SIZE);
+		setHeight(SIZE);
+		setFill(Color.LIGHTGRAY);
+		setStroke(Color.GRAY);		
+		setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
 		
 		// Highlight
 		innerShadow.setRadius(4);
 		innerShadow.setChoke(0.5);
 		bloom.setInput(innerShadow);
+		highlight = bloom;
 		
-		//Text
+		// Text
 		text = new Text("");
 		text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
-		stack.getChildren().addAll(shape, text);//, tileimage);
+		stack = new StackPane();
+		
+		stack.getChildren().addAll(this, text);
 		Board.grid.add(stack, column, row);
 		
 		//Setting up interactions
-		shape.setOnMouseClicked(this);
-		shape.setOnMouseEntered(this);
-		shape.setOnMouseExited(this);
-
+		setOnMouseClicked(this);
+		setOnMouseEntered(this);
+		setOnMouseExited(this);
 	}
 	
 	public void reveal_tile() {
 		clicked = true;
-		shape.setEffect(null);
+		set_highlight(null);
 		if (Board.bombTiles.contains(this)) {
 			for (Tile[] tileRows : Board.tiles) {
 				for (Tile tile : tileRows) {
@@ -99,12 +97,12 @@ public class Tile implements EventHandler<MouseEvent> {
 					
 				}
 				else {
-					tile.shape.setFill(bombPattern);	
+					tile.setFill(bombPattern);	
 				}
 			}
 		}
 		else {
-			shape.setFill(Color.WHITE);
+			setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
 				for (Tile neighbor : Board.get_neighbors(this)) {
@@ -136,48 +134,16 @@ public class Tile implements EventHandler<MouseEvent> {
 	
 	public void set_highlight(Color color) {
 		if (color == null) {
-			shape.setEffect(null);
+			setEffect(null);
 		}
 		else {
 			innerShadow.setColor(color);
-			shape.setEffect(highlight);
+			setEffect(highlight);
 		}
 	}
 	
 	@Override
 	public void handle(MouseEvent event) {
-		if (!clicked) {
-			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
-				set_highlight(Color.DARKBLUE);
-			}
-			else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
-				set_highlight(null);
-			}
-			
-			if (event.getButton() == MouseButton.PRIMARY) {
-				if (!flagged) {
-					if(!Board.firstclicked) {
-						Board.firstClick(this);
-					}
-					else {
-						reveal_tile();
-					}
-				}
-			}
-			else if (event.getButton() == MouseButton.SECONDARY) {
-				if (flagged) {
-					shape.setFill(Color.LIGHTGRAY);
-						Board.bombsNotFound++;
-						TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
-				}
-				
-				else {
-					shape.setFill(flagPattern);
-						Board.bombsNotFound--;
-						TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
-				}
-				flagged = !flagged;
-			}
-		}
-	}	
+		TileController.onClick(this, event);
+	}
 }

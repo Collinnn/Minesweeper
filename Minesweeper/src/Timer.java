@@ -47,6 +47,7 @@ public class Timer {
 		timeline.playFromStart();
 		timeline.pause();
 		time = 0;
+		min = 0;
 	}
 	
 	public int getTime() { 

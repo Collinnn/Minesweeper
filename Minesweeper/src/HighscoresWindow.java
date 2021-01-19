@@ -22,10 +22,20 @@ public class HighscoresWindow {
 		window.setResizable(false);
 			
 		ListView<String> listView = new ListView<>();
+		listViewFill(listView,Highscores.beginnerFile);
 			
+		VBox headerLayout = new VBox();
+		Label difficultyLabel = new Label();
+		difficultyLabel.setText("Beginner");
+		difficultyLabel.setPadding(new Insets(0,0,0,8));
+		Label playerLabel = new Label("Player\tHighscore");
+		playerLabel.setPadding(new Insets(0,0,0,8));
+		headerLayout.getChildren().addAll(difficultyLabel,playerLabel);
+		
 		HBox buttonLayout = new HBox();
 		Button beginnerButton = new Button("Beginner");
 		beginnerButton.setOnAction(e -> {
+			difficultyLabel.setText("Beginner");
 			listView.getItems().clear();
 			try {
 				listViewFill(listView,Highscores.beginnerFile);
@@ -33,8 +43,10 @@ public class HighscoresWindow {
 				e1.printStackTrace();
 			}
 		});
+		
 		Button mediumButton = new Button("Medium");
 		mediumButton.setOnAction(e -> {
+			difficultyLabel.setText("Medium");
 			listView.getItems().clear();
 			try {
 				listViewFill(listView,Highscores.mediumFile);
@@ -44,6 +56,7 @@ public class HighscoresWindow {
 		});
 		Button expertButton = new Button("Expert");
 		expertButton.setOnAction(e -> {
+			difficultyLabel.setText("Expert");
 			listView.getItems().clear();
 			try {
 				listViewFill(listView,Highscores.expertFile);
@@ -52,23 +65,14 @@ public class HighscoresWindow {
 			}
 		});
 		
-		
 		buttonLayout.getChildren().addAll(beginnerButton,mediumButton,expertButton);
-			
-		HBox headerLayout = new HBox();
-		Label playerLabel = new Label("Player\tHighscore");
-		playerLabel.setPadding(new Insets(0,0,0,8));
-		headerLayout.getChildren().addAll(playerLabel);
-		
 			
 		VBox primaryLayout = new VBox();
 		primaryLayout.getChildren().addAll(headerLayout,listView,buttonLayout);
 		
-		
-		Scene scene = new Scene(primaryLayout,173,275);
+		Scene scene = new Scene(primaryLayout,173,291);
 		window.setScene(scene);
-		window.showAndWait();	
-		
+		window.showAndWait();
 		}
 		
 		public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {

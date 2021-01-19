@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -66,9 +67,10 @@ public class HighscoresWindow {
 		});
 		
 		buttonLayout.getChildren().addAll(beginnerButton,mediumButton,expertButton);
-			
+		buttonLayout.setAlignment(Pos.CENTER);
+		
 		VBox primaryLayout = new VBox();
-		primaryLayout.setPrefSize(173,291);
+		primaryLayout.setPrefHeight(291);
 		primaryLayout.getChildren().addAll(headerLayout,listView,buttonLayout);
 		
 		Scene scene = new Scene(primaryLayout);

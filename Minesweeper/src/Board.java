@@ -11,6 +11,7 @@ public class Board {
 	public static int WIDTH = 62;
 	public static int HEIGHT = 30;
 	public static int winCounter;
+	public static int timesClicked;
 	
 	// Array for all tiles and tiles with bombs
 	public static Tile[][] tiles = new Tile[HEIGHT][WIDTH];
@@ -41,6 +42,7 @@ public class Board {
 	        }
 	    }
 		winCounter = (HEIGHT*WIDTH)-noOfBombs;
+		timesClicked = 0;
 	}
 	
 	private static void initBombs() {

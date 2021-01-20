@@ -102,6 +102,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 			}
 		}
 		else {
+			Board.timesClicked++;
 			Board.winCounter --;
 			setFill(Color.WHITE);
 			int val = get_value();

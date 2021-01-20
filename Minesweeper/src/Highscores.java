@@ -10,24 +10,20 @@ public class Highscores {
 	public static File mediumFile = new File("Highscores.txt");
 	public static File expertFile = new File("Highscores.txt");
 	
-	private final int size = 10;
-	private String[] highscores = new String[size];
-	private Scanner input;
-	private PrintStream output;
-	
-	public Highscores(File f) throws FileNotFoundException {
-		this.read(f);
-	}
+	private static final int size = 10;
+	private static String[] highscores = new String[size];
+	private static Scanner input;
+	private static PrintStream output;
 	
 	//reads from file and loads highscores into array
-	public void read(File f) throws FileNotFoundException {
+	public static void read(File f) throws FileNotFoundException {
 		input = new Scanner(f);
 		for(int i = 0; i < highscores.length; i++) {
 			highscores[i] = input.next();
 		}
 	}
 	
-	public boolean isNewHighscore(int score, File f) throws FileNotFoundException {
+	public static boolean isNewHighscore(int score, File f) throws FileNotFoundException {
 		read(f);
 		boolean newHighscore = false;
 		for(int i = highscores.length - 1; i >= 0; i++) {
@@ -39,7 +35,7 @@ public class Highscores {
 	}
 	
 	//loads new highscore into array and updates data-file containing highscores
-	public void write(String name, int score, File f) throws FileNotFoundException {
+	public static void write(String name, int score, File f) throws FileNotFoundException {
 		read(f);
 		output = new PrintStream(f);
 		for(int i = highscores.length - 1; i >= 0; i++) {
@@ -55,14 +51,14 @@ public class Highscores {
 	}
 	
 	//resets data-file to default state
-	public void reset(File f) throws FileNotFoundException {
+	public static void reset(File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {
 			output.println("-1:***");
 		}
 	}
 	
-	public String[] getHighscores() {
+	public static String[] getHighscores() {
 		String[] copy = highscores.clone();
 		return copy;
 	}

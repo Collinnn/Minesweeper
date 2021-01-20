@@ -24,6 +24,7 @@ public class Board {
 	private static int randRow;
 	private static int randCol; 
 	
+	//Static bomb counters
 	public static int noOfBombs = 80;
 	public static int bombsNotFound = noOfBombs;
 	
@@ -52,6 +53,7 @@ public class Board {
 			randRow = rand.nextInt(height);
 			randCol = rand.nextInt(width);
 		    Tile tile = tiles[randRow][randCol];
+		    //To stop bombs landing on the same space
 		    if (!bombTiles.contains(tile)) {
 		    	bombTiles.add(tile);	           
 		    	bombs++;
@@ -114,7 +116,7 @@ public class Board {
 		
 		return group;
 	}
-	
+	//First click funtionality, removes bombs and clears a 3x3 grid for the player. 
 	public static void firstClick(Tile tile) {
 		firstclicked = true;
 		Main.time.timeline.play();
@@ -134,6 +136,7 @@ public class Board {
 		tile.revealTile();
 	}
 	
+	//Resets the board with new bombs and new sizes if changed
 	public void reset() {
 		tiles = new Tile[height][width];
 		grid.getChildren().clear();

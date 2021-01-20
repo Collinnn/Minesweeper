@@ -24,7 +24,7 @@ public class TopBarLayout {
 		Region buffer = new Region();
 		buffer.setPadding(new Insets(0,60,0,60));
 		
-		
+		//setup for the two counters
 		StackPane leftPane = new StackPane();
 		StackPane rightPane = new StackPane();
 		Rectangle left = new Rectangle(90,40);
@@ -36,6 +36,7 @@ public class TopBarLayout {
 		labelBombCounter = new Label(String.valueOf(Board.bombsNotFound));
 		labelBombCounter.setTextFill(Color.WHITE);
 		
+		//Two middle buttons
 		Button hint = new Button("Hints");
 		hint.setOnAction(e-> Hints.getHint());
 		
@@ -45,7 +46,7 @@ public class TopBarLayout {
 		labelTimer.setText("0");
 		labelTimer.setTextFill(Color.WHITE);
 		
-		
+		//Init of the 2 counters
 		leftPane.getChildren().addAll(left, labelBombCounter);
 		rightPane.getChildren().addAll(right, labelTimer);
 		

@@ -59,7 +59,20 @@ public class SettingsWindow {
 		
 		
 		// Toggles the difficulty change to int between 0-3 to make it read the current difficulty from someplace else
-		beginner.setSelected(true);
+		switch(Board.difficulty) {
+		case 0:
+			beginner.setSelected(true);
+			break;
+		case 1:
+			medium.setSelected(true);
+			break;
+		case 2:
+			expert.setSelected(true);
+			break;
+		case 3:
+			custom.setSelected(true);
+			break;
+		}
 		
 		
 		
@@ -72,29 +85,42 @@ public class SettingsWindow {
 		Text bHeight = new Text(String.valueOf(BHEIGHT));
 		Text mHeight = new Text(String.valueOf(MHEIGHT));
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
+		
+		
+		Text bWidth = new Text(String.valueOf(BWIDTH));
+		Text mWidth = new Text(String.valueOf(MWIDTH));
+		Text eWidth = new Text(String.valueOf(EWIDTH));
+		
+		
+		Text bBombs = new Text(String.valueOf(BBOMBS));
+		Text mBombs = new Text(String.valueOf(MBOMBS));
+		Text eBombs = new Text(String.valueOf(EBOMBS));
+		
+		
 		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
+		TextField cWidth = new TextField(String.valueOf(CWIDTH));
+		TextField cBombs = new TextField(String.valueOf(CBOMBS));
+		if(custom.isSelected()) {
+			cHeight.setText(String.valueOf(Board.HEIGHT));
+			cWidth.setText(String.valueOf(Board.WIDTH));
+			cBombs.setText(String.valueOf(Board.noOfBombs));
+		}
+		
 		cHeight.setPrefWidth(60);
 		Text cHError = new Text("Max is 30 min is 1");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
 		
-		Text bWidth = new Text(String.valueOf(BWIDTH));
-		Text mWidth = new Text(String.valueOf(MWIDTH));
-		Text eWidth = new Text(String.valueOf(EWIDTH));
-		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		cWidth.setPrefWidth(60);
 		Text cWError = new Text("Max is 62 min is 1");
 		cWError.setFill(Color.RED);
 		cWError.setVisible(false);
 		
-		Text bBombs = new Text(String.valueOf(BBOMBS));
-		Text mBombs = new Text(String.valueOf(MBOMBS));
-		Text eBombs = new Text(String.valueOf(EBOMBS));
-		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		cBombs.setPrefWidth(60);
 		Text cBError = new Text("Set to Max 2000");
 		cBError.setFill(Color.RED);
 		cBError.setVisible(false);
+		
 		
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {

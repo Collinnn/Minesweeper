@@ -2,12 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Highscores {
 	
-	public static File beginnerFile = new File("beginnerHighscores.txt");
-	public static File mediumFile = new File("mediumHighscores.txt");
-	public static File expertFile = new File("expertHighscores.txt");
+	public static File beginnerFile = new File("Highscores.txt");
+	public static File mediumFile = new File("Highscores.txt");
+	public static File expertFile = new File("Highscores.txt");
 	
 	private final int size = 10;
 	private String[] highscores = new String[size];
@@ -29,9 +30,10 @@ public class Highscores {
 	//loads new highscore into array and updates data-file containing highscores
 	public void write(String name, int score, File f) throws FileNotFoundException {
 		output = new PrintStream(f);
-		for(int i = 0; i < highscores.length; i++) {
-			if(score > Integer.parseInt(highscores[i].split(":")[1])) {
-				highscores[i] = name + ":" + score;
+		for(int i = highscores.length - 1; i >= 0; i++) {
+			if(score < Integer.parseInt(highscores[i].split(":")[0])) {
+				highscores[i] = score + ":" + name;
+				Arrays.sort(highscores);
 				break;
 			}
 		}

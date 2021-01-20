@@ -17,6 +17,7 @@ public class winWindow {
 	
 	private static int LEN = 3;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void display() {
 		
 		Stage window = new Stage();

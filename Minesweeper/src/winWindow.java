@@ -54,6 +54,7 @@ public class winWindow {
 		//Initialising textbox to show the difficulty
 		Text difficultyText = new Text();
 		
+		//The following text objects and textfield are used when a new highscore is made
 		Text highscoreText = new Text("New Highscore!!!");
 		
 		Text nameBoxText = new Text("Write Initials");
@@ -85,7 +86,9 @@ public class winWindow {
 		Button saveHighscore = new Button("Save Highscore");
 		saveHighscore.setVisible(false);
 		
-		
+		//This code checks which difficulty it is currently on and sets the difficulty text to that difficulty
+		//It then checks whether the score achieved was a new highscore and reveals the relevant objects for that
+		//The custom difficulty doesn't have a leaderboard
 		switch(Board.difficulty) {
 		case 0:
 			difficultyText.setText("Difficulty: Beginner");
@@ -126,7 +129,7 @@ public class winWindow {
 			break;
 		}
 	
-		
+		//This segment writes the highscore and the initials of the player to the relevant text file
 		saveHighscore.setOnAction(e ->{
 			switch(Board.difficulty) {
 			case 0:
@@ -156,6 +159,7 @@ public class winWindow {
 			}
 		});
 		
+		// The objects are added to the relevant layouts and they are then all collected in one layout for the winWindow
 		score.getChildren().add(scoreText);
 		scoreAndTime.getChildren().addAll(score,timeText);
 		difficulty.getChildren().add(difficultyText);
@@ -167,10 +171,10 @@ public class winWindow {
 		winWindowLayout.setPrefSize(300, 300);
 		winWindowLayout.setAlignment(Pos.CENTER);
 		
+		//The layouts are addded to a scene and then shown
 		Scene scene = new Scene(winWindowLayout);
 		window.setScene(scene);
 		window.showAndWait();
-		winWindowLayout.requestFocus();
 		
 	}
 }

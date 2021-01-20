@@ -8,7 +8,8 @@ public class Highscores {
 	public static File beginnerFile = new File("beginnerHighscores.txt");
 	public static File mediumFile = new File("mediumHighscores.txt");
 	public static File expertFile = new File("expertHighscores.txt");
-	private static final int size = 10;
+	
+	private final int size = 10;
 	private String[] highscores = new String[size];
 	private Scanner input;
 	private PrintStream output;
@@ -17,6 +18,7 @@ public class Highscores {
 		this.read(f);
 	}
 	
+	//reads from file and loads highscores into array
 	public void read(File f) throws FileNotFoundException {
 		input = new Scanner(f);
 		for(int i = 0; i < highscores.length; i++) {
@@ -24,6 +26,7 @@ public class Highscores {
 		}
 	}
 	
+	//loads new highscore into array and updates data-file containing highscores
 	public void write(String name, int score, File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {
@@ -37,6 +40,7 @@ public class Highscores {
 		}
 	}
 	
+	//resets data-file to default state
 	public void reset(File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {

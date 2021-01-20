@@ -19,7 +19,7 @@ public class Main extends Application {
 		root = stage;
 		root.setTitle("Minesweeper");
 		root.getIcons().add(new Image("bomb1.png"));
-		root.setScene(new Scene(MinesweeperStageSetup.setStage()));
+		root.setScene(new Scene(StageSetup.getStage()));
 		root.setResizable(false);
 		root.show();
 	}

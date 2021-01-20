@@ -109,12 +109,12 @@ public class SettingsWindow {
 		
 		cHeight.setPrefWidth(60);
 		//Error message if wrong input
-		Text cHError = new Text("Max is 30 min is 1");
+		Text cHError = new Text("Max is 30 min is 4");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
 		
 		cWidth.setPrefWidth(60);
-		Text cWError = new Text("Max is 62 min is 1");
+		Text cWError = new Text("Max is 62 min is 4");
 		cWError.setFill(Color.RED);
 		cWError.setVisible(false);
 		
@@ -148,14 +148,14 @@ public class SettingsWindow {
 					int h = Integer.valueOf(cHeight.getText());
 					int w = Integer.valueOf(cWidth.getText());
 					int b = Integer.valueOf(cBombs.getText());
-					if(h<1 || h>CHMAX) {
+					if(h<4 || h>CHMAX) {
 						h = CHEIGHT;
 						cHError.setVisible(true);
 					}else {
 						cHError.setVisible(false);
 					}
 					
-					if(w<1 || w > CWMAX) {
+					if(w<4 || w > CWMAX) {
 						w = CWIDTH;
 						cWError.setVisible(true);
 					}else {

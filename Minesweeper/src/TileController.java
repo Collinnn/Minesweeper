@@ -23,12 +23,14 @@ public class TileController {
 			if (event.getButton() == MouseButton.PRIMARY) {
 				if (!tile.flagged) {
 					if(!Board.firstclicked) {
+						Board.timesClicked++;
 						Board.firstClick(tile);
 						if(Board.winCounter == 0) {
 							winWindow.display();
 						}
 					}
 					else {
+						Board.timesClicked++;
 						tile.revealTile();
 						if(Board.winCounter == 0) {
 							winWindow.display();

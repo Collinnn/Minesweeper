@@ -51,11 +51,6 @@ public class Timer {
 		min = 0;
 	}
 	
-	public int getTime() {
-		time = min*60 + seconds;
-		return time;
-	}
-	
 	public String toString() {
 		String string = "";
 		if(min == 0) {

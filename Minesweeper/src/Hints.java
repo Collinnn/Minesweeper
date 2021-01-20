@@ -1,7 +1,7 @@
 import javafx.scene.paint.Color;
 import java.util.ArrayList; 
 public class Hints {
-	
+	//Not used right now.
 	public ArrayList<Tile> GenerateBitmap() {
 		ArrayList<Tile> bitmap = new ArrayList<Tile>();
 		for (int row = 0; row < Board.HEIGHT;row++) {

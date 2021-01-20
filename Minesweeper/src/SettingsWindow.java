@@ -34,8 +34,8 @@ public class SettingsWindow {
 		
 		window.setTitle("Settings");
 		
+		//Int af settings vindue
 		HBox settingsMenu = new HBox();
-		
 		VBox radioMenu = new VBox();
 		VBox newGameButton = new VBox();
 		VBox height = new VBox();
@@ -46,7 +46,7 @@ public class SettingsWindow {
 		VBox bombsInset = new VBox();
 		
 		ToggleGroup radioButtons = new ToggleGroup();
-		
+		//Radiobutton naming and connecting
 		RadioButton beginner = new RadioButton("Beginner");
 		RadioButton medium = new RadioButton("Medium");
 		RadioButton expert = new RadioButton("Expert");
@@ -62,18 +62,20 @@ public class SettingsWindow {
 		beginner.setSelected(true);
 		
 		
-		
+		//Naming
 		Button newGame = new Button("New Game");
 		
 		Text heightText = new Text("Height");
 		Text widthText = new Text("Width");
 		Text bombText = new Text("Bombs");
 		
+		//Get value and set it to the different tekst parts of the difficulty's
 		Text bHeight = new Text(String.valueOf(BHEIGHT));
 		Text mHeight = new Text(String.valueOf(MHEIGHT));
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
 		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
 		cHeight.setPrefWidth(60);
+		//Error message if wrong input
 		Text cHError = new Text("Max is 30 min is 1");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
@@ -95,6 +97,7 @@ public class SettingsWindow {
 		Text cBError = new Text("Set to Max 2000");
 		cBError.setFill(Color.RED);
 		cBError.setVisible(false);
+		
 		
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {

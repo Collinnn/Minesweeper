@@ -34,7 +34,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 	
 	private Text text;
 	private StackPane stack;
-	
+	//Color array
 	private Color[] textFill = new Color[] {
 			Color.BLUE, 
 			Color.GREEN, 
@@ -104,13 +104,16 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		else {
 			setFill(Color.WHITE);
 			int val = get_value();
+			
 			if (val == 0) {
+				//for each neighbor get neighbors
 				for (Tile neighbor : Board.get_neighbors(this)) {
 					if (!neighbor.clicked) {
 						if (neighbor.flagged) {
 							Board.bombsNotFound++;
 							TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 						}
+						//recursive funktion
 						neighbor.reveal_tile();
 					}
 				}

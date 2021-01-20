@@ -26,6 +26,7 @@ public class winWindow {
 		HBox scoreAndTime = new HBox();
 		HBox score = new HBox();
 		HBox difficulty = new HBox();
+		HBox highscore = new HBox();
 		VBox nameBoxLayout = new VBox();
 		VBox winWindowLayout = new VBox();
 		
@@ -34,8 +35,12 @@ public class winWindow {
 		scoreAndTime.setAlignment(Pos.TOP_CENTER);
 		difficulty.setPadding(new Insets(20,0,20,0));
 		difficulty.setAlignment(Pos.CENTER);
+		highscore.setPadding(new Insets(20,0,20,0));
+		highscore.setAlignment(Pos.CENTER);
+		highscore.setVisible(false);
 		nameBoxLayout.setPadding(new Insets(20,0,20,0));
 		nameBoxLayout.setAlignment(Pos.CENTER);
+		nameBoxLayout.setVisible(false);
 		
 		
 		Text scoreText = new Text("Din score er: " + String.valueOf(Board.timesClicked));
@@ -44,20 +49,7 @@ public class winWindow {
 		
 		Text difficultyText = new Text();
 		
-		switch(Board.difficulty) {
-		case 0:
-			difficultyText.setText("Difficulty: Beginner");
-			break;
-		case 1:
-			difficultyText.setText("Difficulty: Medium");
-			break;
-		case 2:
-			difficultyText.setText("Difficulty: Expert");
-			break;
-		case 3:
-			difficultyText.setText("Difficulty: Custom " + String.valueOf(Board.height + "x" + Board.width));
-			break;
-		}
+		Text highscoreText = new Text("New Highscore!!!");
 		
 		Text nameBoxText = new Text("Write Initials");
 		TextField nameBox = new TextField("XXX");
@@ -86,10 +78,83 @@ public class winWindow {
 		
 		
 		Button saveHighscore = new Button("Save Highscore");
+		saveHighscore.setVisible(false);
+		
+		
+		switch(Board.difficulty) {
+		case 0:
+			difficultyText.setText("Difficulty: Beginner");
+			try {
+				if((Highscores.isNewHighscore(Score.getScore(),Highscores.beginnerFile ))) {
+					highscore.setVisible(true);
+					nameBoxLayout.setVisible(true);
+					saveHighscore.setVisible(true);
+				}
+			}catch(Exception FileNotFoundException) {
+			}
+			
+			break;
+		case 1:
+			difficultyText.setText("Difficulty: Medium");
+			try {
+				if((Highscores.isNewHighscore(Score.getScore(),Highscores.mediumFile ))) {
+					highscore.setVisible(true);
+					nameBoxLayout.setVisible(true);
+					saveHighscore.setVisible(true);
+				}
+			}catch(Exception FileNotFoundException) {
+			}
+			break;
+		case 2:
+			difficultyText.setText("Difficulty: Expert");
+			try {
+				if((Highscores.isNewHighscore(Score.getScore(),Highscores.expertFile ))) {
+					highscore.setVisible(true);
+					nameBoxLayout.setVisible(true);
+					saveHighscore.setVisible(true);
+				}
+			}catch(Exception FileNotFoundException) {
+			}
+			break;
+		case 3:
+			difficultyText.setText("Difficulty: Custom " + String.valueOf(Board.height + "x" + Board.width));
+			break;
+		}
+	
+		
+		saveHighscore.setOnAction(e ->{
+			switch(Board.difficulty) {
+			case 0:
+				try{
+					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.beginnerFile);
+					window.close();
+				}catch(Exception FileNotFoundException) {
+					
+				}
+				break;
+			case 1:
+				try{
+					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.mediumFile);
+					window.close();
+				}catch(Exception FileNotFoundException) {
+					
+				}
+				break;
+			case 2:
+				try{
+					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.expertFile);
+					window.close();
+				}catch(Exception FileNotFoundException) {
+					
+				}
+				break;
+			}
+		});
 		
 		score.getChildren().add(scoreText);
 		scoreAndTime.getChildren().addAll(score,timeText);
 		difficulty.getChildren().add(difficultyText);
+		highscore.getChildren().add(highscoreText);
 		nameBoxLayout.getChildren().addAll(nameBoxText,nameBox);
 		
 		winWindowLayout.getChildren().addAll(scoreAndTime,difficulty,nameBoxLayout,saveHighscore);

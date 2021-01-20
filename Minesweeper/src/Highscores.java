@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 public class Highscores {
 	
-	public static File beginnerFile = new File("Highscores.txt");
-	public static File mediumFile = new File("Highscores.txt");
-	public static File expertFile = new File("Highscores.txt");
+	public static File beginnerFile = new File("beginnerHighscores.txt");
+	public static File mediumFile = new File("mediumHighscores.txt");
+	public static File expertFile = new File("expertHighscores.txt");
 	
 	private static final int size = 10;
 	private static String[] highscores = new String[size];

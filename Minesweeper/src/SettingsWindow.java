@@ -12,19 +12,19 @@ import javafx.stage.Stage;
 
 public class SettingsWindow {
 	
-	private static final int BHEIGHT = 15;
+	private static final int BHEIGHT = 4;
 	private static final int MHEIGHT = 15;
 	private static final int EHEIGHT = 15;
 	private static int CHEIGHT = 15;
 	private static int CHMAX = 30;
 	
-	private static final int BWIDTH = 20;
+	private static final int BWIDTH = 4;
 	private static final int MWIDTH = 20;
 	private static final int EWIDTH = 20;
 	private static int CWIDTH = 20;
 	private static int CWMAX = 62;
 	
-	private static final int BBOMBS = 20;
+	private static final int BBOMBS = 7;
 	private static final int MBOMBS = 20;
 	private static final int EBOMBS = 20;
 	private static int CBOMBS = 20;

@@ -20,9 +20,9 @@ public class Score {
 		return groups.size();
 	}
 	
-	public static int getScore(Timer time) {
+	public static int getScore() {
 		
-		score =  time.getTime() / (get3BV() / Board.timesClicked);
+		score =  Main.time.getTime() / (get3BV() / Board.timesClicked);
 		
 		return score;
 	}

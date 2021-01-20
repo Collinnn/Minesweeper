@@ -79,13 +79,13 @@ public class HighscoresWindow {
 		}
 		
 		public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
-			Highscores h = new Highscores(f);
-			for(int i = 0; i < h.getHighscores().length; i++) {
-				if(h.getHighscores()[i].equals("-1:***")) {
+			Highscores.read(f);
+			for(int i = 0; i < Highscores.getHighscores().length; i++) {
+				if(Highscores.getHighscores()[i].equals("-1:***")) {
 					listview.getItems().add("-\t\t-");
 				} else {
-					listview.getItems().add(h.getHighscores()[i].split(":")[0] + "\t\t" + 
-				h.getHighscores()[i].split(":")[1]);
+					listview.getItems().add(Highscores.getHighscores()[i].split(":")[0] + "\t\t" + 
+				Highscores.getHighscores()[i].split(":")[1]);
 				}
 			}
 		}

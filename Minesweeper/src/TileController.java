@@ -14,10 +14,10 @@ public class TileController {
 	public static void onClick(Tile tile, MouseEvent event) {
 		if (!tile.clicked) {
 			if (event.getEventType() == MouseEvent.MOUSE_ENTERED) {
-				tile.set_highlight(Color.DARKBLUE);
+				tile.setHighlight(Color.DARKBLUE);
 			}
 			else if (event.getEventType() == MouseEvent.MOUSE_EXITED) {
-				tile.set_highlight(null);
+				tile.setHighlight(null);
 			}
 			
 			if (event.getButton() == MouseButton.PRIMARY) {

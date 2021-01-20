@@ -4,8 +4,8 @@ public class Hints {
 	
 	public ArrayList<Tile> GenerateBitmap() {
 		ArrayList<Tile> bitmap = new ArrayList<Tile>();
-		for (int row = 0; row < Board.HEIGHT;row++) {
-			for (int col = 0; col <Board.WIDTH;col++) {
+		for (int row = 0; row < Board.height;row++) {
+			for (int col = 0; col <Board.width;col++) {
 				Tile tile = Board.tiles[row][col];
 				if(tile.clicked) {
 					bitmap.add(tile);

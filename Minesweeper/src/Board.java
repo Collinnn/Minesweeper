@@ -8,14 +8,14 @@ import javafx.scene.layout.GridPane;
 public class Board {
 	public static GridPane grid = new GridPane();
 
-	public static int WIDTH = 62;
-	public static int HEIGHT = 30;
+	public static int width = 62;
+	public static int height = 30;
 	public static int winCounter;
 	public static int timesClicked;
 	public static int difficulty = 0;
 	
 	// Array for all tiles and tiles with bombs
-	public static Tile[][] tiles = new Tile[HEIGHT][WIDTH];
+	public static Tile[][] tiles = new Tile[height][width];
 	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
 	
 
@@ -37,20 +37,20 @@ public class Board {
 	
 	
 	private static void initTiles() {
-		for (int row = 0; row < HEIGHT; row++) {
-	        for (int col = 0; col < WIDTH; col++) {
+		for (int row = 0; row < height; row++) {
+	        for (int col = 0; col < width; col++) {
 	            new Tile(row, col);
 	        }
 	    }
-		winCounter = (HEIGHT*WIDTH)-noOfBombs;
+		winCounter = (height*width)-noOfBombs;
 		timesClicked = 0;
 	}
 	
 	private static void initBombs() {
 		int bombs = 0;
 		while (bombs < noOfBombs) {
-			randRow = rand.nextInt(HEIGHT);
-			randCol = rand.nextInt(WIDTH);
+			randRow = rand.nextInt(height);
+			randCol = rand.nextInt(width);
 		    Tile tile = tiles[randRow][randCol];
 		    if (!bombTiles.contains(tile)) {
 		    	bombTiles.add(tile);	           
@@ -65,8 +65,8 @@ public class Board {
 		}
 		int bombs = 0;
 		while (bombs < noOfBombs) {
-			randRow = rand.nextInt(HEIGHT);
-			randCol = rand.nextInt(WIDTH);
+			randRow = rand.nextInt(height);
+			randCol = rand.nextInt(width);
 		    Tile tile = tiles[randRow][randCol];
 		    if (!bombTiles.contains(tile) && !group.contains(tile)) {
 		    	bombTiles.add(tile);	           
@@ -135,7 +135,7 @@ public class Board {
 	}
 	
 	public void reset() {
-		tiles = new Tile[HEIGHT][WIDTH];
+		tiles = new Tile[height][width];
 		grid.getChildren().clear();
 		initTiles();
 		initBombs();

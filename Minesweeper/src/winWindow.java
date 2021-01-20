@@ -14,7 +14,7 @@ public class winWindow {
 		
 		
 		
-		Button submitHighscore = new Button("Submit Highscore");
+		Button saveHighscore = new Button("Save Highscore");
 		
 		TextField nameBox = new TextField();
 		nameBox.setPromptText("Enter 3 Initials here");

@@ -101,8 +101,8 @@ public class SettingsWindow {
 		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		if(custom.isSelected()) {
-			cHeight.setText(String.valueOf(Board.HEIGHT));
-			cWidth.setText(String.valueOf(Board.WIDTH));
+			cHeight.setText(String.valueOf(Board.height));
+			cWidth.setText(String.valueOf(Board.width));
 			cBombs.setText(String.valueOf(Board.noOfBombs));
 		}
 		
@@ -124,20 +124,20 @@ public class SettingsWindow {
 		
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {
-				Board.HEIGHT = BHEIGHT;
-				Board.WIDTH = BWIDTH;
+				Board.height = BHEIGHT;
+				Board.width = BWIDTH;
 				Board.noOfBombs = BBOMBS;
 				Board.difficulty = 0;
 				Main.board.reset();
 			}else if(medium.isSelected()) {
-				Board.HEIGHT = MHEIGHT;
-				Board.WIDTH = MWIDTH;
+				Board.height = MHEIGHT;
+				Board.width = MWIDTH;
 				Board.noOfBombs = MBOMBS;
 				Board.difficulty = 1;
 				Main.board.reset();
 			}else if(expert.isSelected()) {
-				Board.HEIGHT = EHEIGHT;
-				Board.WIDTH = EWIDTH;
+				Board.height = EHEIGHT;
+				Board.width = EWIDTH;
 				Board.noOfBombs = EBOMBS;
 				Board.difficulty = 2;
 				Main.board.reset();
@@ -171,14 +171,14 @@ public class SettingsWindow {
 					}else {
 						cBError.setVisible(false);
 					}
-					Board.HEIGHT = h;
-					Board.WIDTH = w;
+					Board.height = h;
+					Board.width = w;
 					Board.noOfBombs = b;
 					Board.difficulty = 3;
 					Main.board.reset();
 				}catch(Exception IllegalArgumentException){
-					Board.HEIGHT = CHEIGHT;
-					Board.WIDTH = CWIDTH;
+					Board.height = CHEIGHT;
+					Board.width = CWIDTH;
 					Board.noOfBombs = CBOMBS;
 					Board.difficulty = 3;
 					Main.board.reset();

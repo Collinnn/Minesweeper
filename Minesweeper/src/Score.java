@@ -1,9 +1,11 @@
 import java.util.HashSet;
 
 
-public class BV3 {
+public class Score {
 	
-	public static Integer get_3BV() {
+	private static int score = 0;
+	
+	public static Integer get3BV() {
 		//HashSet is used in that every item is unique and the order does not matter.
 		HashSet<HashSet<Tile>> groups = new HashSet<HashSet<Tile>>();
 		for (int row = 0; row < Board.height; row++) {
@@ -16,5 +18,16 @@ public class BV3 {
 			}
 		}
 		return groups.size();
+	}
+	
+	public static int getScore(Timer time) {
+		
+		score =  time.getTime() / (get3BV() / Board.timesClicked);
+		
+		return score;
+	}
+	
+	public static int resetScore() {
+		return score = 0;
 	}
 }

@@ -7,6 +7,7 @@ public class Timer {
 	public Timeline timeline;
 
 	private int time;
+	private int seconds;
 	private int min; 
 	
 	//Sets the timer to work, with a duration of 1 second. 
@@ -18,17 +19,17 @@ public class Timer {
 	}
 	
 	private void increment () {
-		time++;
+		seconds++;
 		//Counts upto 59 sekunds
-		if(time ==60) {
+		if(seconds ==60) {
 			min++;
-			time = 0;
+			seconds = 0;
 		}	
 		
 		if(min == 0) {
-			TopBarLayout.labelTimer.setText(String.valueOf(time));	
+			TopBarLayout.labelTimer.setText(String.valueOf(seconds));	
 		}else {
-			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + time));
+			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + seconds));
 		}	
 			
 		}
@@ -46,16 +47,21 @@ public class Timer {
 	public void restartcounter() {
 		timeline.playFromStart();
 		timeline.pause();
-		time = 0;
+		seconds = 0;
 		min = 0;
+	}
+	
+	public int getTime() {
+		time = min*60 + seconds;
+		return time;
 	}
 	
 	public String toString() {
 		String string = "";
 		if(min == 0) {
-			string = String.valueOf(time);	
+			string = String.valueOf(seconds);	
 		}else {
-			string = String.valueOf(min + ":" + time);
+			string = String.valueOf(min + ":" + seconds);
 		}	
 		
 		return string; 

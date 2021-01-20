@@ -83,9 +83,9 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		setOnMouseExited(this);
 	}
 	
-	public void reveal_tile() {
+	public void revealTile() {
 		clicked = true;
-		set_highlight(null);
+		setHighlight(null);
 		if (Board.bombTiles.contains(this)) {
 			for (Tile[] tileRows : Board.tiles) {
 				for (Tile tile : tileRows) {
@@ -102,19 +102,19 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 			}
 		}
 		else {
+			Board.timesClicked++;
+			Board.winCounter --;
 			setFill(Color.WHITE);
-			int val = get_value();
-			
+			int val = getValue();
 			if (val == 0) {
-				//for each neighbor get neighbors
-				for (Tile neighbor : Board.get_neighbors(this)) {
+				for (Tile neighbor : Board.getNeighbors(this)) {
 					if (!neighbor.clicked) {
 						if (neighbor.flagged) {
 							Board.bombsNotFound++;
 							TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 						}
 						//recursive funktion
-						neighbor.reveal_tile();
+						neighbor.revealTile();
 					}
 				}
 			}
@@ -123,11 +123,14 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 				text.setFill(textFill[val]);
 			}
 		}
+		if(Board.winCounter == 0) {
+			
+		}
 	}
 	
-	public Integer get_value() {
+	public Integer getValue() {
 		int neighborBombs = 0;
-		for (Tile neighbor : Board.get_neighbors(this)) {
+		for (Tile neighbor : Board.getNeighbors(this)) {
     		if (Board.bombTiles.contains(neighbor)) {
     			neighborBombs++;
     		}
@@ -135,7 +138,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		return neighborBombs;
 	}
 	
-	public void set_highlight(Color color) {
+	public void setHighlight(Color color) {
 		if (color == null) {
 			setEffect(null);
 		}

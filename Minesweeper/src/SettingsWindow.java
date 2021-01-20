@@ -59,7 +59,20 @@ public class SettingsWindow {
 		
 		
 		// Toggles the difficulty change to int between 0-3 to make it read the current difficulty from someplace else
-		beginner.setSelected(true);
+		switch(Board.difficulty) {
+		case 0:
+			beginner.setSelected(true);
+			break;
+		case 1:
+			medium.setSelected(true);
+			break;
+		case 2:
+			expert.setSelected(true);
+			break;
+		case 3:
+			custom.setSelected(true);
+			break;
+		}
 		
 		
 		//Naming
@@ -73,26 +86,38 @@ public class SettingsWindow {
 		Text bHeight = new Text(String.valueOf(BHEIGHT));
 		Text mHeight = new Text(String.valueOf(MHEIGHT));
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
+		
+		
+		Text bWidth = new Text(String.valueOf(BWIDTH));
+		Text mWidth = new Text(String.valueOf(MWIDTH));
+		Text eWidth = new Text(String.valueOf(EWIDTH));
+		
+		
+		Text bBombs = new Text(String.valueOf(BBOMBS));
+		Text mBombs = new Text(String.valueOf(MBOMBS));
+		Text eBombs = new Text(String.valueOf(EBOMBS));
+		
+		
 		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
+		TextField cWidth = new TextField(String.valueOf(CWIDTH));
+		TextField cBombs = new TextField(String.valueOf(CBOMBS));
+		if(custom.isSelected()) {
+			cHeight.setText(String.valueOf(Board.height));
+			cWidth.setText(String.valueOf(Board.width));
+			cBombs.setText(String.valueOf(Board.noOfBombs));
+		}
+		
 		cHeight.setPrefWidth(60);
 		//Error message if wrong input
 		Text cHError = new Text("Max is 30 min is 1");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
 		
-		Text bWidth = new Text(String.valueOf(BWIDTH));
-		Text mWidth = new Text(String.valueOf(MWIDTH));
-		Text eWidth = new Text(String.valueOf(EWIDTH));
-		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		cWidth.setPrefWidth(60);
 		Text cWError = new Text("Max is 62 min is 1");
 		cWError.setFill(Color.RED);
 		cWError.setVisible(false);
 		
-		Text bBombs = new Text(String.valueOf(BBOMBS));
-		Text mBombs = new Text(String.valueOf(MBOMBS));
-		Text eBombs = new Text(String.valueOf(EBOMBS));
-		TextField cBombs = new TextField(String.valueOf(CBOMBS));
 		cBombs.setPrefWidth(60);
 		Text cBError = new Text("Set to Max 2000");
 		cBError.setFill(Color.RED);
@@ -101,19 +126,22 @@ public class SettingsWindow {
 		
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {
-				Board.HEIGHT = BHEIGHT;
-				Board.WIDTH = BWIDTH;
+				Board.height = BHEIGHT;
+				Board.width = BWIDTH;
 				Board.noOfBombs = BBOMBS;
+				Board.difficulty = 0;
 				Main.board.reset();
 			}else if(medium.isSelected()) {
-				Board.HEIGHT = MHEIGHT;
-				Board.WIDTH = MWIDTH;
+				Board.height = MHEIGHT;
+				Board.width = MWIDTH;
 				Board.noOfBombs = MBOMBS;
+				Board.difficulty = 1;
 				Main.board.reset();
 			}else if(expert.isSelected()) {
-				Board.HEIGHT = EHEIGHT;
-				Board.WIDTH = EWIDTH;
+				Board.height = EHEIGHT;
+				Board.width = EWIDTH;
 				Board.noOfBombs = EBOMBS;
+				Board.difficulty = 2;
 				Main.board.reset();
 			}else if(custom.isSelected()) {
 				try {
@@ -145,14 +173,16 @@ public class SettingsWindow {
 					}else {
 						cBError.setVisible(false);
 					}
-					Board.HEIGHT = h;
-					Board.WIDTH = w;
+					Board.height = h;
+					Board.width = w;
 					Board.noOfBombs = b;
+					Board.difficulty = 3;
 					Main.board.reset();
 				}catch(Exception IllegalArgumentException){
-					Board.HEIGHT = CHEIGHT;
-					Board.WIDTH = CWIDTH;
+					Board.height = CHEIGHT;
+					Board.width = CWIDTH;
 					Board.noOfBombs = CBOMBS;
+					Board.difficulty = 3;
 					Main.board.reset();
 				}
 			}

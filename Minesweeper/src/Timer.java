@@ -50,7 +50,14 @@ public class Timer {
 		min = 0;
 	}
 	
-	public int getTime() { 
-		return time;
+	public String toString() {
+		String string = "";
+		if(min == 0) {
+			string = String.valueOf(time);	
+		}else {
+			string = String.valueOf(min + ":" + time);
+		}	
+		
+		return string; 
 	}
 }

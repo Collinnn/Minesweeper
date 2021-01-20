@@ -27,7 +27,8 @@ public class Highscores {
 		}
 	}
 	
-	public boolean isNewHighscore(int score) {
+	public boolean isNewHighscore(int score, File f) throws FileNotFoundException {
+		read(f);
 		boolean newHighscore = false;
 		for(int i = highscores.length - 1; i >= 0; i++) {
 			if(score < Integer.parseInt(highscores[i].split(":")[0])) {
@@ -39,6 +40,7 @@ public class Highscores {
 	
 	//loads new highscore into array and updates data-file containing highscores
 	public void write(String name, int score, File f) throws FileNotFoundException {
+		read(f);
 		output = new PrintStream(f);
 		for(int i = highscores.length - 1; i >= 0; i++) {
 			if(score < Integer.parseInt(highscores[i].split(":")[0])) {

@@ -26,7 +26,7 @@ public class TileController {
 						Board.firstClick(tile);
 					}
 					else {
-						tile.reveal_tile();
+						tile.revealTile();
 					}
 				}
 			}

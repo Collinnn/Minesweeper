@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class SettingsWindow {
 	
+	// Declaration of constants for the different difficulties
 	private static final int BHEIGHT = 4;
 	private static final int MHEIGHT = 15;
 	private static final int EHEIGHT = 15;
@@ -29,12 +30,15 @@ public class SettingsWindow {
 	private static final int EBOMBS = 20;
 	private static int CBOMBS = 20;
 
+	
+	// Display method to show the settingsMenu as well determine it's behaviors
 	public static void display() {	
+		
 		Stage window = new Stage();
 		
 		window.setTitle("Settings");
 		
-		//Int af settings vindue
+		// Initialisation of the different layout used in the settingsMenu
 		HBox settingsMenu = new HBox();
 		VBox radioMenu = new VBox();
 		VBox newGameButton = new VBox();
@@ -45,8 +49,8 @@ public class SettingsWindow {
 		VBox bombs = new VBox();
 		VBox bombsInset = new VBox();
 		
+		//Initialisation of buttons to select difficulty as well as togglegroup to ensure only one can be selected
 		ToggleGroup radioButtons = new ToggleGroup();
-		//Radiobutton naming and connecting
 		RadioButton beginner = new RadioButton("Beginner");
 		RadioButton medium = new RadioButton("Medium");
 		RadioButton expert = new RadioButton("Expert");
@@ -58,7 +62,7 @@ public class SettingsWindow {
 		custom.setToggleGroup(radioButtons);
 		
 		
-		// Toggles the difficulty change to int between 0-3 to make it read the current difficulty from someplace else
+		//Selects the current difficulty and activates the relevant button
 		switch(Board.difficulty) {
 		case 0:
 			beginner.setSelected(true);
@@ -75,14 +79,15 @@ public class SettingsWindow {
 		}
 		
 		
-		//Naming
+		//Button to confirm the changes and start a new game
 		Button newGame = new Button("New Game");
 		
+		//topText for the different columns
 		Text heightText = new Text("Height");
 		Text widthText = new Text("Width");
 		Text bombText = new Text("Bombs");
 		
-		//Get value and set it to the different tekst parts of the difficulty's
+		//Text to show the sizes of and the amount of bombs for each difficulty
 		Text bHeight = new Text(String.valueOf(BHEIGHT));
 		Text mHeight = new Text(String.valueOf(MHEIGHT));
 		Text eHeight = new Text(String.valueOf(EHEIGHT));
@@ -97,7 +102,8 @@ public class SettingsWindow {
 		Text mBombs = new Text(String.valueOf(MBOMBS));
 		Text eBombs = new Text(String.valueOf(EBOMBS));
 		
-		
+		//Makes editable textfields which shows the default values of the custom difficulty
+		//If custom was already selected the current values are shown instead
 		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
 		TextField cWidth = new TextField(String.valueOf(CWIDTH));
 		TextField cBombs = new TextField(String.valueOf(CBOMBS));
@@ -107,8 +113,9 @@ public class SettingsWindow {
 			cBombs.setText(String.valueOf(Board.noOfBombs));
 		}
 		
+		//Sets the default width's of the textfields as well as preparing error text to be shown
+		//if the value is outside the max or minimum for the field.
 		cHeight.setPrefWidth(60);
-		//Error message if wrong input
 		Text cHError = new Text("Max is 30 min is 4");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
@@ -123,7 +130,8 @@ public class SettingsWindow {
 		cBError.setFill(Color.RED);
 		cBError.setVisible(false);
 		
-		
+		//Makes the button retrieve the relevant information from the constants to change the difficulty and reset the game
+		//when pressed.
 		newGame.setOnAction(e ->{
 			if(beginner.isSelected()) {
 				Board.height = BHEIGHT;
@@ -143,13 +151,20 @@ public class SettingsWindow {
 				Board.noOfBombs = EBOMBS;
 				Board.difficulty = 2;
 				Main.board.reset();
-			}else if(custom.isSelected()) {
+			} 
+			//Tries to take the values from the textfields and checks whether they are within the bounds we have setup
+			//If the values pasted are not numbers the default is chosen and an error is displayed,
+			//if they are numbers they are changed to the chosen values unless the values are 
+			//smaller than the minimum size or bigger than the maximum size.
+			//If this occurs the errortext is shown.
+			else if(custom.isSelected()) {
 				try {
 					int h = Integer.valueOf(cHeight.getText());
 					int w = Integer.valueOf(cWidth.getText());
 					int b = Integer.valueOf(cBombs.getText());
 					if(h<4 || h>CHMAX) {
 						h = CHEIGHT;
+						cHError.setText("Max is 30 min is 4");
 						cHError.setVisible(true);
 					}else {
 						cHError.setVisible(false);
@@ -163,7 +178,7 @@ public class SettingsWindow {
 					}
 					
 					if(b<1) {
-						b= CBOMBS;
+						b= 1;
 						cBError.setText("Min is 1");
 						cBError.setVisible(true);
 					}else if(b >= (h*w)-9) {
@@ -179,6 +194,8 @@ public class SettingsWindow {
 					Board.difficulty = 3;
 					Main.board.reset();
 				}catch(Exception IllegalArgumentException){
+					cHError.setText("Enter only numbers");
+					cHError.setVisible(true);
 					Board.height = CHEIGHT;
 					Board.width = CWIDTH;
 					Board.noOfBombs = CBOMBS;
@@ -186,20 +203,22 @@ public class SettingsWindow {
 					Main.board.reset();
 				}
 			}
+			//Commands to make sure the game window is resized when the content is and to center it.
 			Main.root.sizeToScene();
 			Main.root.centerOnScreen();
 		});
 		
 		
 		
-		
+		//Makes sure the textfields for the custom difficulty are only selectable if the difficulty is chosen
 		cHeight.disableProperty().bind(custom.selectedProperty().not());
 		cWidth.disableProperty().bind(custom.selectedProperty().not());
 		cBombs.disableProperty().bind(custom.selectedProperty().not());
 		
 		
 		
-		
+		//Adding the Text and textfields to the layout and adding Padding to make it align with each other as well as
+		//to add spacing between elements 
 		heightInset.getChildren().addAll(bHeight,mHeight,eHeight);
 		heightInset.setPadding(new Insets(0,0,0,8));
 		widthInset.getChildren().addAll(bWidth,mWidth,eWidth);
@@ -217,20 +236,21 @@ public class SettingsWindow {
 		
 		
 		
-		
+		//Adding the rest of the elements into their respective layouts as well as adding Padding
 		newGameButton.getChildren().add(newGame);
 		newGameButton.setPadding(new Insets(10,0,0,0));
 		
 		radioMenu.getChildren().addAll(beginner,medium,expert,custom,newGameButton);
 		radioMenu.setPadding(new Insets(20,0,10,20));
 		
+		//Adding all of the layouts to a single final layout
 		settingsMenu.getChildren().addAll(radioMenu,height,width,bombs);
 		
 		
-		
+		//Adding the final layout to the scene and showing the window
 		Scene scene = new Scene(settingsMenu);
 		window.setScene(scene);
-		window.showAndWait();
+		window.show();
 		
 	}
 }

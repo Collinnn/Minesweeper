@@ -19,11 +19,13 @@ public class winWindow {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void display() {
-		
+		//Making the window that pops up if you click on all the required tiles
 		Stage window = new Stage();
 		window.setTitle("You Won");
+		//Forces the user to deal with the win screen before continuing
 		window.initModality(Modality.APPLICATION_MODAL);
 		
+		//Setting up the layouts
 		HBox scoreAndTime = new HBox();
 		HBox score = new HBox();
 		HBox difficulty = new HBox();
@@ -31,6 +33,7 @@ public class winWindow {
 		VBox nameBoxLayout = new VBox();
 		VBox winWindowLayout = new VBox();
 		
+		//Adding spacing and alignment to the layouts and making certain layouts invisible unless it is a highscore
 		score.setPadding(new Insets(0,30,0,0));
 		scoreAndTime.setPadding(new Insets(20,0,20,0));
 		scoreAndTime.setAlignment(Pos.TOP_CENTER);
@@ -43,11 +46,12 @@ public class winWindow {
 		nameBoxLayout.setAlignment(Pos.CENTER);
 		nameBoxLayout.setVisible(false);
 		
-		
+		//Text boxes which retrieves and shows the score as well as time taken to solve the game
 		Text scoreText = new Text("Din score er: " + String.valueOf(Board.timesClicked));
 		
 		Text timeText = new Text("Din tid: " + Main.time.toString());
 		
+		//Initialising textbox to show the difficulty
 		Text difficultyText = new Text();
 		
 		Text highscoreText = new Text("New Highscore!!!");

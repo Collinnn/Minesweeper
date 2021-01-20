@@ -7,21 +7,21 @@ import javafx.scene.control.MenuItem;
 public class MenuLayout {
 
 	public static MenuBar getMenuBar() {
-		Menu fileMenu = new Menu("_File");
+		//Making a menu at the top of the layout to show settings and highscores
+		Menu fileMenu = new Menu("File");
 		
-		MenuItem settings = new MenuItem("Settings");
+		//Adding the items in the menu and making them open their relevant windows.
+		MenuItem settings = new MenuItem("Settings...");
 		settings.setOnAction(e -> SettingsWindow.display());
-		MenuItem leaderboards = new MenuItem("Leaderboards");
-		leaderboards.setOnAction(e -> {
-			//autogenereret
+		MenuItem highscores = new MenuItem("Leaderboards...");
+		highscores.setOnAction(e -> {
 			try {
 				HighscoresWindow.display();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		});
-		MenuItem exit = new MenuItem("Exit");
-		fileMenu.getItems().addAll(settings, leaderboards, exit);
+		fileMenu.getItems().addAll(settings, highscores);
 		MenuBar menuBar = new MenuBar();
 		menuBar.getMenus().addAll(fileMenu);
 		

@@ -10,13 +10,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class TopBarLayout {
-
+	
+	//Initialisation of Label to be updated outside this class
 	public static Label labelBombCounter = new Label();
 	public static Label labelTimer = new Label();
 	
-	
+	//Method to make and return the layout of the top of the game
 	public static BorderPane getTopBar() {
 		
+		//Initialising layouts and alignment
 		BorderPane topItems = new BorderPane();
 		
 		HBox middleBox = new HBox();
@@ -24,7 +26,7 @@ public class TopBarLayout {
 		Region buffer = new Region();
 		buffer.setPadding(new Insets(0,60,0,60));
 		
-		//setup for the two counters
+		//Making the background of the bombcounter and the timer as well as making the rectangles act as borders for these
 		StackPane leftPane = new StackPane();
 		StackPane rightPane = new StackPane();
 		Rectangle left = new Rectangle(90,40);
@@ -32,30 +34,32 @@ public class TopBarLayout {
 		left.setFill(Color.BLACK);
 		right.setFill(Color.BLACK);
 		
-		
-		labelBombCounter = new Label(String.valueOf(Board.bombsNotFound));
+		//Setting the start value of the bombcounter
+		labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 		labelBombCounter.setTextFill(Color.WHITE);
 		
-		//Two middle buttons
+		//Adding hint and reset buttons as well as calling their respective methods
 		Button hint = new Button("Hints");
 		hint.setOnAction(e-> Hints.getHint());
 		
 		Button reset = new Button("Reset");
 		reset.setOnAction(e -> Main.board.reset());
 		
+		//Setting the start value of the timer
 		labelTimer.setText("0");
 		labelTimer.setTextFill(Color.WHITE);
 		
-		//Init of the 2 counters
+		//Adding the bombcounter and timer as well as their respective backgrounds to their layouts
 		leftPane.getChildren().addAll(left, labelBombCounter);
 		rightPane.getChildren().addAll(right, labelTimer);
 		
+		//Adding the buttons to a layout as well as a region to make sure there is space between them
 		middleBox.getChildren().addAll(hint,buffer,reset);
 		
 		leftPane.setPadding(new Insets(10,0,10,20));
 		rightPane.setPadding(new Insets(10,20,10,0));
 
-		
+		//Adding the layouts to the BorderPane which is then returned
 		topItems.setLeft(leftPane);
 		topItems.setRight(rightPane);
 		topItems.setCenter(middleBox);

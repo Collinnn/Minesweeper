@@ -127,16 +127,19 @@ public class SettingsWindow {
 				Board.HEIGHT = BHEIGHT;
 				Board.WIDTH = BWIDTH;
 				Board.noOfBombs = BBOMBS;
+				Board.difficulty = 0;
 				Main.board.reset();
 			}else if(medium.isSelected()) {
 				Board.HEIGHT = MHEIGHT;
 				Board.WIDTH = MWIDTH;
 				Board.noOfBombs = MBOMBS;
+				Board.difficulty = 1;
 				Main.board.reset();
 			}else if(expert.isSelected()) {
 				Board.HEIGHT = EHEIGHT;
 				Board.WIDTH = EWIDTH;
 				Board.noOfBombs = EBOMBS;
+				Board.difficulty = 2;
 				Main.board.reset();
 			}else if(custom.isSelected()) {
 				try {
@@ -171,11 +174,13 @@ public class SettingsWindow {
 					Board.HEIGHT = h;
 					Board.WIDTH = w;
 					Board.noOfBombs = b;
+					Board.difficulty = 3;
 					Main.board.reset();
 				}catch(Exception IllegalArgumentException){
 					Board.HEIGHT = CHEIGHT;
 					Board.WIDTH = CWIDTH;
 					Board.noOfBombs = CBOMBS;
+					Board.difficulty = 3;
 					Main.board.reset();
 				}
 			}

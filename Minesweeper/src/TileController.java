@@ -24,9 +24,15 @@ public class TileController {
 				if (!tile.flagged) {
 					if(!Board.firstclicked) {
 						Board.firstClick(tile);
+						if(Board.winCounter == 0) {
+							winWindow.display();
+						}
 					}
 					else {
 						tile.revealTile();
+						if(Board.winCounter == 0) {
+							winWindow.display();
+						}
 					}
 				}
 			}

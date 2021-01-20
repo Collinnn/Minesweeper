@@ -123,9 +123,6 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 				text.setFill(textFill[val]);
 			}
 		}
-		if(Board.winCounter == 0) {
-			
-		}
 	}
 	
 	public Integer getValue() {

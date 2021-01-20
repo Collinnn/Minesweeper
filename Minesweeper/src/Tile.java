@@ -87,11 +87,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		clicked = true;
 		setHighlight(null);
 		if (Board.bombTiles.contains(this)) {
-			for (Tile[] tileRows : Board.tiles) {
-				for (Tile tile : tileRows) {
-					tile.clicked = true;
-				}
-			}
+			Board.disableAll();
 			for (Tile tile : Board.bombTiles) {
 				if (tile.flagged) {
 					
@@ -122,9 +118,6 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 				text.setText(Integer.toString(val));
 				text.setFill(textFill[val]);
 			}
-		}
-		if(Board.winCounter == 0) {
-			
 		}
 	}
 	

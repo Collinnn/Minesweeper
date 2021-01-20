@@ -116,6 +116,15 @@ public class Board {
 		
 		return group;
 	}
+	
+	public static void disableAll() {
+		for (Tile[] tileRows : tiles) {
+			for (Tile tile : tileRows) {
+				tile.clicked = true;
+			}
+		}
+	}
+	
 	//First click funtionality, removes bombs and clears a 3x3 grid for the player. 
 	public static void firstClick(Tile tile) {
 		firstclicked = true;

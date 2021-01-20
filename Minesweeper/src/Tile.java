@@ -102,6 +102,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 			}
 		}
 		else {
+			Board.winCounter --;
 			setFill(Color.WHITE);
 			int val = get_value();
 			if (val == 0) {
@@ -119,6 +120,9 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 				text.setText(Integer.toString(val));
 				text.setFill(textFill[val]);
 			}
+		}
+		if(Board.winCounter == 0) {
+			
 		}
 	}
 	

@@ -12,6 +12,7 @@ public class Board {
 	public static int HEIGHT = 30;
 	public static int winCounter;
 	public static int timesClicked;
+	public static int difficulty = 0;
 	
 	// Array for all tiles and tiles with bombs
 	public static Tile[][] tiles = new Tile[HEIGHT][WIDTH];

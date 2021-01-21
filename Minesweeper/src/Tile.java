@@ -71,6 +71,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		
 		text = new Text("");
 		text.setFont(Font.font(null, FontWeight.BOLD, 18));
+		text.setVisible(false);
 		
 		stack = new StackPane();
 		stack.getChildren().addAll(this, text); // Stacks text on top of tile
@@ -124,6 +125,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 			else {
 				text.setText(Integer.toString(val));
 				text.setFill(textFill[val]);
+				text.setVisible(true);
 			}
 		}
 	}

@@ -44,6 +44,7 @@ public class TileController {
 					if (Board.winCounter == 0) {
 						Main.time.pausecounter(false);
 						Board.disableAll();
+						Main.time.pausecounter(true);
 						winWindow.display();
 					}
 				}

@@ -92,7 +92,7 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 		setHighlight(null);
 		// Reveals all bombs and disables all tiles when a bomb is clicked
 		if (Board.bombTiles.contains(this)) {
-			Main.time.pausecounter(false);
+			Main.time.pausecounter(true);
 			Board.disableAll();
 			for (Tile tile : Board.bombTiles) {
 				if (tile.flagged) {

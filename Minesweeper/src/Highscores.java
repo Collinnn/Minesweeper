@@ -27,6 +27,11 @@ public class Highscores {
 		read(f);
 		boolean newHighscore = false;
 		for(int i = highscores.length - 1; i >= 0; i++) {
+			if(Integer.parseInt(highscores[i].split(":")[0]) == -1) {
+				newHighscore = true;
+			}
+		}
+		for(int i = highscores.length - 1; i >= 0; i++) {
 			if(score < Integer.parseInt(highscores[i].split(":")[0])) {
 				newHighscore = true;
 			}
@@ -38,6 +43,13 @@ public class Highscores {
 	public static void write(String name, int score, File f) throws FileNotFoundException {
 		read(f);
 		output = new PrintStream(f);
+		for(int i = highscores.length - 1; i >= 0; i++) {
+			if(Integer.parseInt(highscores[i].split(":")[0]) == -1) {
+				highscores[i] = score + ":" + name;
+				Arrays.sort(highscores);
+				break;
+			}
+		}
 		for(int i = highscores.length - 1; i >= 0; i++) {
 			if(score < Integer.parseInt(highscores[i].split(":")[0])) {
 				highscores[i] = score + ":" + name;

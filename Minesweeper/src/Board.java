@@ -18,7 +18,7 @@ public class Board {
 	
 	// Array (grid) for all tiles and array for tiles with bombs
 	public static Tile[][] tiles = new Tile[height][width];
-	public static ArrayList<Tile> bombTiles = new ArrayList<Tile>();
+	public static HashSet<Tile> bombTiles = new HashSet<Tile>();
 	
 	private static Random rand = new Random();
 	private static int randRow;

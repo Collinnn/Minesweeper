@@ -43,6 +43,7 @@ public class TileController {
 					// Displays winning screen when game is won
 					if (Board.winCounter == 0) {
 						Board.disableAll();
+						Main.time.pausecounter(true);
 						winWindow.display();
 					}
 				}

@@ -47,7 +47,7 @@ public class winWindow {
 		nameBoxLayout.setVisible(false);
 		
 		//Text boxes which retrieves and shows the score as well as time taken to solve the game
-		Text scoreText = new Text("Din score er: " + String.valueOf(Board.timesClicked));
+		Text scoreText = new Text("Din score er: " + Score.getScore());
 		
 		Text timeText = new Text("Din tid: " + Main.time.toString());
 		

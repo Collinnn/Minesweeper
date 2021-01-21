@@ -29,11 +29,8 @@ public class Score {
 	public static int getScore() {
 		
 		score =  Main.time.getTime() / (get3BV() / Board.timesClicked);
-		
+		if(score == 0) score++;
 		return score;
 	}
 	
-	public static int resetScore() {
-		return score = 0;
-	}
 }

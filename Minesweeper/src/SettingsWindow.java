@@ -234,8 +234,6 @@ public class SettingsWindow {
 		bombs.setPadding(new Insets(0,10,10,10));
 		
 		
-		
-		
 		//Adding the rest of the elements into their respective layouts as well as adding Padding
 		newGameButton.getChildren().add(newGame);
 		newGameButton.setPadding(new Insets(10,0,0,0));

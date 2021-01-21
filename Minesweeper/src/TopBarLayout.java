@@ -24,7 +24,7 @@ public class TopBarLayout {
 		HBox middleBox = new HBox();
 		middleBox.setAlignment(Pos.CENTER);
 		Region buffer = new Region();
-		buffer.setPadding(new Insets(0,60,0,60));
+		buffer.setPadding(new Insets(0,30,0,30));
 		
 		//Making the background of the bombcounter and the timer as well as making the rectangles act as borders for these
 		StackPane leftPane = new StackPane();
@@ -58,6 +58,7 @@ public class TopBarLayout {
 		//Adding the buttons to a layout as well as a region to make sure there is space between them
 		middleBox.getChildren().addAll(hint,buffer,reset);
 		
+		middleBox.setPadding(new Insets(0,15,0,15));
 		leftPane.setPadding(new Insets(10,0,10,20));
 		rightPane.setPadding(new Insets(10,20,10,0));
 

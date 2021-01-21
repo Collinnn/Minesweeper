@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 public class Board {
@@ -30,6 +31,7 @@ public class Board {
 	
 	public Board() {
 		grid.setPadding(new Insets(2));
+		grid.setAlignment(Pos.CENTER);
 		initTiles();
 		initBombs();
 	}

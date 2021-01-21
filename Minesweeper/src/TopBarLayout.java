@@ -31,12 +31,14 @@ public class TopBarLayout {
 		StackPane rightPane = new StackPane();
 		Rectangle left = new Rectangle(90,40);
 		Rectangle right = new Rectangle(90,40);
-		left.setFill(Color.BLACK);
-		right.setFill(Color.BLACK);
+		left.setFill(Color.LIGHTGRAY);
+		right.setFill(Color.LIGHTGRAY);
+		left.setStyle("-fx-arc-height: 10; -fx-arc-width: 10;");
+		right.setStyle("-fx-arc-height: 10; -fx-arc-width: 10;");
 		
 		//Setting the start value of the bombcounter
 		labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
-		labelBombCounter.setTextFill(Color.WHITE);
+		labelBombCounter.setTextFill(Color.BLACK);
 		
 		//Adding hint and reset buttons as well as calling their respective methods
 		Button hint = new Button("Hints");
@@ -47,7 +49,7 @@ public class TopBarLayout {
 		
 		//Setting the start value of the timer
 		labelTimer.setText("0");
-		labelTimer.setTextFill(Color.WHITE);
+		labelTimer.setTextFill(Color.BLACK);
 		
 		//Adding the bombcounter and timer as well as their respective backgrounds to their layouts
 		leftPane.getChildren().addAll(left, labelBombCounter);

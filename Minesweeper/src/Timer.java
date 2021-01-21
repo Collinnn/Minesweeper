@@ -30,9 +30,8 @@ public class Timer {
 			TopBarLayout.labelTimer.setText(String.valueOf(seconds));	
 		}else {
 			TopBarLayout.labelTimer.setText(String.valueOf(min + ":" + seconds));
-		}	
-			
-		}
+		}		
+	}
 	
 	//Pause and stop with control by the boolean. 
 	public void pausecounter(boolean stop) {

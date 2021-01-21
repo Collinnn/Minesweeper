@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 public class Board {
 	public static GridPane grid = new GridPane();
 	
-	public static int width = 30;
+	public static int width = 16;
 	public static int height = 16;
 	public static int winCounter; // Remaining not clicked tiles (excluding bombs)
 	public static int timesClicked;
@@ -23,7 +23,7 @@ public class Board {
 	private static int randRow;
 	private static int randCol; 
 	
-	public static int noOfBombs = 99;
+	public static int noOfBombs = 40;
 	public static int bombsNotFound = noOfBombs;
 	
 	public static boolean firstclicked = false;

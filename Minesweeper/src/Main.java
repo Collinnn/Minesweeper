@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -10,8 +12,9 @@ public class Main extends Application {
 	public static Board board = new Board();
 	public static Stage root = new Stage();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		time.timeline.pause();
+		Highscores.createFile();
 		launch(args);
 	}
 	

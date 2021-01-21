@@ -14,27 +14,28 @@ import javafx.scene.text.Text;
 
 
 public class Tile extends Rectangle implements EventHandler<MouseEvent> {
+	/*
+	 * The Tile class uses JavaFX's Rectangle object to create the tiles on the board.
+	 * The class uses a constructor to create individual Tile objects.
+	 */
 	
-	//Images
 	private static final Image bombImg = new Image("bomb1.png");
 	private static final ImagePattern bombPattern = new ImagePattern(bombImg, 0, 0, bombImg.getWidth(), bombImg.getHeight(), false);
 	
-	//Int & bool variables
-	private static final int SIZE = 30;
+	private static final int SIZE = 30; // Tile width and height
 	public int row, col;
 	public boolean flagged = false;
 	public boolean clicked = false;
+	public boolean tempUsed = false; // Used for temporarily marking a tile
 	
-	//shape, effects, text and stackpane
-	//public Rectangle shape;
-	
+	// Highlight effect for tiles
 	private Bloom bloom = new Bloom();
 	private final InnerShadow innerShadow = new InnerShadow(3, Color.DARKBLUE);
 	private Effect highlight;
 	
 	private Text text;
 	private StackPane stack;
-	//Color array
+	
 	private Color[] textFill = new Color[] {
 			Color.BLUE, 
 			Color.GREEN, 
@@ -46,46 +47,50 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 			Color.BLACK
 			};
 	
-	//Tile constructor
 	public Tile(int row, int column) {
 		
 		this.row = row; 
 		this.col = column; 
 		
-		Board.tiles[row][column] = this;
+		Board.tiles[row][column] = this; // The tile will be accessed through this array/matrix
 		
 		
-		// Shape customization with methods from JavaFX Rectangle class
+		// Sets the appearance of the tiles
 		setWidth(SIZE);
 		setHeight(SIZE);
 		setFill(Color.LIGHTGRAY);
 		setStroke(Color.GRAY);		
-		setStyle("-fx-arc-height: 6; -fx-arc-width: 6;");
+		setStyle("-fx-arc-height: 6; -fx-arc-width: 6;"); // Rounded corners
 		
-		// Highlight
+		// Sets the highlight appearance
 		innerShadow.setRadius(4);
 		innerShadow.setChoke(0.5);
 		bloom.setInput(innerShadow);
 		highlight = bloom;
 		
-		// Text
+		
 		text = new Text("");
 		text.setFont(Font.font(null, FontWeight.BOLD, 18));
 		
 		stack = new StackPane();
-		
-		stack.getChildren().addAll(this, text);
+		stack.getChildren().addAll(this, text); // Stacks text on top of tile
 		Board.grid.add(stack, column, row);
 		
-		//Setting up interactions
+		// Set mouse events for the tile
 		setOnMouseClicked(this);
 		setOnMouseEntered(this);
 		setOnMouseExited(this);
 	}
 	
 	public void revealTile() {
+		/*
+		 * Reveals tile when clicked.
+		 * Revealing a bomb reveals all bombs.
+		 * Revealing a blank tile reveals the entire group of tiles.
+		 */
 		clicked = true;
 		setHighlight(null);
+		// Reveals all bombs and disables all tiles when a bomb is clicked
 		if (Board.bombTiles.contains(this)) {
 			Board.disableAll();
 			for (Tile tile : Board.bombTiles) {
@@ -96,23 +101,25 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 					tile.setFill(bombPattern);	
 				}
 			}
-		}
+		}	
 		else {
 			Board.winCounter --;
 			setFill(Color.WHITE);
 			int val = getValue();
+			// When clicking on a blank tile: Reveal all tiles belonging to that tiles group
 			if (val == 0) {
 				for (Tile neighbor : Board.getNeighbors(this)) {
 					if (!neighbor.clicked) {
+						// Increment bomb counter if a tile in the group is flagged
 						if (neighbor.flagged) {
 							Board.bombsNotFound++;
 							TopBarLayout.labelBombCounter.setText(String.valueOf(Board.bombsNotFound));
 						}
-						//recursive funktion
 						neighbor.revealTile();
 					}
 				}
 			}
+			// Show the tile's number
 			else {
 				text.setText(Integer.toString(val));
 				text.setFill(textFill[val]);
@@ -121,7 +128,11 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 	}
 	
 	public Integer getValue() {
+		/*
+		 * Returns the Tile's value/number
+		 */
 		int neighborBombs = 0;
+		// Counts number of neighbors containing bombs
 		for (Tile neighbor : Board.getNeighbors(this)) {
     		if (Board.bombTiles.contains(neighbor)) {
     			neighborBombs++;
@@ -131,7 +142,10 @@ public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 	}
 	
 	public void setHighlight(Color color) {
-		if (color == null) {
+		/*
+		 * Sets the highlight color for the Tile
+		 */
+		if (color == null) { // null = no highlight effect
 			setEffect(null);
 		}
 		else {

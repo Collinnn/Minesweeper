@@ -51,22 +51,18 @@ public class Board {
 		/*
 		 * Places bombs on random tiles.
 		 */
-		
-		// Creates array of all tiles
-		Tile[] allTiles = new Tile[width*height];
-		for (int row=0; row < height; row++) {
-			for (int col=0; col < width; col++) {
-				allTiles[row*width+height] = tiles[row][col];
-			}
-		}
-		
-		int allTilesSize = allTiles.length;
 		int bombs = 0;
-		
-		// Add bombs to random tiles
 		while (bombs < noOfBombs) {
-			bombTiles.add(allTiles[rand.nextInt(allTilesSize-bombs)]);
-			bombs++;
+			// Selects a random tile
+			randRow = rand.nextInt(height);
+			randCol = rand.nextInt(width);
+		    Tile tile = tiles[randRow][randCol];
+		    
+		    // Place bomb on tile if it doesn't already contain a bomb
+		    if (!bombTiles.contains(tile)) {
+		    	bombTiles.add(tile);	           
+		    	bombs++;
+		    }
 		}
 	}
 	

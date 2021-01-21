@@ -7,7 +7,9 @@ public class Hints {
 			for (Tile tile: tilerow) {
 				if (tile.clicked && tile.getValue()==getUnclickedNeighbors(tile).size()) {   
 					for(Tile neighbor : getUnclickedNeighbors(tile)) {
-						neighbor.setHighlight(Color.RED);
+						if (!neighbor.flagged) {
+							neighbor.setHighlight(Color.RED);
+						}
 					}
 				}
 			}

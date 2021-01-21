@@ -84,8 +84,8 @@ public class HighscoresWindow {
 				if(Highscores.getHighscores()[i].equals("-1:***")) {
 					listview.getItems().add("-\t\t-");
 				} else {
-					listview.getItems().add(Highscores.getHighscores()[i].split(":")[0] + "\t\t" + 
-				Highscores.getHighscores()[i].split(":")[1]);
+					listview.getItems().add(Highscores.getHighscores()[i].split(":")[1] + "\t\t" + 
+				Highscores.getHighscores()[i].split(":")[0]);
 				}
 			}
 		}

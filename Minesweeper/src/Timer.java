@@ -20,7 +20,7 @@ public class Timer {
 	
 	private void increment () {
 		seconds++;
-		//Counts upto 59 sekunds
+		//Counts upto 59 seconds
 		if(seconds ==60) {
 			min++;
 			seconds = 0;
@@ -54,7 +54,7 @@ public class Timer {
 		time = min*60 + seconds;
 		return time;
 	}
-	
+		
 	public String toString() {
 		String string = "";
 		if(min == 0) {

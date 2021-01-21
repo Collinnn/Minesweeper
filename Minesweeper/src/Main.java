@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
+	//The following objects are initialised at the top as public and static so they can be used in other classes
 	public static Timer time = new Timer();
 	public static Board board = new Board();
 	public static Stage root = new Stage();

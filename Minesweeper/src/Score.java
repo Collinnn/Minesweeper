@@ -27,8 +27,8 @@ public class Score {
 	}
 	
 	public static int getScore() {
-		
-		score =  Main.time.getTime() / (get3BV() / Board.timesClicked);
+		int divisor = (get3BV()/ Board.timesClicked) == 0?1:get3BV()/ Board.timesClicked;
+		score =  Main.time.getTime() / divisor;
 		if(score == 0) score++;
 		return score;
 	}

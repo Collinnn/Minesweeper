@@ -33,7 +33,4 @@ public class Score {
 		return score;
 	}
 	
-	public static int resetScore() {
-		return score = 0;
-	}
 }

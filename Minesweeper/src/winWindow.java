@@ -93,12 +93,15 @@ public class winWindow {
 		case 0:
 			difficultyText.setText("Difficulty: Beginner");
 			try {
-				if((Highscores.isNewHighscore(Score.getScore(),Highscores.beginnerFile ))) {
+				if((Highscores.isNewHighscore(Score.getScore(),Highscores.beginnerFile))) {
 					highscore.setVisible(true);
 					nameBoxLayout.setVisible(true);
 					saveHighscore.setVisible(true);
+				}else {
+					
 				}
 			}catch(Exception FileNotFoundException) {
+				System.out.println("file not found");
 			}
 			
 			break;
@@ -137,7 +140,7 @@ public class winWindow {
 					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.beginnerFile);
 					window.close();
 				}catch(Exception FileNotFoundException) {
-					
+					System.out.println("File not found");
 				}
 				break;
 			case 1:

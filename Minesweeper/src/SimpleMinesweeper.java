@@ -39,6 +39,10 @@ public class SimpleMinesweeper extends Application {
 			if (rowSize < 4 || colSize < 4 || rowSize > 100 || colSize > 100) {
 				throw new Exception("Invalid argument(s):\n\t-The grid size must be between 4x4 and 100x100");
 			}
+			if (NoOfBombs> rowSize*colSize-1) {
+				throw new Exception("Invalid argument(s):\n\t-The amount of bombs must be at least 1 smaller than the height*width");
+			}
+			
 		}
 		catch(Exception exception) {
 			System.out.println(exception);

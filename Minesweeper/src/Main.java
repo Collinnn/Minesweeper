@@ -1,6 +1,6 @@
 import java.io.IOException;
-
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -22,9 +22,15 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		root = stage;
 		root.setTitle("Minesweeper");
+		root.setOnCloseRequest(e -> closeProgram());
 		root.getIcons().add(new Image("bomb1.png"));
 		root.setScene(new Scene(StageSetup.getStage()));
 		root.setResizable(false);
 		root.show();
 	}
+	
+	public static void closeProgram() {
+		Platform.exit();
+	}
+	
 }

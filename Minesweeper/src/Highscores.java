@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Highscores {
 	
@@ -14,6 +15,21 @@ public class Highscores {
 	private static String[] highscores = new String[size];
 	private static Scanner input;
 	private static PrintStream output;
+	
+	public static void createFile() throws IOException {
+		if(!beginnerFile.exists()) {
+			beginnerFile.createNewFile();
+			reset(beginnerFile);
+		} 
+		if(!mediumFile.exists()) {
+			mediumFile.createNewFile();
+			reset(mediumFile);
+		}
+		if(!expertFile.exists()) {
+			expertFile.createNewFile();
+			reset(expertFile);
+		}
+	}
 	
 	//reads from file and loads highscores into array
 	public static void read(File f) throws FileNotFoundException {

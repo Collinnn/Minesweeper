@@ -64,7 +64,6 @@ public class Highscores {
 			if(Integer.parseInt(highscores[i].split(":")[0]) == -1) {
 				firstLoopEntered = true;
 				highscores[i] = score + ":" + name;
-				Arrays.sort(highscores);
 				break;
 			}
 		}
@@ -72,13 +71,48 @@ public class Highscores {
 			for(int i = highscores.length - 1; i >= 0; i--) {
 				if(score < Integer.parseInt(highscores[i].split(":")[0])) {
 					highscores[i] = score + ":" + name;
-					Arrays.sort(highscores);
 					break;
 				}
 			}
 		}
+		sort(highscores.length -1);
 		for(int i = 0; i < highscores.length; i++) {
 			output.println(highscores[i]);
+		}
+	}
+	
+	
+	private static void sort(int i) {
+		boolean orderIsChanged = false;
+		if(i == 0) {
+			orderIsChanged = true; 
+		}
+		while(!orderIsChanged) {
+			String tempString1 = highscores[i];
+			
+			if(Integer.parseInt(highscores[i-1].split(":")[0]) == -1){
+				highscores[i] = "-1:***";
+				highscores[i-1] = tempString1;
+				sort(i-1);
+			}
+			if(Integer.parseInt(highscores[i].split(":")[0]) != -1) {
+				if(Integer.parseInt(highscores[i-1].split(":")[0])> Integer.parseInt(highscores[i].split(":")[0]) ) {
+					String tempString2 = highscores[i-1];
+					highscores[i-1] = tempString1;
+					highscores[i] = tempString2;
+					sort(i-1);
+					orderIsChanged = true;
+				}
+				else {
+					i--;
+				}
+			}else {
+				orderIsChanged = true;
+			}
+			
+			if(i == 0) {
+				orderIsChanged = true;
+			}
 		}
 	}
 	

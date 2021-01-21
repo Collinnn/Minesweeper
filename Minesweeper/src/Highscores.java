@@ -15,6 +15,8 @@ public class Highscores {
 	private static Scanner input;
 	private static PrintStream output;
 	
+	//Creates the leaderboard files in the same directory as the project
+	//or jar file, if it isn't already there.
 	public static void createFile() throws IOException {
 		if(!beginnerFile.exists()) {
 			beginnerFile.createNewFile();
@@ -30,7 +32,7 @@ public class Highscores {
 		}
 	}
 	
-	//reads from file and loads highscores into array
+	//Reads from a leaderboard file and stores the data in a string array
 	public static void read(File f) throws FileNotFoundException {
 		input = new Scanner(f);
 		for(int i = 0; i < highscores.length; i++) {
@@ -38,6 +40,8 @@ public class Highscores {
 		}
 	}
 	
+	//Checks if a new highscore has been achieved. The lower the score the better.
+	//-1 is a default highscore and should always be replaced.
 	public static boolean isNewHighscore(int score, File f) throws FileNotFoundException {
 		read(f);
 		boolean newHighscore = false;
@@ -54,7 +58,8 @@ public class Highscores {
 		return newHighscore;
 	}
 	
-	//loads new highscore into array and updates data-file containing highscores
+	//Loads leaderboard files with new data, if a new high score has been achieved.
+	//-1 is a default highscore and should always be replaced.
 	public static void write(String name, int score, File f) throws FileNotFoundException {
 		read(f);
 		boolean firstLoopEntered = false;
@@ -66,6 +71,7 @@ public class Highscores {
 				break;
 			}
 		}
+		//If -1 has been replaced, no more replacement should be done.
 		if(!firstLoopEntered) {
 			for(int i = highscores.length - 1; i >= 0; i--) {
 				if(score < Integer.parseInt(highscores[i].split(":")[0])) {
@@ -80,7 +86,9 @@ public class Highscores {
 		}
 	}
 	
-	
+	//Sorts every element of the highscores array such that lower scores
+	//have lower indices and higher scores have higher indices with the
+	//exception of -1, which should be placed after any other score.
 	private static void sort(int i) {
 		boolean orderIsChanged = false;
 		if(i == 0) {
@@ -115,7 +123,7 @@ public class Highscores {
 		}
 	}
 	
-	//resets data-file to default state
+	//resets leaderboard file to default state 
 	public static void reset(File f) throws FileNotFoundException {
 		output = new PrintStream(f);
 		for(int i = 0; i < highscores.length; i++) {

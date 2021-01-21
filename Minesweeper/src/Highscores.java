@@ -58,19 +58,23 @@ public class Highscores {
 	//loads new highscore into array and updates data-file containing highscores
 	public static void write(String name, int score, File f) throws FileNotFoundException {
 		read(f);
+		boolean firstLoopEntered = false;
 		output = new PrintStream(f);
 		for(int i = highscores.length - 1; i >= 0; i--) {
 			if(Integer.parseInt(highscores[i].split(":")[0]) == -1) {
+				firstLoopEntered = true;
 				highscores[i] = score + ":" + name;
 				Arrays.sort(highscores);
 				break;
 			}
 		}
-		for(int i = highscores.length - 1; i >= 0; i--) {
-			if(score < Integer.parseInt(highscores[i].split(":")[0])) {
-				highscores[i] = score + ":" + name;
-				Arrays.sort(highscores);
-				break;
+		if(!firstLoopEntered) {
+			for(int i = highscores.length - 1; i >= 0; i--) {
+				if(score < Integer.parseInt(highscores[i].split(":")[0])) {
+					highscores[i] = score + ":" + name;
+					Arrays.sort(highscores);
+					break;
+				}
 			}
 		}
 		for(int i = 0; i < highscores.length; i++) {

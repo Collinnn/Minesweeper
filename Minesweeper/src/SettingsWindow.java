@@ -13,22 +13,22 @@ import javafx.stage.Stage;
 public class SettingsWindow {
 	
 	// Declaration of constants for the different difficulties
-	private static final int BHEIGHT = 4;
-	private static final int MHEIGHT = 15;
-	private static final int EHEIGHT = 15;
-	private static int CHEIGHT = 15;
+	private static final int BHEIGHT = 9;
+	private static final int MHEIGHT = 16;
+	private static final int EHEIGHT = 30;
+	private static int CHEIGHT = 20;
 	private static int CHMAX = 30;
 	
-	private static final int BWIDTH = 4;
-	private static final int MWIDTH = 20;
-	private static final int EWIDTH = 20;
-	private static int CWIDTH = 20;
+	private static final int BWIDTH = 9;
+	private static final int MWIDTH = 30;
+	private static final int EWIDTH = 30;
+	private static int CWIDTH = 40;
 	private static int CWMAX = 62;
 	
-	private static final int BBOMBS = 7;
-	private static final int MBOMBS = 20;
-	private static final int EBOMBS = 20;
-	private static int CBOMBS = 20;
+	private static final int BBOMBS = 10;
+	private static final int MBOMBS = 99;
+	private static final int EBOMBS = 160;
+	private static int CBOMBS = 300;
 
 	
 	// Display method to show the settingsMenu as well determine it's behaviors

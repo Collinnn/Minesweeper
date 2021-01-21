@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -51,20 +52,22 @@ public class Board {
 		/*
 		 * Places bombs on random tiles.
 		 */
+		
+		// Creates array of all tiles
+		ArrayList<Tile> allTiles = new ArrayList<Tile>();
+		for (Tile[] tileRow : tiles) {
+			allTiles.addAll(Arrays.asList(tileRow));
+		}
+		
+		int groupSize = allTiles.size();
 		int bombs = 0;
+		// Add bombs to random available tiles
 		while (bombs < noOfBombs) {
-			// Selects a random tile
-			randRow = rand.nextInt(height);
-			randCol = rand.nextInt(width);
-		    Tile tile = tiles[randRow][randCol];
-		    
-		    // Place bomb on tile if it doesn't already contain a bomb
-		    if (!bombTiles.contains(tile)) {
-		    	bombTiles.add(tile);	           
-		    	bombs++;
-		    }
+			bombTiles.add(allTiles.remove(rand.nextInt(groupSize-bombs)));
+			bombs++;
 		}
 	}
+	
 	
 	private static void initBombs(int noOfBombs, HashSet<Tile> group) {
 		/*

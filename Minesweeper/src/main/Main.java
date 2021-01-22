@@ -12,6 +12,7 @@ import model.Highscores;
 import model.Timer;
 import view.StageSetup;
 
+//Main responsibility We all added about an equal amount to the main class
 public class Main extends Application {
 	
 	//The following objects are initialised at the top as public and static so they can be used in other classes

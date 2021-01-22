@@ -1,3 +1,4 @@
+package view;
 import java.io.FileNotFoundException;
 
 import javafx.scene.control.Menu;

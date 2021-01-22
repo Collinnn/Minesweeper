@@ -1,3 +1,4 @@
+package view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,6 +9,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import main.Main;
+import model.Board;
+import model.Hints;
 
 public class TopBarLayout {
 	

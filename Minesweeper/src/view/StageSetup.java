@@ -1,4 +1,6 @@
+package view;
 import javafx.scene.layout.BorderPane;
+import model.Board;
 
 public class StageSetup {
 

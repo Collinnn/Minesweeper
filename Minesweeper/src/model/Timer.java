@@ -1,7 +1,9 @@
+package model;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import view.TopBarLayout;
 
 public class Timer {
 	public Timeline timeline;

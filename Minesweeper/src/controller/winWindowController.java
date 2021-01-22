@@ -1,3 +1,9 @@
+package controller;
+
+import model.Board;
+import model.Highscores;
+import model.Score;
+import view.winWindow;
 
 public class winWindowController extends winWindow {
 

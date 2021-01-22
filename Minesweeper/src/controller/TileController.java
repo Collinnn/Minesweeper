@@ -1,8 +1,14 @@
+package controller;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import main.Main;
+import model.Board;
+import view.Tile;
+import view.TopBarLayout;
+import view.winWindow;
 
 
 

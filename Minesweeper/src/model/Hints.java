@@ -1,5 +1,8 @@
+package model;
+import java.util.HashSet;
+
 import javafx.scene.paint.Color;
-import java.util.HashSet; 
+import view.Tile; 
 
 public class Hints {
 	public static void getHint () {

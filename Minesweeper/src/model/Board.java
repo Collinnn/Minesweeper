@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -6,6 +7,9 @@ import java.util.Random;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
+import main.Main;
+import view.Tile;
+import view.TopBarLayout;
 
 public class Board {
 	public static GridPane grid = new GridPane();

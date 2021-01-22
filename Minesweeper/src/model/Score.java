@@ -1,4 +1,8 @@
+package model;
 import java.util.HashSet;
+
+import main.Main;
+import view.Tile;
 
 
 public class Score {

@@ -1,3 +1,8 @@
+package controller;
+
+import main.Main;
+import model.Board;
+import view.SettingsWindow;
 
 public class SettingsController extends SettingsWindow {
 	

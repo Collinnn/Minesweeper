@@ -1,3 +1,4 @@
+package view;
 import java.util.function.UnaryOperator;
 
 import javafx.geometry.Insets;
@@ -12,6 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.Main;
+import model.Board;
+import model.Highscores;
+import model.Score;
+import controller.winWindowController;
 
 public class winWindow {
 	

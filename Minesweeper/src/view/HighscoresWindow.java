@@ -1,7 +1,9 @@
+package view;
 
 
 import java.io.FileNotFoundException;
 
+import controller.HighscoreController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Highscores;
 
 public class HighscoresWindow {
 	

@@ -1,7 +1,10 @@
-import java.io.FileNotFoundException;
-import javafx.scene.control.Label; 
-import javafx.scene.control.ListView; 
+package controller;
 import java.io.File;
+import java.io.FileNotFoundException;
+
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import model.Highscores;
 public class HighscoreController {
 	
 	

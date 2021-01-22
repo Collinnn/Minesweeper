@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import javafx.scene.control.ListView;
-
 public class Highscores {
 	
 	public static File beginnerFile = new File("beginnerHighscores.txt");

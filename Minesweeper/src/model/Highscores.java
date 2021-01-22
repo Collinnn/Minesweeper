@@ -91,6 +91,7 @@ public class Highscores {
 	//Sorts every element of the highscores array such that lower scores
 	//have lower indices and higher scores have higher indices with the
 	//exception of -1, which should be placed after any other score.
+	//The sort method was made by Christopher
 	private static void sort(int i) {
 		boolean orderIsChanged = false;
 		if(i == 0) {

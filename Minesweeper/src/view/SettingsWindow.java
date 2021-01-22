@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
 
+//Main responsibility Christopher Zwinge
 public class SettingsWindow {
 	
 	// Declaration of constants for the different difficulties

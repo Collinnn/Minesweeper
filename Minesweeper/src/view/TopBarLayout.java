@@ -13,6 +13,7 @@ import main.Main;
 import model.Board;
 import model.Hints;
 
+//Main responsibility Christopher Zwinge
 public class TopBarLayout {
 	
 	//Initialisation of Label to be updated outside this class

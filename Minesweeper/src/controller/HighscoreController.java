@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import view.HighscoresWindow;
+
+//Main responsibility Simon Peter Sundt Poulsen
 public class HighscoreController {
 	
 	//Method changes difficulty label, clears and updates listView according to chosen difficulty

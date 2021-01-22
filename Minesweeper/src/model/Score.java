@@ -4,7 +4,7 @@ import java.util.HashSet;
 import main.Main;
 import view.Tile;
 
-
+//Main responsibility Tobias Collin
 public class Score {
 	
 	private static int score = 0;

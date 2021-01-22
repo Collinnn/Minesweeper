@@ -11,6 +11,7 @@ import main.Main;
 import view.Tile;
 import view.TopBarLayout;
 
+// Main responsibility Jacob Martens
 public class Board {
 	public static GridPane grid = new GridPane();
 	

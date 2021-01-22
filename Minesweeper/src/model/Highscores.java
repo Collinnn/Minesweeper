@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+//Main responsibility Simon Peter Sundt Poulsen
 public class Highscores {
 	
 	public static File beginnerFile = new File("beginnerHighscores.txt");

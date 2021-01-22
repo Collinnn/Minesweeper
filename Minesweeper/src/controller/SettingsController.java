@@ -4,6 +4,7 @@ import main.Main;
 import model.Board;
 import view.SettingsWindow;
 
+//Main responsibility Christopher Zwinge
 public class SettingsController extends SettingsWindow {
 	
 	//Handles changing the difficulty of the game

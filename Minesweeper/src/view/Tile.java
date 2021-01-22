@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import main.Main;
 import model.Board;
 
-
+//Main responsibility Jacob Martens
 public class Tile extends Rectangle implements EventHandler<MouseEvent> {
 	/*
 	 * The Tile class uses JavaFX's Rectangle object to create the tiles on the board.

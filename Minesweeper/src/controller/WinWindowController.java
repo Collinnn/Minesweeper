@@ -5,6 +5,7 @@ import model.Highscores;
 import model.Score;
 import view.WinWindow;
 
+//Main responsibility Christopher Zwinge
 public class WinWindowController extends WinWindow {
 	
 	//Handles submitting highscores in WinWindow

@@ -3,7 +3,6 @@ package view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import controller.HighscoreController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Highscores;
 
+//Main responsibility Simon Peter Sundt Poulsen
 public class HighscoresWindow {
 
 	public static void display() throws FileNotFoundException {

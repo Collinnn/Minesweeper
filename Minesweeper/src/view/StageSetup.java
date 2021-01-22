@@ -2,6 +2,7 @@ package view;
 import javafx.scene.layout.BorderPane;
 import model.Board;
 
+//Main responsibility Christopher Zwinge
 public class StageSetup {
 
 	public static BorderPane getStage() {

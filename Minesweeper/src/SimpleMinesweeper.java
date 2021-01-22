@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * the entire simple Minesweeper program.
  */
 
+//Main responsibility Jacob Martens
 public class SimpleMinesweeper extends Application {
 	Button button;
 	

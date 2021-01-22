@@ -5,6 +5,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
+//Main responsibility Christopher Zwinge
 public class MenuLayout {
 
 	public static MenuBar getMenuBar() {

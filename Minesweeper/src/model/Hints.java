@@ -4,6 +4,7 @@ import java.util.HashSet;
 import javafx.scene.paint.Color;
 import view.Tile; 
 
+//Main responsibility Tobias Collin
 public class Hints {
 	public static void getHint () {
 		for (Tile[] tilerow: Board.tiles) {

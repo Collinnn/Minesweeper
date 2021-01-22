@@ -11,7 +11,7 @@ import view.TopBarLayout;
 import view.WinWindow;
 
 
-
+//Main responsibility Jacob Martens
 public class TileController {
 	
 	// Flag image

@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import view.TopBarLayout;
 
+//Main responsibility Tobias Collin
 public class Timer {
 	public Timeline timeline;
 

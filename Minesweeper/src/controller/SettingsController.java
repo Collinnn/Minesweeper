@@ -6,7 +6,7 @@ import view.SettingsWindow;
 
 public class SettingsController extends SettingsWindow {
 	
-
+	//Handles changing the difficulty of the game
 	public static void handle() {
 			if(beginner.isSelected()) {
 				Board.height = BHEIGHT;

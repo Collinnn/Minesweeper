@@ -6,7 +6,8 @@ import model.Score;
 import view.WinWindow;
 
 public class WinWindowController extends WinWindow {
-
+	
+	//Handles submitting highscores in WinWindow
 	public static void handle() {
 			switch(Board.difficulty) {
 			case 0:

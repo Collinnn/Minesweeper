@@ -22,7 +22,7 @@ public class Timer {
 	
 	private void increment () {
 		seconds++;
-		//Counts upto 59 seconds
+		//Counts up to 59 seconds
 		if(seconds ==60) {
 			min++;
 			seconds = 0;

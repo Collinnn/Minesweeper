@@ -7,7 +7,8 @@ import javafx.scene.control.ListView;
 import view.HighscoresWindow;
 public class HighscoreController {
 	
-	
+	//Method changes difficulty label, clears and updates listView according to chosen difficulty
+	//Works with HighscoresWindow's buttons
 	public static  void Controller(Label label, ListView<String> listView,File file,String input) {
 		label.setText(input);
 		listView.getItems().clear();

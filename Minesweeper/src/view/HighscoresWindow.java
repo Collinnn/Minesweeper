@@ -25,9 +25,9 @@ public class HighscoresWindow {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Leaderboards");
 		window.setResizable(false);
-			
+		
 		ListView<String> listView = new ListView<>();
-			
+		
 		VBox headerLayout = new VBox();
 		Label difficultyLabel = new Label();
 		Label playerLabel = new Label("Player\tHighscore");
@@ -75,6 +75,7 @@ public class HighscoresWindow {
 		window.showAndWait();
 		}
 		
+		//Fills listView with highscores from chosen difficulty
 		public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
 			Highscores.read(f);
 			for(int i = 0; i < Highscores.getHighscores().length; i++) {

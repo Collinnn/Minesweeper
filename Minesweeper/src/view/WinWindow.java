@@ -1,6 +1,6 @@
 package view;
 import java.util.function.UnaryOperator;
-
+import controller.WinWindowController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,7 +17,6 @@ import main.Main;
 import model.Board;
 import model.Highscores;
 import model.Score;
-import controller.WinWindowController;
 
 public class WinWindow {
 	

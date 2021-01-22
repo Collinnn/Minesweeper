@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import javafx.scene.control.ListView;
+
 public class Highscores {
 	
 	public static File beginnerFile = new File("beginnerHighscores.txt");
@@ -134,5 +136,16 @@ public class Highscores {
 	public static String[] getHighscores() {
 		String[] copy = highscores.clone();
 		return copy;
+	}
+	public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
+		Highscores.read(f);
+		for(int i = 0; i < Highscores.getHighscores().length; i++) {
+			if(Highscores.getHighscores()[i].equals("-1:***")) {
+				listview.getItems().add("-\t\t-");
+			} else {
+				listview.getItems().add(Highscores.getHighscores()[i].split(":")[1] + "\t\t" + 
+			Highscores.getHighscores()[i].split(":")[0]);
+			}
+		}
 	}
 }

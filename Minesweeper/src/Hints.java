@@ -16,7 +16,7 @@ public class Hints {
 		}
 	}
 
-	private static HashSet<Tile> getUnclickedNeighbors(Tile tile) {
+	private static HashSet<Tile> getUnclickedNeighbors(Tile tile) { 
 		HashSet<Tile> notClicked = new HashSet<Tile>();
 		for(Tile neighbor: Board.getNeighbors(tile)) {
 			if(!neighbor.clicked) {

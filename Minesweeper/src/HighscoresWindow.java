@@ -1,5 +1,5 @@
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 public class HighscoresWindow {
 	
+	
+
 	public static void display() throws FileNotFoundException {
 			
 		Stage window = new Stage();
@@ -23,7 +25,8 @@ public class HighscoresWindow {
 		window.setResizable(false);
 			
 		ListView<String> listView = new ListView<>();
-		
+		Highscores.listViewFill(listView,Highscores.beginnerFile);
+			
 		VBox headerLayout = new VBox();
 		Label difficultyLabel = new Label();
 		Label playerLabel = new Label("Player\tHighscore");
@@ -51,37 +54,19 @@ public class HighscoresWindow {
 		//When button is clicked, the listView should be cleared and items should be added
 		//according to selected difficulty
 		beginnerButton.setOnAction(e -> {
-			difficultyLabel.setText("Beginner");
-			listView.getItems().clear();
-			try {
-				listViewFill(listView,Highscores.beginnerFile);
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			HighscoreController.Controller(difficultyLabel,listView,Highscores.beginnerFile,"Beginner");
 		});
 		
 		//When button is clicked, the listView should be cleared and items should be added
 		//according to selected difficulty
 		mediumButton.setOnAction(e -> {
-			difficultyLabel.setText("Medium");
-			listView.getItems().clear();
-			try {
-				listViewFill(listView,Highscores.mediumFile);
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			HighscoreController.Controller(difficultyLabel,listView,Highscores.mediumFile,"Medium");
 		});
 		
 		//When button is clicked, the listView should be cleared and items should be added
 		//according to selected difficulty
 		expertButton.setOnAction(e -> {
-			difficultyLabel.setText("Expert");
-			listView.getItems().clear();
-			try {
-				listViewFill(listView,Highscores.expertFile);
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			HighscoreController.Controller(difficultyLabel,listView,Highscores.expertFile,"Expert");
 		});
 		
 		Scene scene = new Scene(primaryLayout);
@@ -89,19 +74,6 @@ public class HighscoresWindow {
 		window.showAndWait();
 		}
 		
-		//This method fills listView highscores according to selected difficulty
-		public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
-			Highscores.read(f);
-			//-1:*** is just an initial score and should not be shown as
-			//a highscore in listView. Instead it should show -. 
-			for(int i = 0; i < Highscores.getHighscores().length; i++) {
-				if(Highscores.getHighscores()[i].equals("-1:***")) {
-					listview.getItems().add("-\t\t-");
-				} else {
-					listview.getItems().add(Highscores.getHighscores()[i].split(":")[1] + "\t\t" + 
-				Highscores.getHighscores()[i].split(":")[0]);
-				}
-			}
-		}
+		
 
 }

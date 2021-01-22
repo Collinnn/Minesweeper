@@ -13,22 +13,38 @@ import javafx.stage.Stage;
 public class SettingsWindow {
 	
 	// Declaration of constants for the different difficulties
-	private static final int BHEIGHT = 9;
-	private static final int MHEIGHT = 16;
-	private static final int EHEIGHT = 16;
-	private static int CHEIGHT = 20;
-	private static int CHMAX = 30;
+	public static final int BHEIGHT = 9;
+	public static final int MHEIGHT = 16;
+	public static final int EHEIGHT = 16;
+	public static int CHEIGHT = 20;
+	public static int CHMAX = 30;
 	
-	private static final int BWIDTH = 9;
-	private static final int MWIDTH = 16;
-	private static final int EWIDTH = 30;
-	private static int CWIDTH = 40;
-	private static int CWMAX = 62;
+	public static final int BWIDTH = 9;
+	public static final int MWIDTH = 16;
+	public static final int EWIDTH = 30;
+	public static int CWIDTH = 40;
+	public static int CWMAX = 62;
 	
-	private static final int BBOMBS = 10;
-	private static final int MBOMBS = 40;
-	private static final int EBOMBS = 99;
-	private static int CBOMBS = 200;
+	public static final int BBOMBS = 10;
+	public static final int MBOMBS = 40;
+	public static final int EBOMBS = 99;
+	public static int CBOMBS = 200;
+	
+	public static RadioButton beginner = new RadioButton("Beginner");
+	public static RadioButton medium = new RadioButton("Medium");
+	public static RadioButton expert = new RadioButton("Expert");
+	public static RadioButton custom = new RadioButton("Custom");
+	
+	
+	public static TextField cHeight = new TextField();
+	public static TextField cWidth = new TextField();
+	public static TextField cBombs = new TextField();
+	
+	
+	public static Text cHError = new Text();
+	public static Text cWError = new Text();
+	public static Text cBError = new Text();
+	
 
 	
 	// Display method to show the settingsMenu as well determine it's behaviors
@@ -51,10 +67,6 @@ public class SettingsWindow {
 		
 		//Initialisation of buttons to select difficulty as well as togglegroup to ensure only one can be selected
 		ToggleGroup radioButtons = new ToggleGroup();
-		RadioButton beginner = new RadioButton("Beginner");
-		RadioButton medium = new RadioButton("Medium");
-		RadioButton expert = new RadioButton("Expert");
-		RadioButton custom = new RadioButton("Custom");
 		
 		beginner.setToggleGroup(radioButtons);
 		medium.setToggleGroup(radioButtons);
@@ -104,9 +116,9 @@ public class SettingsWindow {
 		
 		//Makes editable textfields which shows the default values of the custom difficulty
 		//If custom was already selected the current values are shown instead
-		TextField cHeight = new TextField(String.valueOf(CHEIGHT));
-		TextField cWidth = new TextField(String.valueOf(CWIDTH));
-		TextField cBombs = new TextField(String.valueOf(CBOMBS));
+		cHeight.setText(String.valueOf(CHEIGHT));
+		cWidth.setText(String.valueOf(CWIDTH));
+		cBombs.setText(String.valueOf(CBOMBS));
 		if(custom.isSelected()) {
 			cHeight.setText(String.valueOf(Board.height));
 			cWidth.setText(String.valueOf(Board.width));
@@ -116,97 +128,23 @@ public class SettingsWindow {
 		//Sets the default width's of the textfields as well as preparing error text to be shown
 		//if the value is outside the max or minimum for the field.
 		cHeight.setPrefWidth(60);
-		Text cHError = new Text("Max is 30 min is 4");
+		cHError.setText("Max is 30 min is 4");
 		cHError.setFill(Color.RED);
 		cHError.setVisible(false);
 		
 		cWidth.setPrefWidth(60);
-		Text cWError = new Text("Max is 62 min is 4");
+		cWError.setText("Max is 62 min is 4");
 		cWError.setFill(Color.RED);
 		cWError.setVisible(false);
 		
 		cBombs.setPrefWidth(60);
-		Text cBError = new Text("Set to Max 2000");
+		cBError.setText("Set to Max 2000");
 		cBError.setFill(Color.RED);
 		cBError.setVisible(false);
 		
 		//Makes the button retrieve the relevant information from the constants to change the difficulty and reset the game
 		//when pressed.
-		newGame.setOnAction(e ->{
-			if(beginner.isSelected()) {
-				Board.height = BHEIGHT;
-				Board.width = BWIDTH;
-				Board.noOfBombs = BBOMBS;
-				Board.difficulty = 0;
-				Main.board.reset();
-			}else if(medium.isSelected()) {
-				Board.height = MHEIGHT;
-				Board.width = MWIDTH;
-				Board.noOfBombs = MBOMBS;
-				Board.difficulty = 1;
-				Main.board.reset();
-			}else if(expert.isSelected()) {
-				Board.height = EHEIGHT;
-				Board.width = EWIDTH;
-				Board.noOfBombs = EBOMBS;
-				Board.difficulty = 2;
-				Main.board.reset();
-			} 
-			//Tries to take the values from the textfields and checks whether they are within the bounds we have setup
-			//If the values pasted are not numbers the default is chosen and an error is displayed,
-			//if they are numbers they are changed to the chosen values unless the values are 
-			//smaller than the minimum size or bigger than the maximum size.
-			//If this occurs the errortext is shown.
-			else if(custom.isSelected()) {
-				try {
-					int h = Integer.valueOf(cHeight.getText());
-					int w = Integer.valueOf(cWidth.getText());
-					int b = Integer.valueOf(cBombs.getText());
-					if(h<4 || h>CHMAX) {
-						h = CHEIGHT;
-						cHError.setText("Max is 30 min is 4");
-						cHError.setVisible(true);
-					}else {
-						cHError.setVisible(false);
-					}
-					
-					if(w<4 || w > CWMAX) {
-						w = CWIDTH;
-						cWError.setVisible(true);
-					}else {
-						cWError.setVisible(false);
-					}
-					
-					if(b<1) {
-						b= 1;
-						cBError.setText("Min is 1");
-						cBError.setVisible(true);
-					}else if(b >= (h*w)-9) {
-						b= (h*w)-9;
-						cBError.setText("Set to Max " + String.valueOf((h*w)-9));
-						cBError.setVisible(true);
-					}else {
-						cBError.setVisible(false);
-					}
-					Board.height = h;
-					Board.width = w;
-					Board.noOfBombs = b;
-					Board.difficulty = 3;
-					Main.board.reset();
-				}catch(Exception IllegalArgumentException){
-					cHError.setText("Enter only numbers");
-					cHError.setVisible(true);
-					Board.height = CHEIGHT;
-					Board.width = CWIDTH;
-					Board.noOfBombs = CBOMBS;
-					Board.difficulty = 3;
-					Main.board.reset();
-				}
-			}
-			//Commands to make sure the game window is resized when the content is and to center it.
-			Main.root.sizeToScene();
-			Main.root.centerOnScreen();
-		});
+		newGame.setOnAction(e ->SettingsController.handle());
 		
 		
 		

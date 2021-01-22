@@ -17,10 +17,12 @@ public class winWindow {
 	
 	private static int LEN = 3;
 	
+	public static Stage window = new Stage();
+	public static TextField nameBox = new TextField();
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void display() {
 		//Making the window that pops up if you click on all the required tiles
-		Stage window = new Stage();
 		window.setTitle("You Won");
 		//Forces the user to deal with the win screen before continuing
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -58,7 +60,7 @@ public class winWindow {
 		Text highscoreText = new Text("New Highscore!!!");
 		
 		Text nameBoxText = new Text("Write Initials");
-		TextField nameBox = new TextField("XXX");
+		nameBox.setText("XXX");
 		nameBox.setMaxSize(40,24);
 		
 		// This short code segment is borrowed from kleopatra's comment on this Stackoverflow question 
@@ -133,34 +135,7 @@ public class winWindow {
 		}
 	
 		//This segment writes the highscore and the initials of the player to the relevant text file
-		saveHighscore.setOnAction(e ->{
-			switch(Board.difficulty) {
-			case 0:
-				try{
-					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.beginnerFile);
-					window.close();
-				}catch(Exception FileNotFoundException) {
-					System.out.println("File not found");
-				}
-				break;
-			case 1:
-				try{
-					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.mediumFile);
-					window.close();
-				}catch(Exception FileNotFoundException) {
-					
-				}
-				break;
-			case 2:
-				try{
-					Highscores.write(nameBox.getText(), Score.getScore(), Highscores.expertFile);
-					window.close();
-				}catch(Exception FileNotFoundException) {
-					
-				}
-				break;
-			}
-		});
+		saveHighscore.setOnAction(e -> winWindowController.handle());
 		
 		// The objects are added to the relevant layouts and they are then all collected in one layout for the winWindow
 		score.getChildren().add(scoreText);

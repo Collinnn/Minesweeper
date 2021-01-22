@@ -43,7 +43,7 @@ public class HighscoresWindow {
 		primaryLayout.getChildren().addAll(headerLayout,listView,buttonLayout);
 		
 		//Fills listView with highscores from initial difficulty
-		listViewFill(listView,Highscores.beginnerFile);
+		Highscores.listViewFill(listView,Highscores.beginnerFile);
 		//Text to show which difficulty is initially selected
 		difficultyLabel.setText("Beginner");
 		playerLabel.setPadding(new Insets(0,0,0,8));

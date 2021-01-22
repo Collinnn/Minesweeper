@@ -121,7 +121,7 @@ public class Highscores {
 			}
 			
 			if(i == 0) {
-				orderIsChanged = true;
+				orderIsChanged = true;	
 			}
 		}
 	}
@@ -138,15 +138,5 @@ public class Highscores {
 		String[] copy = highscores.clone();
 		return copy;
 	}
-	public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
-		Highscores.read(f);
-		for(int i = 0; i < Highscores.getHighscores().length; i++) {
-			if(Highscores.getHighscores()[i].equals("-1:***")) {
-				listview.getItems().add("-\t\t-");
-			} else {
-				listview.getItems().add(Highscores.getHighscores()[i].split(":")[1] + "\t\t" + 
-			Highscores.getHighscores()[i].split(":")[0]);
-			}
-		}
-	}
+	
 }

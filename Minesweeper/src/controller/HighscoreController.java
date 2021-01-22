@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import model.Highscores;
+import view.HighscoresWindow;
 public class HighscoreController {
 	
 	
@@ -12,7 +12,7 @@ public class HighscoreController {
 		label.setText(input);
 		listView.getItems().clear();
 		try {
-			Highscores.listViewFill(listView,file);
+			HighscoresWindow.listViewFill(listView,file);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}

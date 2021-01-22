@@ -1,6 +1,7 @@
 package view;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import controller.HighscoreController;
@@ -17,8 +18,6 @@ import javafx.stage.Stage;
 import model.Highscores;
 
 public class HighscoresWindow {
-	
-	
 
 	public static void display() throws FileNotFoundException {
 			
@@ -28,7 +27,6 @@ public class HighscoresWindow {
 		window.setResizable(false);
 			
 		ListView<String> listView = new ListView<>();
-		Highscores.listViewFill(listView,Highscores.beginnerFile);
 			
 		VBox headerLayout = new VBox();
 		Label difficultyLabel = new Label();
@@ -46,7 +44,7 @@ public class HighscoresWindow {
 		primaryLayout.getChildren().addAll(headerLayout,listView,buttonLayout);
 		
 		//Fills listView with highscores from initial difficulty
-		Highscores.listViewFill(listView,Highscores.beginnerFile);
+		listViewFill(listView,Highscores.beginnerFile);
 		//Text to show which difficulty is initially selected
 		difficultyLabel.setText("Beginner");
 		playerLabel.setPadding(new Insets(0,0,0,8));
@@ -77,6 +75,16 @@ public class HighscoresWindow {
 		window.showAndWait();
 		}
 		
-		
+		public static void listViewFill(ListView<String> listview, File f) throws FileNotFoundException {
+			Highscores.read(f);
+			for(int i = 0; i < Highscores.getHighscores().length; i++) {
+				if(Highscores.getHighscores()[i].equals("-1:***")) {
+					listview.getItems().add("-\t\t-");
+				} else {
+					listview.getItems().add(Highscores.getHighscores()[i].split(":")[1] + "\t\t" + 
+				Highscores.getHighscores()[i].split(":")[0]);
+				}
+			}
+		}
 
 }

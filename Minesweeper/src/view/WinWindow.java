@@ -17,9 +17,9 @@ import main.Main;
 import model.Board;
 import model.Highscores;
 import model.Score;
-import controller.winWindowController;
+import controller.WinWindowController;
 
-public class winWindow {
+public class WinWindow {
 	
 	private static int LEN = 3;
 	
@@ -141,7 +141,7 @@ public class winWindow {
 		}
 	
 		//This segment writes the highscore and the initials of the player to the relevant text file
-		saveHighscore.setOnAction(e -> winWindowController.handle());
+		saveHighscore.setOnAction(e -> WinWindowController.handle());
 		
 		// The objects are added to the relevant layouts and they are then all collected in one layout for the winWindow
 		score.getChildren().add(scoreText);

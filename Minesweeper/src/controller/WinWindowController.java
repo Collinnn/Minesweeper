@@ -3,9 +3,9 @@ package controller;
 import model.Board;
 import model.Highscores;
 import model.Score;
-import view.winWindow;
+import view.WinWindow;
 
-public class winWindowController extends winWindow {
+public class WinWindowController extends WinWindow {
 
 	public static void handle() {
 			switch(Board.difficulty) {

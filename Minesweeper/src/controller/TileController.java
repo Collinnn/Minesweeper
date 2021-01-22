@@ -8,7 +8,7 @@ import main.Main;
 import model.Board;
 import view.Tile;
 import view.TopBarLayout;
-import view.winWindow;
+import view.WinWindow;
 
 
 
@@ -50,7 +50,7 @@ public class TileController {
 					if (Board.winCounter == 0) {
 						Board.disableAll();
 						Main.time.pausecounter(true);
-						winWindow.display();
+						WinWindow.display();
 					}
 				}
 			}

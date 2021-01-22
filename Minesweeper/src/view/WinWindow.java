@@ -28,6 +28,7 @@ public class WinWindow {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void display() {
+		window = new Stage();
 		//Making the window that pops up if you click on all the required tiles
 		window.setTitle("You Won");
 		//Forces the user to deal with the win screen before continuing
